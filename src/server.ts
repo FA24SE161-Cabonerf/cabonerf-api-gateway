@@ -1,16 +1,17 @@
 import config from '@gateway/config';
+import { BASE_URL } from '@gateway/constants/baseurl';
 import elasticSearch from '@gateway/elasticsearch';
 import { infoMessage } from '@gateway/log/message.log';
-import { winstonLogger } from '@gateway/winston';
-import { Application, json, Request, Response, urlencoded } from 'express';
-import { Logger } from 'winston';
-import cors from 'cors';
-import http from 'http';
-import hpp from 'hpp';
-import helmet from 'helmet';
-import compression from 'compression';
-import { BASE_URL } from '@gateway/constants/baseurl';
 import healthRoute from '@gateway/routes/health.routes';
+import testHttpRoute from '@gateway/routes/test.routes';
+import { winstonLogger } from '@gateway/winston';
+import compression from 'compression';
+import cors from 'cors';
+import { Application, json, urlencoded } from 'express';
+import helmet from 'helmet';
+import hpp from 'hpp';
+import http from 'http';
+import { Logger } from 'winston';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'Gateway', 'debug');
 
@@ -44,6 +45,7 @@ export class GatewayServer {
 
 	private initRoutes(_app: Application) {
 		_app.use(BASE_URL, healthRoute.routes());
+		_app.use(BASE_URL, testHttpRoute.routes());
 	}
 
 	private async initElasticsearch() {
