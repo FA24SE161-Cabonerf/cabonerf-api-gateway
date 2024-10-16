@@ -44,9 +44,6 @@ export class GatewayServer {
 
 	private initRoutes(_app: Application) {
 		_app.use(BASE_URL, healthRoute.routes());
-		_app.use('/', (_req: Request, res: Response) => {
-			res.status(200).send('ok');
-		});
 	}
 
 	private async initElasticsearch() {
