@@ -1,5 +1,5 @@
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
-import { MainController } from '@gateway/controllers/cabonerf.main.controllers';
+import { AuthController } from '@gateway/controllers/cabonerf-main/auth.controllers';
 import { asyncHandler } from '@gateway/utils/async-handler';
 import express, { Router } from 'express';
 
@@ -11,11 +11,11 @@ export class AuthenticationRoute {
 	}
 
 	routes() {
-		this.router.post(ROUTE_ENDPOINTS.LOGIN, asyncHandler(MainController.prototype.login));
+		this.router.post(ROUTE_ENDPOINTS.LOGIN, asyncHandler(AuthController.prototype.login));
 
 		return this.router;
 	}
 }
 
-const authenticationRoute = new AuthenticationRoute();
-export default authenticationRoute;
+const authRoute = new AuthenticationRoute();
+export default authRoute;

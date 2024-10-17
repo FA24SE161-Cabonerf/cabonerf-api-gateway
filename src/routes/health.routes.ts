@@ -10,9 +10,10 @@ class HealthRoute {
 		this.router = express.Router();
 	}
 
-	routes(): Router {
+	public routes(): Router {
 		this.router.get(ROUTE_ENDPOINTS.GATEWAY_HEALTH, asyncHandler(HealthController.prototype.checkHealth));
 		this.router.get(ROUTE_ENDPOINTS.MAIN_HEALTH, asyncHandler(HealthController.prototype.checkMainHealth));
+
 		return this.router;
 	}
 }

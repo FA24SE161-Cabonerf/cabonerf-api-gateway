@@ -1,4 +1,4 @@
-import { User } from '@gateway/models/user.model';
+import { User } from '@gateway/models/cabonerf-main/user.model';
 
 interface LoginReqBody {
 	email: string;
