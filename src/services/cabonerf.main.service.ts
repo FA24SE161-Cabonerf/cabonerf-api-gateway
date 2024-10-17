@@ -12,14 +12,20 @@ export class MainService {
 	}
 
 	public async health() {
-		const response = await this.axiosService.axios.get<string>(API_PARAMS.HEALTH);
+		const response = await this.axiosService.axios.get(API_PARAMS.HEALTH);
 
 		return response;
 	}
 
 	public async login(payload: LoginReqBody) {
-		const response = await this.axiosService.axios.post<CommonResponse<LoginResponse>>(API_PARAMS.LOGIN, payload);
+		const response = await this.axiosService.axios.post<CommonResponse<LoginResponse>>(
+			API_PARAMS.API_VERSION + API_PARAMS.USERS + API_PARAMS.LOGIN,
+			payload
+		);
 
 		return response;
 	}
 }
+
+const mainService = new MainService();
+export default mainService;

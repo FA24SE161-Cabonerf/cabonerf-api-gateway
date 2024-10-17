@@ -1,4 +1,4 @@
-import { MainService } from '@gateway/services/cabonerf.main.service';
+import mainService from '@gateway/services/cabonerf.main.service';
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
@@ -10,8 +10,10 @@ export class HealthController {
 	}
 
 	public async checkMainHealth(_req: Request, res: Response, _next: NextFunction) {
-		const response = await MainService.prototype.health();
+		const response = await mainService.health();
 
-		return res.status(response.status).json(response);
+		return res.status(response.status).json({
+			message: 'OK'
+		});
 	}
 }

@@ -5,9 +5,10 @@ import { infoMessage } from '@gateway/log/message.log';
 import authenticationRoute from '@gateway/routes/auth.routes';
 import healthRoute from '@gateway/routes/health.routes';
 import { winstonLogger } from '@gateway/winston';
+import { AxiosError } from 'axios';
 import compression from 'compression';
 import cors from 'cors';
-import { Application, json, urlencoded } from 'express';
+import { Application, json, NextFunction, Request, Response, urlencoded } from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import http from 'http';
@@ -22,6 +23,7 @@ export class GatewayServer {
 		this.initStandardMiddleware(app);
 		this.initSecurityMiddleware(app);
 		this.initRoutes(app);
+		this.initErrorHandler(app);
 	}
 
 	private initStandardMiddleware(_app: Application) {
@@ -59,6 +61,15 @@ export class GatewayServer {
 		} catch (error) {
 			log.error(infoMessage({ service: 'Server', content: error as string }));
 		}
+	}
+
+	private initErrorHandler(_app: Application) {
+		_app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+			if (err instanceof AxiosError) {
+				res.status(err.status!).json(err.response?.data);
+			} else {
+			}
+		});
 	}
 
 	private async startServer(httpServer: http.Server): Promise<void> {
