@@ -1,3 +1,4 @@
+import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import { HealthController } from '@gateway/controllers/health.controllers';
 import { asyncHandler } from '@gateway/utils/async-handler';
 import express, { Router } from 'express';
@@ -10,8 +11,8 @@ class HealthRoute {
 	}
 
 	routes(): Router {
-		this.router.get('/health', asyncHandler(HealthController.prototype.checkHealth));
-
+		this.router.get(ROUTE_ENDPOINTS.GATEWAY_HEALTH, asyncHandler(HealthController.prototype.checkHealth));
+		this.router.get(ROUTE_ENDPOINTS.MAIN_HEALTH, asyncHandler(HealthController.prototype.checkMainHealth));
 		return this.router;
 	}
 }
