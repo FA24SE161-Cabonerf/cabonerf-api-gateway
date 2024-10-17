@@ -2,12 +2,13 @@ import config from '@gateway/config';
 import { BASE_PATH_V1 } from '@gateway/constants/basePath';
 import elasticSearch from '@gateway/elasticsearch';
 import { infoMessage } from '@gateway/log/message.log';
-import authenticationRoute from '@gateway/routes/auth.routes';
+import authRoute from '@gateway/routes/auth.routes';
 import healthRoute from '@gateway/routes/health.routes';
 import { winstonLogger } from '@gateway/winston';
+import { AxiosError } from 'axios';
 import compression from 'compression';
 import cors from 'cors';
-import { Application, json, urlencoded } from 'express';
+import { Application, json, NextFunction, Request, Response, urlencoded } from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import http from 'http';
@@ -22,6 +23,7 @@ export class GatewayServer {
 		this.initStandardMiddleware(app);
 		this.initSecurityMiddleware(app);
 		this.initRoutes(app);
+		this.initErrorHandler(app);
 	}
 
 	private initStandardMiddleware(_app: Application) {
@@ -45,11 +47,19 @@ export class GatewayServer {
 
 	private initRoutes(_app: Application) {
 		_app.use(BASE_PATH_V1, healthRoute.routes());
-		_app.use(BASE_PATH_V1, authenticationRoute.routes());
+		_app.use(BASE_PATH_V1, authRoute.routes());
 	}
 
 	private async initElasticsearch() {
 		await elasticSearch.checkConnection();
+	}
+	private initErrorHandler(_app: Application) {
+		_app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+			if (err instanceof AxiosError) {
+				res.status(err.status!).json(err.response?.data);
+			} else {
+			}
+		});
 	}
 
 	private async initServer(_app: Application): Promise<void> {

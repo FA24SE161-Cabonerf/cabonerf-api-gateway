@@ -1,14 +1,14 @@
-import { MainService } from '@gateway/services/cabonerf.main.service';
+import { AuthService } from '@gateway/services/cabonerf-main/auth.service';
 import { LoginReqBody } from '@gateway/types/auth.type';
 import { Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core/index';
 import { StatusCodes } from 'http-status-codes';
 
-export class MainController {
+export class AuthController {
 	public async login(req: Request<ParamsDictionary, any, LoginReqBody>, res: Response) {
 		const { email, password } = req.body;
 
-		const response = await MainService.prototype.login({ email, password });
+		const response = await AuthService.prototype.login({ email, password });
 
 		return res.status(StatusCodes.OK).json(response.data);
 	}

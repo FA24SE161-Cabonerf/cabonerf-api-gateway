@@ -1,9 +1,17 @@
 export class API_PARAMS {
+	public static API_VERSION = 'api/v1';
+
+	/**
+	 * Health
+	 */
+
+	public static HEALTH = '/health';
+
 	/**
 	 * User APIs
 	 */
-	public static HEALTH = '/health';
 	public static USERS = '/users';
+
 	public static LOGIN = '/login';
 	public static REGISTER = '/register';
 	public static REFRESH_TOKEN = '/refresh';
