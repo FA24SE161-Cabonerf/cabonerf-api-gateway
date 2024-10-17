@@ -1,4 +1,5 @@
 import config from '@gateway/config';
+import { BASE_PATH_V1 } from '@gateway/constants/basePath';
 import elasticSearch from '@gateway/elasticsearch';
 import { infoMessage } from '@gateway/log/message.log';
 import authenticationRoute from '@gateway/routes/auth.routes';
@@ -43,8 +44,8 @@ export class GatewayServer {
 	}
 
 	private initRoutes(_app: Application) {
-		_app.use(config.BASE_PATH_V1, healthRoute.routes());
-		_app.use(config.BASE_PATH_V1, authenticationRoute.routes());
+		_app.use(BASE_PATH_V1, healthRoute.routes());
+		_app.use(BASE_PATH_V1, authenticationRoute.routes());
 	}
 
 	private async initElasticsearch() {
