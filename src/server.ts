@@ -1,9 +1,8 @@
 import config from '@gateway/config';
-import { BASE_URL } from '@gateway/constants/baseurl';
 import elasticSearch from '@gateway/elasticsearch';
 import { infoMessage } from '@gateway/log/message.log';
+import authenticationRoute from '@gateway/routes/auth.routes';
 import healthRoute from '@gateway/routes/health.routes';
-import testHttpRoute from '@gateway/routes/test.routes';
 import { winstonLogger } from '@gateway/winston';
 import compression from 'compression';
 import cors from 'cors';
@@ -34,7 +33,7 @@ export class GatewayServer {
 		_app.set('trust proxy', 1);
 		_app.use(
 			cors({
-				origin: '*',
+				origin: config.CLIENT_URL,
 				credentials: true,
 				methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH']
 			})
@@ -44,17 +43,17 @@ export class GatewayServer {
 	}
 
 	private initRoutes(_app: Application) {
-		_app.use(BASE_URL, healthRoute.routes());
-		_app.use(BASE_URL, testHttpRoute.routes());
+		_app.use(config.BASE_PATH_V1, healthRoute.routes());
+		_app.use(config.BASE_PATH_V1, authenticationRoute.routes());
 	}
 
 	private async initElasticsearch() {
 		await elasticSearch.checkConnection();
 	}
 
-	private async initServer(app: Application): Promise<void> {
+	private async initServer(_app: Application): Promise<void> {
 		try {
-			const httpServer: http.Server = new http.Server(app);
+			const httpServer: http.Server = new http.Server(_app);
 			await this.startServer(httpServer);
 		} catch (error) {
 			log.error(infoMessage({ service: 'Server', content: error as string }));
