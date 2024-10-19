@@ -1,6 +1,7 @@
 import config from '@gateway/config';
 import { BASE_PATH_V1 } from '@gateway/constants/basePath';
 import elasticSearch from '@gateway/elasticsearch';
+import { CommonGatewayError } from '@gateway/errors/gateway.errors';
 import { infoMessage } from '@gateway/log/message.log';
 import authRoute from '@gateway/routes/auth.routes';
 import healthRoute from '@gateway/routes/health.routes';
@@ -57,7 +58,8 @@ export class GatewayServer {
 		_app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
 			if (err instanceof AxiosError) {
 				res.status(err.status!).json(err.response?.data);
-			} else {
+			} else if (err instanceof CommonGatewayError) {
+				res.status(err.status).json(err);
 			}
 		});
 	}
