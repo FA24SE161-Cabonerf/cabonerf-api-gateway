@@ -5,6 +5,17 @@ interface LoginReqBody {
 	password: string;
 }
 
+interface RegisterReqBody {
+	email: string;
+	password: string;
+	fullName: string;
+	confirmPassword: string;
+}
+
+interface LogoutReqBody {
+	refreshToken: string;
+}
+
 interface AuthResponse<T> {
 	access_token: string;
 	refresh_token: string;
@@ -12,5 +23,6 @@ interface AuthResponse<T> {
 }
 
 type LoginResponse = AuthResponse<Omit<User, 'phone' | 'bio' | 'userVerifyStatus'>>;
+type RegisterResponse = LoginResponse;
 
-export { AuthResponse, LoginReqBody, LoginResponse };
+export { AuthResponse, LoginReqBody, LoginResponse, RegisterReqBody, RegisterResponse, LogoutReqBody };

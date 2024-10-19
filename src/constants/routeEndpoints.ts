@@ -1,5 +1,10 @@
 export class ROUTE_ENDPOINTS {
+	/**
+	 * Auth Endpoint
+	 */
 	public static LOGIN = '/login';
+	public static REGISTER = '/register';
+	public static LOGOUT = '/logout';
 
 	/**
 	 * Health Check Services

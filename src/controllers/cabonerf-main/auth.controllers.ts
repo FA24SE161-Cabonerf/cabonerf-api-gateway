@@ -1,8 +1,8 @@
 import { AuthService } from '@gateway/services/cabonerf-main/auth.service';
-import { LoginReqBody } from '@gateway/types/auth.type';
+import { LoginReqBody, RegisterReqBody } from '@gateway/types/auth.type';
+import { JWTPayload } from '@gateway/types/jwt.type';
 import { Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core/index';
-import { StatusCodes } from 'http-status-codes';
 
 export class AuthController {
 	public async login(req: Request<ParamsDictionary, any, LoginReqBody>, res: Response) {
@@ -10,6 +10,24 @@ export class AuthController {
 
 		const response = await AuthService.prototype.login({ email, password });
 
-		return res.status(StatusCodes.OK).json(response.data);
+		return res.status(response.status).json(response.data);
+	}
+
+	public async register(req: Request<ParamsDictionary, any, RegisterReqBody>, res: Response) {
+		const { confirmPassword, email, fullName, password } = req.body;
+
+		const response = await AuthService.prototype.register({ confirmPassword, email, fullName, password });
+
+		return res.status(response.status).json(response.data);
+	}
+
+	public async logout(req: Request, res: Response) {
+		const { refreshToken } = req.body;
+
+		const encodedJWT = req.jwtClientGatewayDecoded as JWTPayload;
+
+		const response = await AuthService.prototype.logout({ refreshToken }, encodedJWT);
+
+		return res.status(response.status).json(response.data);
 	}
 }

@@ -25,6 +25,11 @@
 			"@gateway/*": ["src/*"]
 		}
 	},
-	"include": ["src", "winston.ts", "winston.ts"],
+	"include": [
+		"src",
+		"winston.ts"
+		// Added express.d.ts here to ensure custom type is recognized
+	],
+	"files": ["src/type.d.ts"],
 	"exclude": ["node_modules"]
 }
