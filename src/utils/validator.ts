@@ -11,10 +11,7 @@ export const validator = (schemaChain: Schema, location?: Location[] | undefined
 		await runnableSchema.run(req);
 
 		const errors = await validationResult(req);
-		console.log('Running Herer');
-		if (!errors.isEmpty) {
-			console.log('Running No error');
-
+		if (errors.isEmpty()) {
 			next();
 		}
 
@@ -26,8 +23,7 @@ export const validator = (schemaChain: Schema, location?: Location[] | undefined
 			if (errorsObject[key].msg instanceof CommonGatewayError) {
 				entityError.data[key] = errorsObject[key].msg.data;
 			}
+			return next(entityError);
 		}
-
-		next(entityError);
 	};
 };
