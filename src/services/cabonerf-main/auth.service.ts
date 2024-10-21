@@ -31,7 +31,6 @@ export class AuthService {
 	}
 
 	public async logout(payload: LogoutReqBody, encodedJWT: JWTPayload) {
-		console.log('CALLING....');
 		const response = await mainAxiosService.axios.post(API_PARAMS.API_VERSION + API_PARAMS.USERS + API_PARAMS.LOGOUT, payload, {
 			headers: authHeaders(encodedJWT)
 		});
