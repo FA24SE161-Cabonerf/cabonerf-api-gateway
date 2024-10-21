@@ -7,6 +7,7 @@ export class ROUTE_ENDPOINTS {
 	public static LOGIN = this.USERS + '/login';
 	public static REGISTER = this.USERS + '/register';
 	public static LOGOUT = this.USERS + '/logout';
+	public static ME = this.USERS + '/me';
 
 	/**
 	 * Health Check Services

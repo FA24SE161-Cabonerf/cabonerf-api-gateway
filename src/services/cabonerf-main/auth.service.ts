@@ -4,6 +4,14 @@ import { LoginReqBody, LogoutReqBody, RegisterReqBody, RegisterResponse } from '
 import { CommonResponse } from '@gateway/types/common.types';
 import { JWTPayload } from '@gateway/types/jwt.type';
 
+const authHeaders = (encodedJWT: JWTPayload) => {
+	return {
+		'x-user-id': encodedJWT.user_id,
+		'x-user-role': encodedJWT.role_id,
+		'x-user-active': encodedJWT.user_verify_status
+	};
+};
+
 export class AuthService {
 	public async health() {
 		const response = await mainAxiosService.axios.get(API_PARAMS.HEALTH);
@@ -32,13 +40,17 @@ export class AuthService {
 			API_PARAMS.API_VERSION + API_PARAMS.USERS + API_PARAMS.LOGOUT,
 			payload,
 			{
-				headers: {
-					'x-user-id': encodedJWT.user_id,
-					'x-user-role': encodedJWT.role_id,
-					'x-user-active': encodedJWT.user_verify_status
-				}
+				headers: authHeaders(encodedJWT)
 			}
 		);
+
+		return response;
+	}
+
+	public async me(encodedJWT: JWTPayload) {
+		const response = await mainAxiosService.axios.get(API_PARAMS.API_VERSION + API_PARAMS.USERS + API_PARAMS.ME, {
+			headers: authHeaders(encodedJWT)
+		});
 
 		return response;
 	}

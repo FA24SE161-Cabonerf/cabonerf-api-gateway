@@ -15,6 +15,7 @@ export class AuthenticationRoute {
 		this.router.post(ROUTE_ENDPOINTS.LOGIN, asyncHandler(AuthController.prototype.login));
 		this.router.post(ROUTE_ENDPOINTS.REGISTER, asyncHandler(AuthController.prototype.register));
 		this.router.post(ROUTE_ENDPOINTS.LOGOUT, validatorAccessToken, asyncHandler(AuthController.prototype.logout));
+		this.router.get(ROUTE_ENDPOINTS.ME, validatorAccessToken);
 
 		return this.router;
 	}

@@ -30,4 +30,12 @@ export class AuthController {
 
 		return res.status(response.status).json(response.data);
 	}
+
+	public async me(req: Request, res: Response) {
+		const encodedJWT = req.jwtClientGatewayDecoded as JWTPayload;
+
+		const response = await AuthService.prototype.me(encodedJWT);
+
+		return res.status(response.status).json(response.data);
+	}
 }
