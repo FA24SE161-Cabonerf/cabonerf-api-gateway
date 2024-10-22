@@ -20,6 +20,7 @@ export class AxiosService {
 				// Log headers ở đây để kiểm tra
 
 				// Trả về config đã chỉnh sửa hoặc không
+				console.log(config.headers);
 				return config;
 			},
 			(error) => {
@@ -33,7 +34,7 @@ export class AxiosService {
 		let requestGatewayToken = '';
 
 		if (serviceIDKey) {
-			requestGatewayToken = jwt.sign({ id: serviceIDKey }, config.GATEWAY_SERVICE_SECRET_KEY);
+			requestGatewayToken = jwt.sign({ id: serviceIDKey.trim() }, config.GATEWAY_SERVICE_SECRET_KEY);
 		}
 
 		const instance: ReturnType<typeof axios.create> = axios.create({
