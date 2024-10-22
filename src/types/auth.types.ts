@@ -1,5 +1,11 @@
 import { User } from '@gateway/models/cabonerf-main/user.model';
 
+interface AuthorizationHeaders {
+	'x-user-id': string;
+	'x-user-role': string;
+	'x-user-active': string;
+}
+
 interface LoginReqBody {
 	email: string;
 	password: string;
@@ -25,4 +31,4 @@ interface AuthResponse<T> {
 type LoginResponse = AuthResponse<Omit<User, 'phone' | 'bio' | 'userVerifyStatus'>>;
 type RegisterResponse = LoginResponse;
 
-export { AuthResponse, LoginReqBody, LoginResponse, RegisterReqBody, RegisterResponse, LogoutReqBody };
+export { AuthResponse, LoginReqBody, LoginResponse, RegisterReqBody, RegisterResponse, LogoutReqBody, AuthorizationHeaders };

@@ -1,4 +1,6 @@
+import config from '@gateway/config';
 import { CommonGatewayError } from '@gateway/errors/gateway.errors';
+import mainAxiosService from '@gateway/services/cabonerf-main/main.axios';
 import { JWTPayload } from '@gateway/types/jwt.type';
 import { Request } from 'express';
 import { StatusCodes } from 'http-status-codes';
@@ -41,15 +43,21 @@ export const verifyAccessToken = async (value: string, req?: Request) => {
 
 		const token = await verifyToken({
 			token: _token,
-			secretOrPublicKey: `2a04b96a678f2e398bc5a0bae76028d194bcbbf2bcad11d016b49178bbcad14e`
+			secretOrPublicKey: config.CLIENT_GATEWAY_SECRET_KEY
 		});
-		console.log('Line 46');
+
 		if (req) {
 			(req as Request).jwtClientGatewayDecoded = token;
-			console.log('Line 49');
+
+			mainAxiosService.updateAuthorizationHeader({
+				'x-user-active': token.user_verify_status.toString(),
+				'x-user-id': token.user_id.toString(),
+				'x-user-role': token.role_id.toString()
+			});
+
 			return true;
 		}
-		console.log('Line 52');
+
 		return _token;
 	} catch (error) {
 		if (error instanceof JsonWebTokenError) {
