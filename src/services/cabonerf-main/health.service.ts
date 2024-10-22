@@ -1,4 +1,4 @@
-import { API_PARAMS } from '@gateway/constants/apiParams';
+import { API_PARAMS } from '@gateway/constants/apiParams.';
 import mainAxiosService from '@gateway/services/cabonerf-main/main.axios';
 
 export class HealthService {

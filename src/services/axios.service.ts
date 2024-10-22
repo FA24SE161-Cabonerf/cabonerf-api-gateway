@@ -1,10 +1,12 @@
 import config from '@gateway/config';
+import { AuthorizationHeaders } from '@gateway/types/auth.types';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
 
 // const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'Gateway', 'debug');
 export class AxiosService {
 	public axios: ReturnType<typeof axios.create>;
+	public authorizationHeaders: AuthorizationHeaders | null = null;
 
 	/**
 	 *
@@ -20,7 +22,10 @@ export class AxiosService {
 				// Log headers ở đây để kiểm tra
 
 				// Trả về config đã chỉnh sửa hoặc không
-				console.log(config.headers);
+				config.headers = {
+					...config.headers,
+					...this.authorizationHeaders
+				};
 				return config;
 			},
 			(error) => {
@@ -48,5 +53,9 @@ export class AxiosService {
 		});
 
 		return instance;
+	}
+
+	public updateAuthorizationHeader(payload: AuthorizationHeaders) {
+		this.authorizationHeaders = payload;
 	}
 }

@@ -10,6 +10,15 @@ export class ROUTE_ENDPOINTS {
 	public static ME = this.USERS + '/me';
 
 	/**
+	 * Impact Endpoint
+	 */
+
+	public static IMPACTS = '/impacts';
+
+	public static IMPACT_METHODS = this.IMPACTS + '/impact-methods';
+	public static CATEGORIES = '/categories';
+
+	/**
 	 * Health Check Services
 	 */
 	public static GATEWAY_HEALTH = '/gateway-health';

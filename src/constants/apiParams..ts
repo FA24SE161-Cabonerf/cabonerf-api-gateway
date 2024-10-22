@@ -10,7 +10,7 @@ export class API_PARAMS {
 	/**
 	 * User APIs
 	 */
-	public static USERS = '/users';
+	public static USERS = this.API_VERSION + '/users';
 
 	public static LOGIN = '/login';
 	public static REGISTER = '/register';
@@ -19,4 +19,13 @@ export class API_PARAMS {
 	public static LOGOUT = '/logout';
 	public static ME = '/me';
 	public static EMAIL_VERIFY = '/email_verify';
+
+	/**
+	 * Impacts APIs
+	 */
+
+	public static IMPACTS = this.API_VERSION + '/impacts';
+
+	public static IMPACT_METHODS = '/impact-methods';
+	public static CATEGORIES = '/categories';
 }
