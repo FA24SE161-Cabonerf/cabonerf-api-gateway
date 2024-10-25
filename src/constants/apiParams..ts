@@ -28,4 +28,9 @@ export class API_PARAMS {
 
 	public static IMPACT_METHODS = '/impact-methods';
 	public static CATEGORIES = '/categories';
+
+	/**
+	 * Project APIs
+	 */
+	public static PROJECTS = this.API_VERSION + '/projects';
 }
