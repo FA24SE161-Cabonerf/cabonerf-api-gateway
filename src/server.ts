@@ -6,6 +6,7 @@ import { infoMessage } from '@gateway/log/message.log';
 import authRoute from '@gateway/routes/auth.routes';
 import healthRoute from '@gateway/routes/health.routes';
 import impactRoute from '@gateway/routes/impact.routes';
+import projectRoute from '@gateway/routes/project.routes';
 import { winstonLogger } from '@gateway/winston';
 import { AxiosError } from 'axios';
 import compression from 'compression';
@@ -51,6 +52,7 @@ export class GatewayServer {
 		_app.use(BASE_PATH_V1, healthRoute.routes());
 		_app.use(BASE_PATH_V1, authRoute.routes());
 		_app.use(BASE_PATH_V1, impactRoute.routes());
+		_app.use(BASE_PATH_V1, projectRoute.routes());
 	}
 
 	private async initElasticsearch() {

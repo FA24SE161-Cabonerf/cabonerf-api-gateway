@@ -19,6 +19,11 @@ export class ROUTE_ENDPOINTS {
 	public static CATEGORIES = '/categories';
 
 	/**
+	 * Project
+	 */
+	public static PROJECTS = '/projects';
+
+	/**
 	 * Health Check Services
 	 */
 	public static GATEWAY_HEALTH = '/gateway-health';
