@@ -26,4 +26,9 @@ export class ImpactService {
 
 		return response;
 	}
+
+	public async createImpactMethod(payload: CreateImpactMethodReqBody) {
+		const response = await mainAxiosService.axios.post<CommonResponse<any>>(API_PARAMS.IMPACTS + API_PARAMS.IMPACT_METHODS, payload);
+		return response;
+	}
 }
