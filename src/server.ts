@@ -5,7 +5,7 @@ import { CommonGatewayError } from '@gateway/errors/gateway.errors';
 import { infoMessage } from '@gateway/log/message.log';
 import authRoute from '@gateway/routes/auth.routes';
 import healthRoute from '@gateway/routes/health.routes';
-import impactRoute from '@gateway/routes/impact.routes';
+import impactMethodRoute from '@gateway/routes/impactMethod.routes';
 import projectRoute from '@gateway/routes/project.routes';
 import { winstonLogger } from '@gateway/winston';
 import { AxiosError } from 'axios';
@@ -51,7 +51,7 @@ export class GatewayServer {
 	private initRoutes(_app: Application) {
 		_app.use(BASE_PATH_V1, healthRoute.routes());
 		_app.use(BASE_PATH_V1, authRoute.routes());
-		_app.use(BASE_PATH_V1, impactRoute.routes());
+		_app.use(BASE_PATH_V1, impactMethodRoute.routes());
 		_app.use(BASE_PATH_V1, projectRoute.routes());
 	}
 
