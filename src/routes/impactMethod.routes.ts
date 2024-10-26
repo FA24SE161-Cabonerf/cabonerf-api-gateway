@@ -12,23 +12,23 @@ class ImpactMethodRoute {
 	}
 
 	public routes(): Router {
+		// Get all impact method
 		this.router.get(
-			ROUTE_ENDPOINTS.IMPACT_METHODS,
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_METHODS,
 			validatorAccessToken,
 			asyncHandler(ImpactMethodController.prototype.getImpactMethods)
 		);
+
+		// Get impact method by id
 		this.router.get(
-			ROUTE_ENDPOINTS.IMPACT_METHODS + '/:id',
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_METHODS + '/:id',
 			validatorAccessToken,
 			asyncHandler(ImpactMethodController.prototype.getImpactMethodById)
 		);
-		this.router.get(
-			ROUTE_ENDPOINTS.IMPACT_METHODS + '/:id' + ROUTE_ENDPOINTS.CATEGORIES,
-			validatorAccessToken,
-			asyncHandler(ImpactMethodController.prototype.getImpactCategoriesByMethodId)
-		);
+
+		// Create new impact method
 		this.router.post(
-			ROUTE_ENDPOINTS.IMPACT_METHODS,
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_METHODS,
 			validatorAccessToken,
 			asyncHandler(ImpactMethodController.prototype.createImpactMethod)
 		);

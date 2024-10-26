@@ -10,13 +10,17 @@ export class ROUTE_ENDPOINTS {
 	public static ME = this.USERS + '/me';
 
 	/**
-	 * Impact Endpoint
+	 * Impacts Endpoint
 	 */
 
 	public static IMPACTS = '/impacts';
 
-	public static IMPACT_METHODS = this.IMPACTS + '/impact-methods';
-	public static CATEGORIES = '/categories';
+	// Impact Method
+	public static IMPACT_METHODS = '/impact-methods';
+
+	// Impact Category
+
+	public static IMPACT_CATEGORIES = '/impact-categories';
 
 	/**
 	 * Project

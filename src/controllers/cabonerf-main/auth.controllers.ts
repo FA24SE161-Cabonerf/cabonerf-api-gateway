@@ -1,6 +1,5 @@
 import { AuthService } from '@gateway/services/cabonerf-main/auth.service';
 import { LoginReqBody, RegisterReqBody } from '@gateway/types/auth.types';
-import { GatewayResponse } from '@gateway/types/common.types';
 import { Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core/index';
 
@@ -10,9 +9,7 @@ export class AuthController {
 
 		const result = await AuthService.prototype.login({ email, password });
 
-		const response = new GatewayResponse({ data: result.data.data, message: result.data.message, status: result.status });
-
-		return res.status(result.status).json(response);
+		return res.status(result.status).json(result.data);
 	}
 
 	public async register(req: Request<ParamsDictionary, any, RegisterReqBody>, res: Response) {
@@ -20,9 +17,7 @@ export class AuthController {
 
 		const result = await AuthService.prototype.register({ confirmPassword, email, fullName, password });
 
-		const response = new GatewayResponse({ data: result.data.data, message: result.data.message, status: result.status });
-
-		return res.status(result.status).json(response);
+		return res.status(result.status).json(result.data);
 	}
 
 	public async logout(req: Request, res: Response) {
@@ -30,16 +25,12 @@ export class AuthController {
 
 		const result = await AuthService.prototype.logout({ refreshToken });
 
-		const response = new GatewayResponse({ data: result.data.data, message: result.data.message, status: result.status });
-
-		return res.status(result.status).json(response);
+		return res.status(result.status).json(result.data);
 	}
 
 	public async me(_req: Request, res: Response) {
 		const result = await AuthService.prototype.me();
 
-		const response = new GatewayResponse({ data: result.data.data, message: result.data.message, status: result.status });
-
-		return res.status(result.status).json(response);
+		return res.status(result.status).json(result.data);
 	}
 }

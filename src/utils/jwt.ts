@@ -22,7 +22,7 @@ export const verifyToken = ({ token, secretOrPublicKey }: { token: string; secre
 		verify(token, secretOrPublicKey, { algorithms: ['HS256'] }, (error, decoded) => {
 			if (error) {
 				// Use reject directly instead of throwing
-				return reject(error.message);
+				return reject(error);
 			}
 			resolve(decoded as JWTPayload);
 		});

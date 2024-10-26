@@ -1,4 +1,4 @@
-interface CreateImpactMethodReqBody {
+export interface CreateImpactMethodReqBody {
 	name: string;
 	description: string;
 	version: string;
