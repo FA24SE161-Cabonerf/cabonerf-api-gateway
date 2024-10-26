@@ -1,5 +1,5 @@
 export interface CommonResponse<T> {
-	status: string;
+	status: number;
 	message: string;
 	data: T;
 }
@@ -14,4 +14,8 @@ export class GatewayResponse<T> {
 		this.message = message;
 		this.data = data;
 	}
+}
+
+export interface ParamID {
+	id: string;
 }

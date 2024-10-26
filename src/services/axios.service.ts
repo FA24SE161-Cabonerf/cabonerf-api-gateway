@@ -15,7 +15,7 @@ export class AxiosService {
 	 * @returns AxiosInstance
 	 */
 	constructor(baseUrl: string, serviceIDKey: string) {
-		this.axios = this.axiosCreateInstance(baseUrl, serviceIDKey);
+		this.axios = this.axiosCreateInstance(baseUrl + '/api/v1', serviceIDKey);
 
 		this.axios.interceptors.request.use(
 			(config: any) => {

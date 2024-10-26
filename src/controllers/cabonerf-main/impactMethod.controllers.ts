@@ -1,41 +1,26 @@
 import { ImpactService as ImpactMethodService } from '@gateway/services/cabonerf-main/impactMethod.service';
-import { GatewayResponse } from '@gateway/types/common.types';
+import { CreateImpactMethodReqBody } from '@gateway/types/impactMethod.types';
 import { Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core/index';
 
 export default class ImpactMethodController {
-	public async getImpactMethods(_req: Request, _res: Response) {
+	public async getImpactMethods(_req: Request, res: Response) {
 		const result = await ImpactMethodService.prototype.getImpactMethods();
 
-		const response = new GatewayResponse({ status: result.status, data: result.data.data, message: result.data.message });
-
-		return _res.status(result.status).json(response);
+		return res.status(result.status).json(result.data);
 	}
 
-	public async getImpactMethodById(_req: Request, _res: Response) {
+	public async getImpactMethodById(_req: Request, res: Response) {
 		const id = _req.params.id;
 
 		const result = await ImpactMethodService.prototype.getImpactMethodById({ id });
-
-		const response = new GatewayResponse({ status: result.status, data: result.data.data, message: result.data.message });
-
-		return _res.status(result.status).json(response);
+		return res.status(result.status).json(result.data);
 	}
 
-	public async getImpactCategoriesByMethodId(_req: Request, _res: Response) {
-		const id = _req.params.id;
-
-		const result = await ImpactMethodService.prototype.getImpactCategoriesByMethodId({ id });
-
-		const response = new GatewayResponse({ status: result.status, data: result.data.data, message: result.data.message });
-
-		return _res.status(result.status).json(response);
-	}
-
-	public async createImpactMethod(_req: Request<ParamsDictionary, unknown, CreateImpactMethodReqBody>, _res: Response) {
+	public async createImpactMethod(_req: Request<ParamsDictionary, unknown, CreateImpactMethodReqBody>, res: Response) {
 		const { ...rest } = _req.body;
 		const result = await ImpactMethodService.prototype.createImpactMethod(rest);
-		const response = new GatewayResponse({ status: result.status, data: result.data.data, message: result.data.message });
-		return _res.status(result.status).json(response);
+
+		return res.status(result.status).json(result.data);
 	}
 }
