@@ -26,6 +26,20 @@ class ImpactCategoryRoute {
 			asyncHandler(ImpactCategoryController.prototype.getImpactCategoryById)
 		);
 
+		// Get all impact category
+		this.router.get(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_CATEGORIES,
+			validatorAccessToken,
+			asyncHandler(ImpactCategoryController.prototype.getAllImpactCategory)
+		);
+
+		// Create impact category
+		this.router.post(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_CATEGORIES,
+			validatorAccessToken,
+			asyncHandler(ImpactCategoryController.prototype.createImpactCategory)
+		);
+
 		return this.router;
 	}
 }
