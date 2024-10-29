@@ -17,6 +17,7 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import http from 'http';
 import { Logger } from 'winston';
+import midpointRoute from './routes/midpoint.routes';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'Gateway', 'debug');
 
@@ -55,6 +56,7 @@ export class GatewayServer {
 		_app.use(BASE_PATH_V1, impactMethodRoute.routes());
 		_app.use(BASE_PATH_V1, impactCategoryRoute.routes());
 		_app.use(BASE_PATH_V1, projectRoute.routes());
+		_app.use(BASE_PATH_V1, midpointRoute.routes());
 	}
 
 	private async initElasticsearch() {
