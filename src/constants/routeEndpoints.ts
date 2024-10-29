@@ -28,6 +28,11 @@ export class ROUTE_ENDPOINTS {
 	public static PROJECTS = '/projects';
 
 	/**
+	 * Life Cycle Stages
+	 */
+	public static LIFE_CYCLE_STAGES = '/life-cycle-stages';
+
+	/**
 	 * Health Check Services
 	 */
 	public static GATEWAY_HEALTH = '/gateway-health';
