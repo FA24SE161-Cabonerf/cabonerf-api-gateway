@@ -7,6 +7,7 @@ import authRoute from '@gateway/routes/auth.routes';
 import healthRoute from '@gateway/routes/health.routes';
 import impactCategoryRoute from '@gateway/routes/impactCategory.routes';
 import impactMethodRoute from '@gateway/routes/impactMethod.routes';
+import lifeCycleStagesRoute from '@gateway/routes/lifeCycleStages.routes';
 import projectRoute from '@gateway/routes/project.routes';
 import { winstonLogger } from '@gateway/winston';
 import { AxiosError } from 'axios';
@@ -55,6 +56,7 @@ export class GatewayServer {
 		_app.use(BASE_PATH_V1, impactMethodRoute.routes());
 		_app.use(BASE_PATH_V1, impactCategoryRoute.routes());
 		_app.use(BASE_PATH_V1, projectRoute.routes());
+		_app.use(BASE_PATH_V1, lifeCycleStagesRoute.routes());
 	}
 
 	private async initElasticsearch() {
