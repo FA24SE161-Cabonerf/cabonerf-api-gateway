@@ -1,40 +1,36 @@
 # Stage 1: Build
-FROM node:22-alpine AS build
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
-# Copy package.json and tsconfig.json first to utilize Docker caching
+# Copy only necessary files to install dependencies
 COPY package.json tsconfig.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --loglevel verbose
 
-# Copy the rest of the source code
+# Copy the rest of the application source
 COPY . ./
 
-# Run build commands if necessary (skip if not needed)
+# Optional: Run build commands if necessary
 # RUN npm run build
 
 # Stage 2: Production
-FROM node:22-alpine
+FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy package.json and tsconfig.json to production container
-COPY --from=build /app/package.json /app/package.json
-COPY --from=build /app/tsconfig.json /app/tsconfig.json
+# Copy production dependencies and files from build stage
+COPY --from=build /app/package.json ./
+COPY --from=build /app/tsconfig.json ./
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/src ./src
+COPY --from=build /app/.env .env
 
-# Copy node_modules from build stage (caching)
-COPY --from=build /app/node_modules /app/node_modules
-
-# Copy the rest of the source code
-COPY --from=build /app/src /app/src
-COPY --from=build /app/.env /app/.env
-
-# Install nodemon globally
-RUN npm install -g nodemon
+# Install nodemon globally for development mode
+RUN npm install --loglevel verbose -g nodemon
 
 EXPOSE 4000
 
-# Run the application
+# Start the application in development mode
 CMD ["npm", "run", "dev"]
