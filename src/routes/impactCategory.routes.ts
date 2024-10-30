@@ -40,6 +40,20 @@ class ImpactCategoryRoute {
 			asyncHandler(ImpactCategoryController.prototype.createImpactCategory)
 		);
 
+		// Update impact category with id
+		this.router.put(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_CATEGORIES + '/:id',
+			validatorAccessToken,
+			asyncHandler(ImpactCategoryController.prototype.updateImpactCategory)
+		);
+
+		// Delete impact category with id
+		this.router.delete(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_CATEGORIES + '/:id',
+			validatorAccessToken,
+			asyncHandler(ImpactCategoryController.prototype.deleteImpactCategory)
+		);
+
 		return this.router;
 	}
 }

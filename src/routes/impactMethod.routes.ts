@@ -32,6 +32,27 @@ class ImpactMethodRoute {
 			validatorAccessToken,
 			asyncHandler(ImpactMethodController.prototype.createImpactMethod)
 		);
+
+		// Update impact method with id
+		this.router.put(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_METHODS + '/:id',
+			validatorAccessToken,
+			asyncHandler(ImpactMethodController.prototype.updateImpactMethodById)
+		);
+
+		// Delete impact method with id
+		this.router.delete(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_METHODS + '/:id',
+			validatorAccessToken,
+			asyncHandler(ImpactMethodController.prototype.deleteImpactMethodById)
+		);
+
+		// Add category to method with id
+		this.router.post(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_METHODS + '/:methodId' + ROUTE_ENDPOINTS.IMPACT_CATEGORIES + '/:categoryId',
+			validatorAccessToken,
+			asyncHandler(ImpactMethodController.prototype.addCategoryToMethod)
+		);
 		return this.router;
 	}
 }

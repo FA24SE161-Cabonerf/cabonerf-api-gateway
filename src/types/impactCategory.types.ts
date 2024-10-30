@@ -1,4 +1,4 @@
-export interface CreateImpactCategoryReqBody {
+export interface BaseImpactCategoryReqBody {
 	name: string;
 	indicator: string;
 	indicatorDescription: string;

@@ -2,7 +2,7 @@ import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import { ImpactMethod } from '@gateway/models/cabonerf-main/impact.model';
 import mainAxiosService from '@gateway/services/cabonerf-main/main.axios';
 import { CommonResponse } from '@gateway/types/common.types';
-import { CreateImpactMethodReqBody } from '@gateway/types/impactMethod.types';
+import { BaseImpactMethodReqBody } from '@gateway/types/impactMethod.types';
 
 export class ImpactService {
 	public async getImpactMethods() {
@@ -21,10 +21,32 @@ export class ImpactService {
 		return response;
 	}
 
-	public async createImpactMethod(payload: CreateImpactMethodReqBody) {
+	public async createImpactMethod(payload: BaseImpactMethodReqBody) {
 		const response = await mainAxiosService.axios.post<CommonResponse<any>>(
 			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_METHODS,
 			payload
+		);
+		return response;
+	}
+
+	public async updateImpactMethodById(id: string, payload: BaseImpactMethodReqBody) {
+		const response = await mainAxiosService.axios.put<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_METHODS + `/${id}`,
+			payload
+		);
+		return response;
+	}
+
+	public async deleteImpactMethodById(id: string) {
+		const response = await mainAxiosService.axios.delete<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_METHODS + `/${id}`
+		);
+		return response;
+	}
+
+	public async addCategoryToMethod(methodId: string, categoryId: string) {
+		const response = await mainAxiosService.axios.post<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_METHODS + `/${methodId}` + ROUTE_ENDPOINTS.IMPACT_CATEGORIES + `/${categoryId}`
 		);
 		return response;
 	}
