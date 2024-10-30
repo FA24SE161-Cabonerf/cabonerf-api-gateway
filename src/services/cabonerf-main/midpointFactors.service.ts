@@ -5,12 +5,12 @@ import { PaginationRequest } from '@gateway/models/cabonerf-main/paginationReque
 
 export class MidpointService {
 	public async getAllMidpointFactors() {
-		const response = await mainAxiosService.axios.get<CommonResponse<any>>(ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.MIDPOINTS);
+		const response = await mainAxiosService.axios.get<CommonResponse<any>>(ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.MIDPOINT_FACTORS);
 		return response;
 	}
 	public async getAllMidpointFactorsForAdmin(payload: PaginationRequest) {
 		const response = await mainAxiosService.axios.get<CommonResponse<any>>(
-			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.MIDPOINTS,
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.MIDPOINT_FACTORS,
 			{
 				params: {
 					currentPage: payload.currentPage,
@@ -22,7 +22,7 @@ export class MidpointService {
 	}
 	public async getMidpointFactorById(payload: ParamID) {
 		const response = await mainAxiosService.axios.get<CommonResponse<any>>(
-			`${ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.MIDPOINTS}/${payload.id}`
+			`${ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.MIDPOINT_FACTORS}/${payload.id}`
 		);
 		return response;
 	}

@@ -18,7 +18,7 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import http from 'http';
 import { Logger } from 'winston';
-import midpointRoute from './routes/midpoint.routes';
+import midpointRoute from './routes/midpointFactors.routes';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'Gateway', 'debug');
 

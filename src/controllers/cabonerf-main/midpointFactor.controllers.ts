@@ -1,4 +1,4 @@
-import { MidpointService } from '@gateway/services/cabonerf-main/midpoint.service';
+import { MidpointService } from '@gateway/services/cabonerf-main/midpointFactors.service';
 import { Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { ParamID } from '@gateway/types/common.types';
