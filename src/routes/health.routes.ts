@@ -13,7 +13,7 @@ class HealthRoute {
 	public routes(): Router {
 		this.router.get(ROUTE_ENDPOINTS.GATEWAY_HEALTH, asyncHandler(HealthController.prototype.checkHealth));
 		this.router.get(ROUTE_ENDPOINTS.MAIN_HEALTH, asyncHandler(HealthController.prototype.checkMainHealth));
-
+		this.router.get(ROUTE_ENDPOINTS.NODEBASED_HEALTH, asyncHandler(HealthController.prototype.checkNodebasedHealth));
 		return this.router;
 	}
 }
