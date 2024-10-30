@@ -22,6 +22,9 @@ export class ROUTE_ENDPOINTS {
 
 	public static IMPACT_CATEGORIES = '/impact-categories';
 
+	// Impact Midpoint
+	public static MIDPOINTS = '/midpoint-factors';
+
 	/**
 	 * Project
 	 */
@@ -37,5 +40,12 @@ export class ROUTE_ENDPOINTS {
 	 */
 	public static GATEWAY_HEALTH = '/gateway-health';
 	public static MAIN_HEALTH = '/main-health';
+
 	public static NODEBASED_HEALTH = '/nodebased-health';
+
+
+	/**
+	 * Admin
+	 */
+	public static ADMIN = '/admin';
 }
