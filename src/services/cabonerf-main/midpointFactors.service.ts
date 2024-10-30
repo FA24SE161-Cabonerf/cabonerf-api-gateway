@@ -3,7 +3,7 @@ import mainAxiosService from '@gateway/services/cabonerf-main/main.axios';
 import { CommonResponse, ParamID } from '@gateway/types/common.types';
 import { PaginationRequest } from '@gateway/models/cabonerf-main/paginationRequest.model';
 
-export class MidpointService {
+export class MidpointFactorService {
 	public async getAllMidpointFactors() {
 		const response = await mainAxiosService.axios.get<CommonResponse<any>>(ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.MIDPOINT_FACTORS);
 		return response;

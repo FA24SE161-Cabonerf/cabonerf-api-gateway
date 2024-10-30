@@ -1,10 +1,10 @@
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import { validatorAccessToken } from '@gateway/middlewares/token.middleware';
-import MidpointController from '@gateway/controllers/cabonerf-main/midpointFactor.controllers';
+import MidpointFactorController from '@gateway/controllers/cabonerf-main/midpointFactor.controllers';
 import { asyncHandler } from '@gateway/utils/async-handler';
 import express, { Router } from 'express';
 
-class MidpointRoute {
+class MidpointFactorRoute {
 	private router: Router;
 
 	constructor() {
@@ -16,27 +16,27 @@ class MidpointRoute {
 		this.router.get(
 			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.MIDPOINT_FACTORS,
 			validatorAccessToken,
-			asyncHandler(MidpointController.prototype.getAllMidpointFactors)
+			asyncHandler(MidpointFactorController.prototype.getAllMidpointFactors)
 		);
 
 		// Get all midpoint factors for admin
 		this.router.get(
 			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.MIDPOINT_FACTORS,
 			validatorAccessToken,
-			asyncHandler(MidpointController.prototype.getAllMidpointFactorsForAdmin)
+			asyncHandler(MidpointFactorController.prototype.getAllMidpointFactorsForAdmin)
 		);
 
 		// Get midpoint factor by id
 		this.router.get(
 			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.MIDPOINT_FACTORS + '/:id',
 			validatorAccessToken,
-			asyncHandler(MidpointController.prototype.getMidpointFactorById)
+			asyncHandler(MidpointFactorController.prototype.getMidpointFactorById)
 		);
 
 		return this.router;
 	}
 }
 
-const midpointRoute = new MidpointRoute();
+const midpointFactorRoute = new MidpointFactorRoute();
 
-export default midpointRoute;
+export default midpointFactorRoute;

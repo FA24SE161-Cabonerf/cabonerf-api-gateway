@@ -25,6 +25,9 @@ export class ROUTE_ENDPOINTS {
 	// Impact Midpoint
 	public static MIDPOINT_FACTORS = '/midpoint-factors';
 
+	// Midpoint Impact Category
+	public static MIDPOINT_CATEGORIES = '/midpoint-categories';
+
 	/**
 	 * Project
 	 */
