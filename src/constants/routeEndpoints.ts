@@ -37,4 +37,5 @@ export class ROUTE_ENDPOINTS {
 	 */
 	public static GATEWAY_HEALTH = '/gateway-health';
 	public static MAIN_HEALTH = '/main-health';
+	public static NODEBASED_HEALTH = '/nodebased-health';
 }
