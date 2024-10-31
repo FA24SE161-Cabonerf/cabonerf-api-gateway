@@ -13,6 +13,7 @@ import projectRoute from '@gateway/routes/project.routes';
 import midpointFactorRoute from './routes/midpointFactors.routes';
 import perspectiveRoute from './routes/perspective.routes';
 import unitRoute from './routes/unit.routes';
+import unitGroupRoute from './routes/unitGroup.routes';
 import { winstonLogger } from '@gateway/winston';
 import { AxiosError } from 'axios';
 import compression from 'compression';
@@ -65,6 +66,7 @@ export class GatewayServer {
 		_app.use(BASE_PATH_V1, lifeCycleStagesRoute.routes());
 		_app.use(BASE_PATH_V1, perspectiveRoute.routes());
 		_app.use(BASE_PATH_V1, unitRoute.routes());
+		_app.use(BASE_PATH_V1, unitGroupRoute.routes());
 	}
 
 	private async initElasticsearch() {
