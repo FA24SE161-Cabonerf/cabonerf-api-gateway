@@ -4,7 +4,7 @@ import mainAxiosService from '@gateway/services/cabonerf-main/main.axios';
 import { CommonResponse } from '@gateway/types/common.types';
 import { BaseImpactMethodReqBody } from '@gateway/types/impactMethod.types';
 
-export class ImpactService {
+export class ImpactMethodService {
 	public async getImpactMethods() {
 		const response = await mainAxiosService.axios.get<CommonResponse<ImpactMethod[]>>(
 			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_METHODS

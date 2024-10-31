@@ -10,6 +10,9 @@ import impactMethodRoute from '@gateway/routes/impactMethod.routes';
 import lifeCycleStagesRoute from '@gateway/routes/lifeCycleStages.routes';
 import midpointCategoryRoute from './routes/midpointCategory.routes';
 import projectRoute from '@gateway/routes/project.routes';
+import midpointFactorRoute from './routes/midpointFactors.routes';
+import perspectiveRoute from './routes/perspective.routes';
+import unitRoute from './routes/unit.routes';
 import { winstonLogger } from '@gateway/winston';
 import { AxiosError } from 'axios';
 import compression from 'compression';
@@ -19,7 +22,6 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import http from 'http';
 import { Logger } from 'winston';
-import midpointFactorRoute from './routes/midpointFactors.routes';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'Gateway', 'debug');
 
@@ -61,6 +63,8 @@ export class GatewayServer {
 		_app.use(BASE_PATH_V1, midpointFactorRoute.routes());
 		_app.use(BASE_PATH_V1, midpointCategoryRoute.routes());
 		_app.use(BASE_PATH_V1, lifeCycleStagesRoute.routes());
+		_app.use(BASE_PATH_V1, perspectiveRoute.routes());
+		_app.use(BASE_PATH_V1, unitRoute.routes());
 	}
 
 	private async initElasticsearch() {

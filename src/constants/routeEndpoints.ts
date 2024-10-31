@@ -29,6 +29,16 @@ export class ROUTE_ENDPOINTS {
 	public static MIDPOINT_CATEGORIES = '/midpoint-categories';
 
 	/**
+	 * Unit
+	 */
+	public static UNITS = '/units';
+
+	/**
+	 * Unit group
+	 */
+	public static UNIT_GROUPS = '/unit-groups';
+
+	/**
 	 * Project
 	 */
 	public static PROJECTS = '/projects';
@@ -37,6 +47,11 @@ export class ROUTE_ENDPOINTS {
 	 * Life Cycle Stages
 	 */
 	public static LIFE_CYCLE_STAGES = '/life-cycle-stages';
+
+	/**
+	 * Perspectives
+	 */
+	public static PERSPECTIVES = '/perspectives';
 
 	/**
 	 * Health Check Services

@@ -1,4 +1,4 @@
-import { ImpactService as ImpactMethodService } from '@gateway/services/cabonerf-main/impactMethod.service';
+import { ImpactMethodService as ImpactMethodService } from '@gateway/services/cabonerf-main/impactMethod.service';
 import { ParamID } from '@gateway/types/common.types';
 import { BaseImpactMethodReqBody } from '@gateway/types/impactMethod.types';
 import { Request, Response } from 'express';
