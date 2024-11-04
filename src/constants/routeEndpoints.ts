@@ -54,6 +54,11 @@ export class ROUTE_ENDPOINTS {
 	public static PERSPECTIVES = '/perspectives';
 
 	/**
+	 * Connector
+	 */
+	public static CONNECTOR = '/connectors';
+
+	/**
 	 * Health Check Services
 	 */
 	public static GATEWAY_HEALTH = '/gateway-health';

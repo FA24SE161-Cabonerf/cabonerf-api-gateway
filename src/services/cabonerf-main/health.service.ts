@@ -7,4 +7,9 @@ export class HealthService {
 
 		return response;
 	}
+
+	public async testCreateProcessQueue(msg: string) {
+		const response = await mainAxiosService.axios.post('/test-create-process-queue', msg);
+		return response;
+	}
 }
