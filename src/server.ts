@@ -23,6 +23,8 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import http from 'http';
 import { Logger } from 'winston';
+import { Server } from 'socket.io';
+import { SocketIOHandler } from '@gateway/socket/socket.io';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'Gateway', 'debug');
 
@@ -82,10 +84,25 @@ export class GatewayServer {
 		});
 	}
 
+	private startSocketIO(io: Server): void {
+		const socketIOApp = new SocketIOHandler(io);
+		socketIOApp.listen();
+	}
+
+	private initSocketIO(http: http.Server) {
+		const io = new Server(http, {
+			cors: {
+				origin: 'http://localhost:5173'
+			}
+		});
+		this.startSocketIO(io);
+	}
+
 	private async initServer(_app: Application): Promise<void> {
 		try {
 			const httpServer: http.Server = new http.Server(_app);
 			await this.startServer(httpServer);
+			await this.initSocketIO(httpServer);
 		} catch (error) {
 			log.error(infoMessage({ service: 'Server', content: error as string }));
 		}
