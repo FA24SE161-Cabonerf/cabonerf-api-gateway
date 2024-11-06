@@ -2,7 +2,7 @@ import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import express, { Router } from 'express';
 import { validatorAccessToken } from '@gateway/middlewares/token.middleware';
 import { asyncHandler } from '@gateway/utils/async-handler';
-import UnitGroupController from '@gateway/controllers/cabonerf-main/unitGroup.controllers';
+import UnitGroupController from '@gateway/controllers/cabonerf-main/unitGroup.controller';
 export class UnitGroupRoute {
 	private router: Router;
 

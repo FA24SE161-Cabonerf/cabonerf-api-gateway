@@ -1,5 +1,5 @@
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
-import { LifeCycleStagesController } from '@gateway/controllers/cabonerf-main/lifeCycleStages.controllers';
+import { LifeCycleStagesController } from '@gateway/controllers/cabonerf-main/lifeCycleStages.controller';
 import { validatorAccessToken } from '@gateway/middlewares/token.middleware';
 import { asyncHandler } from '@gateway/utils/async-handler';
 import express, { Router } from 'express';

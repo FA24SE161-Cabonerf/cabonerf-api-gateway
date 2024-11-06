@@ -1,7 +1,7 @@
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import mainAxiosService from '@gateway/services/cabonerf-main/main.axios';
 import { CommonResponse } from '@gateway/types/common.types';
-import { CreateProjectReqBody, UpdateProjectReqBody } from '@gateway/types/project.types';
+import { CreateProjectReqBody, Project, UpdateProjectReqBody } from '@gateway/types/project.types';
 
 export default class ProjectService {
 	public async getProject() {
@@ -10,8 +10,10 @@ export default class ProjectService {
 		return response;
 	}
 
-	public async getProjectByID(payload: { id: string }) {
-		const response = await mainAxiosService.axios.get<CommonResponse<any>>(`${ROUTE_ENDPOINTS.PROJECTS}/${payload.id}`);
+	public async getProjectByID(payload: { id: string; wid: string }) {
+		const response = await mainAxiosService.axios.get<CommonResponse<Project>>(
+			`${ROUTE_ENDPOINTS.PROJECTS}/${payload.id}/${payload.wid}`
+		);
 
 		return response;
 	}
