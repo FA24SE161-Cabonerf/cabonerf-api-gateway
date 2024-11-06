@@ -23,4 +23,12 @@ export class HealthController {
 
 		return res.status(response.status).json(response.data);
 	}
+
+	public async testCreateProcessQueue(_req: Request, res: Response, _next: NextFunction) {
+		const response = await HealthService.prototype.testCreateProcessQueue('con cac test queue');
+
+		return res.status(response.status).json({
+			message: response.data
+		});
+	}
 }

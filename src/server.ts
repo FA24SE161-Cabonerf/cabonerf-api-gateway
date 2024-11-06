@@ -23,6 +23,7 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import http from 'http';
 import { Logger } from 'winston';
+import processRoute from './routes/process.routes';
 import { Server } from 'socket.io';
 import { SocketIOHandler } from '@gateway/socket/socket.io';
 
@@ -69,6 +70,7 @@ export class GatewayServer {
 		_app.use(BASE_PATH_V1, perspectiveRoute.routes());
 		_app.use(BASE_PATH_V1, unitRoute.routes());
 		_app.use(BASE_PATH_V1, unitGroupRoute.routes());
+		_app.use(BASE_PATH_V1, processRoute.routes());
 	}
 
 	private async initElasticsearch() {
