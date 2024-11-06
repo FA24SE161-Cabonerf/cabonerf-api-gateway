@@ -26,6 +26,7 @@ import { Logger } from 'winston';
 import processRoute from './routes/process.routes';
 import { Server } from 'socket.io';
 import { SocketIOHandler } from '@gateway/socket/socket.io';
+import exchangeRoute from './routes/exchange.routes';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'Gateway', 'debug');
 
@@ -71,6 +72,7 @@ export class GatewayServer {
 		_app.use(BASE_PATH_V1, unitRoute.routes());
 		_app.use(BASE_PATH_V1, unitGroupRoute.routes());
 		_app.use(BASE_PATH_V1, processRoute.routes());
+		_app.use(BASE_PATH_V1, exchangeRoute.routes());
 	}
 
 	private async initElasticsearch() {
