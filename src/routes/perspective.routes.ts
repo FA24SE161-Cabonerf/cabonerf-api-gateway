@@ -2,7 +2,7 @@ import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import express, { Router } from 'express';
 import { validatorAccessToken } from '@gateway/middlewares/token.middleware';
 import { asyncHandler } from '@gateway/utils/async-handler';
-import PerspectiveController from '@gateway/controllers/cabonerf-main/perspective.controllers';
+import PerspectiveController from '@gateway/controllers/cabonerf-main/perspective.controller';
 export class PerspectiveRoute {
 	private router: Router;
 

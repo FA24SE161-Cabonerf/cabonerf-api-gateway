@@ -1,5 +1,5 @@
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
-import { AuthController } from '@gateway/controllers/cabonerf-main/auth.controllers';
+import { AuthController } from '@gateway/controllers/cabonerf-main/auth.controller';
 import { validatorAccessToken } from '@gateway/middlewares/token.middleware';
 import { asyncHandler } from '@gateway/utils/async-handler';
 import express, { Router } from 'express';

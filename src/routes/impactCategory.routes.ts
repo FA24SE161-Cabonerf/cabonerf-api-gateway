@@ -1,5 +1,5 @@
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
-import ImpactCategoryController from '@gateway/controllers/cabonerf-main/impactCategory.controllers';
+import ImpactCategoryController from '@gateway/controllers/cabonerf-main/impactCategory.controller';
 import { validatorAccessToken } from '@gateway/middlewares/token.middleware';
 import { asyncHandler } from '@gateway/utils/async-handler';
 import express, { Router } from 'express';
