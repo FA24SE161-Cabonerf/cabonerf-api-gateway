@@ -44,6 +44,11 @@ export class ROUTE_ENDPOINTS {
 	public static PROJECTS = '/projects';
 
 	/**
+	 * Process
+	 */
+	public static PROCESS = '/process';
+
+	/**
 	 * Life Cycle Stages
 	 */
 	public static LIFE_CYCLE_STAGES = '/life-cycle-stages';
@@ -52,6 +57,11 @@ export class ROUTE_ENDPOINTS {
 	 * Perspectives
 	 */
 	public static PERSPECTIVES = '/perspectives';
+
+	/**
+	 * Connector
+	 */
+	public static CONNECTOR = '/connectors';
 
 	/**
 	 * Health Check Services

@@ -14,6 +14,7 @@ class HealthRoute {
 		this.router.get(ROUTE_ENDPOINTS.GATEWAY_HEALTH, asyncHandler(HealthController.prototype.checkHealth));
 		this.router.get(ROUTE_ENDPOINTS.MAIN_HEALTH, asyncHandler(HealthController.prototype.checkMainHealth));
 		this.router.get(ROUTE_ENDPOINTS.NODEBASED_HEALTH, asyncHandler(HealthController.prototype.checkNodebasedHealth));
+		this.router.post('/test-create-process-queue', asyncHandler(HealthController.prototype.testCreateProcessQueue));
 		return this.router;
 	}
 }
