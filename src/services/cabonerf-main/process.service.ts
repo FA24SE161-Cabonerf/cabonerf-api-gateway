@@ -1,7 +1,6 @@
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import mainAxiosService from '@gateway/services/cabonerf-main/main.axios';
 import { CommonResponse } from '@gateway/types/common.types';
-import { CreateProcessReqBody } from '@gateway/types/process.types';
 
 export default class ProcessService {
 	// public async getProject() {
@@ -16,7 +15,7 @@ export default class ProcessService {
 		return response;
 	}
 
-	public async createProcess(payload: CreateProcessReqBody) {
+	public async createProcess(payload: any) {
 		const response = await mainAxiosService.axios.post<CommonResponse<any>>(ROUTE_ENDPOINTS.PROCESS, payload);
 
 		return response;
