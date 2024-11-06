@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package.json tsconfig.json ./
 
 # Install dependencies
-RUN npm install --loglevel verbose
+RUN npm install
 
 # Copy the rest of the application source
 COPY . ./
@@ -28,7 +28,7 @@ COPY --from=build /app/src ./src
 COPY --from=build /app/.env .env
 
 # Install nodemon globally for development mode
-RUN npm install --loglevel verbose -g nodemon
+RUN npm install -g nodemon
 
 EXPOSE 4000
 
