@@ -46,7 +46,6 @@ export class ProjectController {
 			...mainData.data.data,
 			processes: _processes
 		};
-		console.log(project);
 
 		const gatewayResponse = new GatewayResponse({ status: 'Success', message: 'Get success', data: project });
 
