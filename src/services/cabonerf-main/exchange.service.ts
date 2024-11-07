@@ -1,4 +1,4 @@
-import { CreateElementaryExchangeReqBody, CreateProductExchangeReqBody } from '@gateway/types/exchange.types';
+import { CreateElementaryExchangeReqBody, CreateProductExchangeReqBody, SearchElementaryQuery } from '@gateway/types/exchange.types';
 import mainAxiosService from './main.axios';
 import { CommonResponse } from '@gateway/types/common.types';
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
@@ -17,6 +17,13 @@ export default class ExchangeService {
 			ROUTE_ENDPOINTS.EXCHANGES + ROUTE_ENDPOINTS.ELEMENTARY_EXCHANGE,
 			payload
 		);
+		return response;
+	}
+
+	public async getAllEmissionSubstances(payload: SearchElementaryQuery) {
+		const response = mainAxiosService.axios.get<CommonResponse<any>>(ROUTE_ENDPOINTS.EMISSION_SUBSTANCE, {
+			params: payload
+		});
 		return response;
 	}
 }
