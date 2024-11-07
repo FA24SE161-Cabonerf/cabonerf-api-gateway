@@ -31,6 +31,7 @@ export class ProjectController {
 						...node,
 						data: {
 							...node.data,
+							description: findedData.description,
 							name: findedData.name,
 							lifeCycleStage: findedData.lifeCycleStage,
 							overallProductFlowRequired: findedData.overallProductFlowRequired,
@@ -46,7 +47,6 @@ export class ProjectController {
 			...mainData.data.data,
 			processes: _processes
 		};
-		console.log(project);
 
 		const gatewayResponse = new GatewayResponse({ status: 'Success', message: 'Get success', data: project });
 
