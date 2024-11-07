@@ -1,7 +1,7 @@
 import ExchangeService from '@gateway/services/cabonerf-main/exchange.service';
 import { CreateElementaryExchangeReqBody, CreateProductExchangeReqBody, SearchElementaryQuery } from '@gateway/types/exchange.types';
 import { Request, Response } from 'express';
-import { ParamsDictionary, Query } from 'express-serve-static-core/index';
+import { ParamsDictionary } from 'express-serve-static-core/index';
 import { isUndefined, omitBy } from 'lodash';
 
 type QueryConfig = {
@@ -21,7 +21,7 @@ export default class ExchangeController {
 		return res.status(result.status).json(result.data);
 	}
 
-	public async getAllEmissionSubstances(_req: Request<ParamsDictionary, any, any, SearchElementaryQuery>, _res: Response) {
+	public async getAllEmissionSubstances(_req: Request<ParamsDictionary, any, any, SearchElementaryQuery>, res: Response) {
 		const queryParams: QueryConfig = _req.query;
 
 		const params: QueryConfig = omitBy(
@@ -34,11 +34,11 @@ export default class ExchangeController {
 				impactCategoryId: queryParams.impactCategoryId
 			},
 			isUndefined
-		);
+		) as QueryConfig;
 
 		console.log(params);
 
 		const result = await ExchangeService.prototype.getAllEmissionSubstances({ ...params });
-		// return res.status(result.status).json(result.data);
+		return res.status(result.status).json(result.data);
 	}
 }

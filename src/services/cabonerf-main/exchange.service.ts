@@ -22,7 +22,12 @@ export default class ExchangeService {
 
 	public async getAllEmissionSubstances(payload: SearchElementaryQuery) {
 		const response = mainAxiosService.axios.get<CommonResponse<any>>(ROUTE_ENDPOINTS.EMISSION_SUBSTANCE, {
-			params: payload
+			params: {
+				...payload,
+				pageCurrent: Number(payload.pageCurrent),
+				pageSize: Number(payload.pageSize),
+				methodId: payload.methodId
+			}
 		});
 		return response;
 	}
