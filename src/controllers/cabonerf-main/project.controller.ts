@@ -31,6 +31,7 @@ export class ProjectController {
 						...node,
 						data: {
 							...node.data,
+							description: findedData.description,
 							name: findedData.name,
 							lifeCycleStage: findedData.lifeCycleStage,
 							overallProductFlowRequired: findedData.overallProductFlowRequired,
