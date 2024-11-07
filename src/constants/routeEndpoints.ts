@@ -64,6 +64,13 @@ export class ROUTE_ENDPOINTS {
 	public static CONNECTOR = '/connectors';
 
 	/**
+	 * Exchange
+	 */
+	public static EXCHANGES = '/exchanges';
+	public static ELEMENTARY_EXCHANGE = '/elementary-exchange';
+	public static PRODUCT_EXCHANGE = '/product-exchange';
+
+	/**
 	 * Health Check Services
 	 */
 	public static GATEWAY_HEALTH = '/gateway-health';
