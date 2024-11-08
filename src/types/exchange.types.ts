@@ -10,4 +10,13 @@ interface CreateElementaryExchangeReqBody {
 	input: boolean;
 }
 
-export type { CreateProductExchangeReqBody, CreateElementaryExchangeReqBody };
+interface SearchElementaryQuery {
+	pageCurrent: string;
+	pageSize: string;
+	methodId: string;
+	input: string;
+	keyword?: string;
+	emissionCompartmentId?: string;
+	impactCategoryId?: string;
+}
+export type { CreateProductExchangeReqBody, CreateElementaryExchangeReqBody, SearchElementaryQuery };

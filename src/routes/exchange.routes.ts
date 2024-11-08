@@ -25,6 +25,13 @@ class ExchangeRoute {
 			asyncHandler(ExchangeController.prototype.createElementaryExchange)
 		);
 
+		// Search elementary
+		this.router.get(
+			ROUTE_ENDPOINTS.EMISSION_SUBSTANCE,
+			validatorAccessToken,
+			asyncHandler(ExchangeController.prototype.getAllEmissionSubstances)
+		);
+
 		return this.router;
 	}
 }

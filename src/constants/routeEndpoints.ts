@@ -71,6 +71,11 @@ export class ROUTE_ENDPOINTS {
 	public static PRODUCT_EXCHANGE = '/product-exchange';
 
 	/**
+	 * Emission substance
+	 */
+	public static EMISSION_SUBSTANCE = '/emission-substance';
+
+	/**
 	 * Health Check Services
 	 */
 	public static GATEWAY_HEALTH = '/gateway-health';
