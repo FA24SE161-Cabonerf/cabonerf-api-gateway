@@ -26,9 +26,10 @@ export default class ExchangeController {
 
 		const params: QueryConfig = omitBy(
 			{
-				pageCurrent: queryParams.pageCurrent || '2',
-				pageSize: queryParams.pageSize || '1',
-				methodId: queryParams.methodId || 'asd',
+				pageCurrent: queryParams.pageCurrent || '1',
+				pageSize: queryParams.pageSize || '5',
+				methodId: queryParams.methodId || '',
+				input: queryParams.input || true,
 				keyword: queryParams.keyword,
 				emissionCompartmentId: queryParams.emissionCompartmentId,
 				impactCategoryId: queryParams.impactCategoryId

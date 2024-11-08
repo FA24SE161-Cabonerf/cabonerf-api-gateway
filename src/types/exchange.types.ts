@@ -14,6 +14,7 @@ interface SearchElementaryQuery {
 	pageCurrent: string;
 	pageSize: string;
 	methodId: string;
+	input: string;
 	keyword?: string;
 	emissionCompartmentId?: string;
 	impactCategoryId?: string;

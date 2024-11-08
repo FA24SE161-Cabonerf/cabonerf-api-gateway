@@ -26,7 +26,8 @@ export default class ExchangeService {
 				...payload,
 				pageCurrent: Number(payload.pageCurrent),
 				pageSize: Number(payload.pageSize),
-				methodId: payload.methodId
+				methodId: payload.methodId,
+				input: payload.input
 			}
 		});
 		return response;
