@@ -6,7 +6,7 @@ interface CreateProductExchangeReqBody {
 
 interface CreateElementaryExchangeReqBody {
 	processId: string;
-	substanceCompartmentId: string;
+	emissionSubstanceId: string;
 	input: boolean;
 }
 
