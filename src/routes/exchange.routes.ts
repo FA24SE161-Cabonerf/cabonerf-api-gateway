@@ -25,6 +25,13 @@ class ExchangeRoute {
 			asyncHandler(ExchangeController.prototype.createElementaryExchange)
 		);
 
+		// remove exchange
+		this.router.delete(
+			ROUTE_ENDPOINTS.EXCHANGES + '/:id',
+			validatorAccessToken,
+			asyncHandler(ExchangeController.prototype.removeExchange)
+		);
+
 		// Search elementary
 		this.router.get(
 			ROUTE_ENDPOINTS.EMISSION_SUBSTANCE,
