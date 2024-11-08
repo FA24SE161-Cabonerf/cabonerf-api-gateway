@@ -20,6 +20,11 @@ export default class ExchangeService {
 		return response;
 	}
 
+	public async removeExchange(id: string) {
+		const response = mainAxiosService.axios.delete<CommonResponse<any>>(ROUTE_ENDPOINTS.EXCHANGES + `/${id}`);
+		return response;
+	}
+
 	public async getAllEmissionSubstances(payload: SearchElementaryQuery) {
 		const response = mainAxiosService.axios.get<CommonResponse<any>>(ROUTE_ENDPOINTS.EMISSION_SUBSTANCE, {
 			params: {

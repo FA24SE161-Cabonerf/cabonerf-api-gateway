@@ -1,4 +1,5 @@
 import ExchangeService from '@gateway/services/cabonerf-main/exchange.service';
+import { ParamID } from '@gateway/types/common.types';
 import { CreateElementaryExchangeReqBody, CreateProductExchangeReqBody, SearchElementaryQuery } from '@gateway/types/exchange.types';
 import { Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core/index';
@@ -18,6 +19,12 @@ export default class ExchangeController {
 	public async createElementaryExchange(_req: Request<ParamsDictionary, unknown, CreateElementaryExchangeReqBody>, res: Response) {
 		const { ...rest } = _req.body;
 		const result = await ExchangeService.prototype.createElementaryExchange(rest);
+		return res.status(result.status).json(result.data);
+	}
+
+	public async removeExchange(_req: Request<ParamID, any, any>, res: Response) {
+		const { id } = _req.params;
+		const result = await ExchangeService.prototype.removeExchange(id);
 		return res.status(result.status).json(result.data);
 	}
 
