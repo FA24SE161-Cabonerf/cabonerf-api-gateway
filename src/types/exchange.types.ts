@@ -19,4 +19,11 @@ interface SearchElementaryQuery {
 	emissionCompartmentId?: string;
 	impactCategoryId?: string;
 }
-export type { CreateProductExchangeReqBody, CreateElementaryExchangeReqBody, SearchElementaryQuery };
+
+interface UpdateExchangeReqBody {
+	name: string;
+	value: number;
+	unitId: string;
+	processId: string;
+}
+export type { CreateProductExchangeReqBody, CreateElementaryExchangeReqBody, SearchElementaryQuery, UpdateExchangeReqBody };

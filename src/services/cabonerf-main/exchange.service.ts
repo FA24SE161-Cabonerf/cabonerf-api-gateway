@@ -1,4 +1,9 @@
-import { CreateElementaryExchangeReqBody, CreateProductExchangeReqBody, SearchElementaryQuery } from '@gateway/types/exchange.types';
+import {
+	CreateElementaryExchangeReqBody,
+	CreateProductExchangeReqBody,
+	SearchElementaryQuery,
+	UpdateExchangeReqBody
+} from '@gateway/types/exchange.types';
 import mainAxiosService from './main.axios';
 import { CommonResponse } from '@gateway/types/common.types';
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
@@ -22,6 +27,22 @@ export default class ExchangeService {
 
 	public async removeExchange(id: string) {
 		const response = mainAxiosService.axios.delete<CommonResponse<any>>(ROUTE_ENDPOINTS.EXCHANGES + `/${id}`);
+		return response;
+	}
+
+	public async updateElementaryExchange(id: string, payload: UpdateExchangeReqBody) {
+		const response = mainAxiosService.axios.patch<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.EXCHANGES + ROUTE_ENDPOINTS.ELEMENTARY_EXCHANGE + `/${id}`,
+			payload
+		);
+		return response;
+	}
+
+	public async updateProductExchange(id: string, payload: UpdateExchangeReqBody) {
+		const response = mainAxiosService.axios.patch<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.EXCHANGES + ROUTE_ENDPOINTS.PRODUCT_EXCHANGE + `/${id}`,
+			payload
+		);
 		return response;
 	}
 
