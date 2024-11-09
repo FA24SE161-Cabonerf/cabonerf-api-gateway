@@ -39,6 +39,19 @@ class ExchangeRoute {
 			asyncHandler(ExchangeController.prototype.getAllEmissionSubstances)
 		);
 
+		// update elementary
+		this.router.patch(
+			ROUTE_ENDPOINTS.EXCHANGES + ROUTE_ENDPOINTS.ELEMENTARY_EXCHANGE + '/:id',
+			validatorAccessToken,
+			asyncHandler(ExchangeController.prototype.updateElementaryExchange)
+		);
+
+		// update product
+		this.router.patch(
+			ROUTE_ENDPOINTS.EXCHANGES + ROUTE_ENDPOINTS.PRODUCT_EXCHANGE + '/:id',
+			validatorAccessToken,
+			asyncHandler(ExchangeController.prototype.updateProductExchange)
+		);
 		return this.router;
 	}
 }
