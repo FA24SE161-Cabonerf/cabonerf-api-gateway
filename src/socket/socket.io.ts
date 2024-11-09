@@ -45,11 +45,12 @@ export class SocketIOHandler {
 			/**
 			 ** Update position process
 			 * @on gateway:cabonerf-node-update-position
-			 * @emit nodebased:cabonerf-node-update-position
+			 * @emit nodebased:node-update-position
 			 */
-			socket.on('gateway:cabonerf-node-update-position', (data: { id: string; x: number; y: number }) => {
+			socket.on('gateway:node-update-position', (data: { id: string; x: number; y: number }) => {
 				if (data) {
-					nodebasedClient.emit('nodebased:cabonerf-node-update-position', data);
+					console.log('UPDATE');
+					nodebasedClient.emit('nodebased:node-update-position', data);
 				}
 			});
 		});

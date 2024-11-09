@@ -44,8 +44,6 @@ export default class ExchangeController {
 			isUndefined
 		) as QueryConfig;
 
-		console.log(params);
-
 		const result = await ExchangeService.prototype.getAllEmissionSubstances({ ...params });
 		return res.status(result.status).json(result.data);
 	}
