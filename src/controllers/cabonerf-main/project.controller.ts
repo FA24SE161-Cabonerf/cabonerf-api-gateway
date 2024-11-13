@@ -75,4 +75,10 @@ export class ProjectController {
 
 		return res.status(result.status).json(result.data);
 	}
+
+	public async changeProjectMethod(_req: Request, res: Response) {
+		const { projectId, methodId } = _req.params;
+		const result = await ProjectService.prototype.changeProjectMethod(projectId, methodId);
+		return res.status(result.status).json(result.data);
+	}
 }

@@ -27,9 +27,15 @@ export default class ExchangeController {
 		return res.status(result.status).json(result.data);
 	}
 
-	public async removeExchange(_req: Request<ParamID, any, any>, res: Response) {
+	public async removeElementaryExchange(_req: Request<ParamID, any, any>, res: Response) {
 		const { id } = _req.params;
-		const result = await ExchangeService.prototype.removeExchange(id);
+		const result = await ExchangeService.prototype.removeElementaryExchange(id);
+		return res.status(result.status).json(result.data);
+	}
+
+	public async removeProductExchange(_req: Request<ParamID, any, any>, res: Response) {
+		const { id } = _req.params;
+		const result = await ExchangeService.prototype.removeProductExchange(id);
 		return res.status(result.status).json(result.data);
 	}
 

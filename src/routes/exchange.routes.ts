@@ -25,11 +25,18 @@ class ExchangeRoute {
 			asyncHandler(ExchangeController.prototype.createElementaryExchange)
 		);
 
-		// remove exchange
+		// remove elementary exchange
 		this.router.delete(
-			ROUTE_ENDPOINTS.EXCHANGES + '/:id',
+			ROUTE_ENDPOINTS.EXCHANGES + ROUTE_ENDPOINTS.ELEMENTARY_EXCHANGE + '/:id',
 			validatorAccessToken,
-			asyncHandler(ExchangeController.prototype.removeExchange)
+			asyncHandler(ExchangeController.prototype.removeElementaryExchange)
+		);
+
+		// remove product exchange
+		this.router.delete(
+			ROUTE_ENDPOINTS.EXCHANGES + ROUTE_ENDPOINTS.PRODUCT_EXCHANGE + '/:id',
+			validatorAccessToken,
+			asyncHandler(ExchangeController.prototype.removeProductExchange)
 		);
 
 		// Search elementary

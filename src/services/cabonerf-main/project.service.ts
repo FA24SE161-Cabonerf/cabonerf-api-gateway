@@ -35,4 +35,11 @@ export default class ProjectService {
 
 		return response;
 	}
+
+	public async changeProjectMethod(projectId: string, methodId: string) {
+		const res = await mainAxiosService.axios.patch<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.PROJECTS + `/${projectId}` + ROUTE_ENDPOINTS.IMPACT_METHODS + `/${methodId}`
+		);
+		return res;
+	}
 }

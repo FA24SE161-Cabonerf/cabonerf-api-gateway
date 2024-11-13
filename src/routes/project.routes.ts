@@ -34,6 +34,12 @@ export class ProjectRoute {
 			validatorAccessToken,
 			asyncHandler(ProjectController.prototype.deleteProjectByID)
 		);
+		// Change method of project
+		this.router.patch(
+			ROUTE_ENDPOINTS.PROJECTS + '/:projectId' + ROUTE_ENDPOINTS.IMPACT_METHODS + '/:methodId',
+			validatorAccessToken,
+			asyncHandler(ProjectController.prototype.changeProjectMethod)
+		);
 		return this.router;
 	}
 }
