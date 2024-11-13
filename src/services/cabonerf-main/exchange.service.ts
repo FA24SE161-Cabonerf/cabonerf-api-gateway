@@ -25,7 +25,12 @@ export default class ExchangeService {
 		return response;
 	}
 
-	public async removeExchange(id: string) {
+	public async removeElementaryExchange(id: string) {
+		const response = mainAxiosService.axios.delete<CommonResponse<any>>(ROUTE_ENDPOINTS.EXCHANGES + `/${id}`);
+		return response;
+	}
+
+	public async removeProductExchange(id: string) {
 		const response = mainAxiosService.axios.delete<CommonResponse<any>>(ROUTE_ENDPOINTS.EXCHANGES + `/${id}`);
 		return response;
 	}
