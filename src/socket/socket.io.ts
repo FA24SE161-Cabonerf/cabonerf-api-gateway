@@ -1,5 +1,6 @@
 import config from '@gateway/config';
 import { CabonerfNodeReqBody } from '@gateway/types/cabonerfNode.types';
+import { CreateConnectorReqBody } from '@gateway/types/connector.types';
 import { Server } from 'socket.io';
 import { io as IOCLient, Socket as SocketClient } from 'socket.io-client';
 
@@ -59,11 +60,26 @@ export class SocketIOHandler {
 			 * @on gateway:node-update-color
 			 * @emit nodebased:node-update-color
 			 */
-
 			socket.on('gateway:node-update-color', (data: { id: string; color: string }) => {
 				if (data) {
 					nodebasedClient.emit('nodebased:node-update-color', data);
 				}
+			});
+
+			/**
+			 ** Create connector (edge)
+			 * @on gateway:connector-create
+			 * @emit nodebased:connector-create
+			 *
+			 * @body {
+			 * 	startProcessId: @type string
+			 * 	endProcessId: @type string
+			 * 	startExchangeId: @type string
+			 * 	endExchangeId: @type string
+			 * }
+			 */
+			socket.on('gateway:connector-create', (data: CreateConnectorReqBody) => {
+				nodebasedClient.emit('nodebased:connector-create', data);
 			});
 		});
 
@@ -89,6 +105,10 @@ export class SocketIOHandler {
 
 		nodebasedClient.on('nodebased:update-process-color-success', (data) => {
 			this.io.emit('gateway:update-process-color-success', data);
+		});
+
+		nodebasedClient.on('nodebased:connector-created', (data) => {
+			this.io.emit('gateway:connector-created', data);
 		});
 	}
 }
