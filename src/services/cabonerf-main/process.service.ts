@@ -1,6 +1,7 @@
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import mainAxiosService from '@gateway/services/cabonerf-main/main.axios';
 import { CommonResponse } from '@gateway/types/common.types';
+import { UpdateProcessReqBody } from '@gateway/types/process.types';
 
 export default class ProcessService {
 	// public async getProject() {
@@ -17,6 +18,12 @@ export default class ProcessService {
 
 	public async createProcess(payload: any) {
 		const response = await mainAxiosService.axios.post<CommonResponse<any>>(ROUTE_ENDPOINTS.PROCESS, payload);
+
+		return response;
+	}
+
+	public async updateProcess(id: string, payload: UpdateProcessReqBody) {
+		const response = await mainAxiosService.axios.put<CommonResponse<any>>(`${ROUTE_ENDPOINTS.PROCESS}/${id}`, payload);
 
 		return response;
 	}

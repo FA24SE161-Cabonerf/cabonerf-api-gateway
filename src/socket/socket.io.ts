@@ -53,6 +53,18 @@ export class SocketIOHandler {
 					nodebasedClient.emit('nodebased:node-update-position', data);
 				}
 			});
+
+			/**
+			 ** Update color process
+			 * @on gateway:node-update-color
+			 * @emit nodebased:node-update-color
+			 */
+
+			socket.on('gateway:node-update-color', (data: { id: string; color: string }) => {
+				if (data) {
+					nodebasedClient.emit('nodebased:node-update-color', data);
+				}
+			});
 		});
 
 		this.io.on('disconnect', (socket) => {
@@ -73,6 +85,10 @@ export class SocketIOHandler {
 
 		nodebasedClient.on('nodebased:delete-process-success', (data) => {
 			this.io.emit('gateway:delete-process-success', data);
+		});
+
+		nodebasedClient.on('nodebased:update-process-color-success', (data) => {
+			this.io.emit('gateway:update-process-color-success', data);
 		});
 	}
 }

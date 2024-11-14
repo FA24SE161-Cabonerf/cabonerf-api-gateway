@@ -22,7 +22,7 @@ export class ProcessRoute {
 		this.router.post(ROUTE_ENDPOINTS.PROCESS, validatorAccessToken, asyncHandler(ProcessController.prototype.createProcess));
 
 		// Update process
-		// this.router.put(`${ROUTE_ENDPOINTS.PROCESS}/:id`, validatorAccessToken, asyncHandler(ProcessController.prototype.updateProcess));
+		this.router.put(`${ROUTE_ENDPOINTS.PROCESS}/:id`, validatorAccessToken, asyncHandler(ProcessController.prototype.updateProcess));
 
 		// Delete process
 		this.router.delete(`${ROUTE_ENDPOINTS.PROJECTS}/:id`, validatorAccessToken, asyncHandler(ProcessController.prototype.deleteProcess));
