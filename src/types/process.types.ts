@@ -14,5 +14,10 @@ interface Process {
 	exchanges: never[];
 }
 
-export type { Process };
+interface UpdateProcessReqBody {
+	name: string;
+	description: string;
+	lifeCycleStagesId: string;
+}
 
+export type { Process, UpdateProcessReqBody };

@@ -1,5 +1,6 @@
 import ProcessService from '@gateway/services/cabonerf-main/process.service';
 import { ParamID } from '@gateway/types/common.types';
+import { UpdateProcessReqBody } from '@gateway/types/process.types';
 import { Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core/index';
 
@@ -25,14 +26,14 @@ export class ProcessController {
 		return res.status(result.status).json(result.data);
 	}
 
-	// public async updateProcess(req: Request<ParamID, any, UpdateProcessReqBody>, res: Response) {
-	// 	const { id } = req.params;
-	// 	const data = req.body;
+	public async updateProcess(req: Request<ParamID, any, UpdateProcessReqBody>, res: Response) {
+		const { id } = req.params;
+		const data = req.body;
 
-	// 	const result = await ProcessService.prototype.updateProcess({ id, data });
+		const result = await ProcessService.prototype.updateProcess(id, data);
 
-	// 	return res.status(result.status).json(result.data);
-	// }
+		return res.status(result.status).json(result.data);
+	}
 
 	public async deleteProcess(req: Request<ParamID, unknown, unknown>, res: Response) {
 		const { id } = req.params;
