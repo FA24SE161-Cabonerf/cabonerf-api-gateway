@@ -14,15 +14,17 @@ export class ProjectController {
 	public async getProjectByID(req: Request<ParamID & { wid: string }, unknown, unknown>, res: Response) {
 		const { id, wid } = req.params;
 
-		const [mainData, nodebasedData] = await Promise.all([
+		const [mainData, cabonerfNodeData, cabonerfEdgeData] = await Promise.all([
 			ProjectService.prototype.getProjectByID({ id, wid }),
-			NodeProcessService.prototype.getNodeProcessByProjectId({ projectId: id })
+			NodeProcessService.prototype.getNodeProcessByProjectId({ projectId: id }),
+			NodeProcessService.prototype.getEdgeProcessByProjectId({ projectId: id })
 		]);
 
 		const mainDataProcessesMap = new Map(mainData.data.data.processes.map((item) => [item.id, item]));
+		const mainDataEdgeMap = new Map(mainData.data.data.connectors.map((item) => [item.id, item]));
 
-		// Merge
-		const _processes = nodebasedData.data.data
+		// Merge node process
+		const _processes = cabonerfNodeData.data.data
 			.map((node) => {
 				const findedData = mainDataProcessesMap.get(node.id);
 
@@ -43,9 +45,26 @@ export class ProjectController {
 			})
 			.filter(Boolean);
 
+		// Merge connector & edge
+		const _edges = cabonerfEdgeData.data.data
+			.map((edge) => {
+				const findedData = mainDataEdgeMap.get(edge.id);
+
+				if (findedData) {
+					return {
+						...edge,
+						data: {
+							...edge.data
+						}
+					};
+				}
+			})
+			.filter(Boolean);
+
 		const project = {
 			...mainData.data.data,
-			processes: _processes
+			processes: _processes,
+			connectors: _edges
 		};
 
 		const gatewayResponse = new GatewayResponse({ status: 'Success', message: 'Get success', data: project });

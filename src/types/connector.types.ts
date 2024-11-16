@@ -5,4 +5,12 @@ interface CreateConnectorReqBody {
 	endExchangesId: string;
 }
 
-export { CreateConnectorReqBody };
+interface Connector {
+	id: string;
+	startProcessId: string;
+	endProcessId: string;
+	startExchangesId: string;
+	endExchangesId: string;
+}
+
+export { CreateConnectorReqBody, Connector };
