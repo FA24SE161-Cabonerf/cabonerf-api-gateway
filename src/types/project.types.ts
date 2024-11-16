@@ -1,3 +1,4 @@
+import { Connector } from '@gateway/types/connector.types';
 import { Process } from '@gateway/types/process.types';
 
 interface Project {
@@ -17,7 +18,7 @@ interface Project {
 	};
 	impacts: [];
 	processes: Process[];
-	connectors: [];
+	connectors: Connector[];
 }
 
 interface CreateProjectReqBody {

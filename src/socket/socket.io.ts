@@ -78,8 +78,9 @@ export class SocketIOHandler {
 			 * 	endExchangeId: @type string
 			 * }
 			 */
-			socket.on('gateway:connector-create', (data: CreateConnectorReqBody) => {
+			socket.on('gateway:connector-create', (data: CreateConnectorReqBody & { projectId: string }) => {
 				nodebasedClient.emit('nodebased:connector-create', data);
+				// this.io.emit('error', new Error('autho'));
 			});
 		});
 
@@ -109,6 +110,10 @@ export class SocketIOHandler {
 
 		nodebasedClient.on('nodebased:connector-created', (data) => {
 			this.io.emit('gateway:connector-created', data);
+		});
+
+		nodebasedClient.on('nodebased:error-create-edge', (data) => {
+			this.io.emit('gateway:error-create-edge', data);
 		});
 	}
 }
