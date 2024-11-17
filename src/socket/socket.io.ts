@@ -80,7 +80,15 @@ export class SocketIOHandler {
 			 */
 			socket.on('gateway:connector-create', (data: CreateConnectorReqBody & { projectId: string }) => {
 				nodebasedClient.emit('nodebased:connector-create', data);
-				// this.io.emit('error', new Error('autho'));
+			});
+
+			/**
+			 ** Delete connector (edge)
+			 * @on gateway:connector-delete
+			 * @emit nodebased:connector-delete
+			 */
+			socket.on('gateway:connector-delete', (data: string) => {
+				nodebasedClient.emit('nodebased:connector-delete', data);
 			});
 		});
 
@@ -114,6 +122,10 @@ export class SocketIOHandler {
 
 		nodebasedClient.on('nodebased:error-create-edge', (data) => {
 			this.io.emit('gateway:error-create-edge', data);
+		});
+
+		nodebasedClient.on('nodebased:connector-deleted', (data) => {
+			this.io.emit('gateway:connector-deleted', data);
 		});
 	}
 }
