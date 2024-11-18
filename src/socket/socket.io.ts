@@ -127,5 +127,9 @@ export class SocketIOHandler {
 		nodebasedClient.on('nodebased:connector-deleted', (data) => {
 			this.io.emit('gateway:connector-deleted', data);
 		});
+
+		nodebasedClient.on('nodebased:delete-connector-ids', (data) => {
+			this.io.emit('gateway:delete-connector-ids', data);
+		});
 	}
 }
