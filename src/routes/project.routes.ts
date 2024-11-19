@@ -40,6 +40,13 @@ export class ProjectRoute {
 			validatorAccessToken,
 			asyncHandler(ProjectController.prototype.changeProjectMethod)
 		);
+
+		// Calculate project
+		this.router.get(
+			ROUTE_ENDPOINTS.PROJECTS + ROUTE_ENDPOINTS.CALCULATION + '/:projectId',
+			validatorAccessToken,
+			asyncHandler(ProjectController.prototype.calculateProject)
+		);
 		return this.router;
 	}
 }

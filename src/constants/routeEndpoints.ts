@@ -42,6 +42,7 @@ export class ROUTE_ENDPOINTS {
 	 * Project
 	 */
 	public static PROJECTS = '/projects';
+	public static CALCULATION = '/calculation';
 
 	/**
 	 * Process
