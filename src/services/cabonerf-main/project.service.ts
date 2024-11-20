@@ -42,4 +42,11 @@ export default class ProjectService {
 		);
 		return res;
 	}
+
+	public async calculateProject(projectId: string) {
+		const res = await mainAxiosService.axios.get<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.PROJECTS + ROUTE_ENDPOINTS.CALCULATION + `/${projectId}`
+		);
+		return res;
+	}
 }

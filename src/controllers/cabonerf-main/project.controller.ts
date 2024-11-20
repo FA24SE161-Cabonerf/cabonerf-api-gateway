@@ -100,4 +100,10 @@ export class ProjectController {
 		const result = await ProjectService.prototype.changeProjectMethod(projectId, methodId);
 		return res.status(result.status).json(result.data);
 	}
+
+	public async calculateProject(_req: Request, res: Response) {
+		const { projectId } = _req.params;
+		const result = await ProjectService.prototype.calculateProject(projectId);
+		return res.status(result.status).json(result.data);
+	}
 }
