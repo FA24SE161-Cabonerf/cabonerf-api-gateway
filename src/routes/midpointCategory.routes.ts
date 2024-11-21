@@ -19,6 +19,23 @@ class MidpointCategoryRoute {
 			asyncHandler(MidpointCategoryController.prototype.getAllMidpointCategories)
 		);
 
+		this.router.post(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.MIDPOINT_CATEGORIES,
+			validatorAccessToken,
+			asyncHandler(MidpointCategoryController.prototype.createMidpointCategory)
+		);
+
+		this.router.put(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.MIDPOINT_CATEGORIES + '/:id',
+			validatorAccessToken,
+			asyncHandler(MidpointCategoryController.prototype.updateMidpointCategory)
+		);
+
+		this.router.delete(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.MIDPOINT_CATEGORIES + '/:id',
+			validatorAccessToken,
+			asyncHandler(MidpointCategoryController.prototype.deleteMidpointCategory)
+		);
 		return this.router;
 	}
 }

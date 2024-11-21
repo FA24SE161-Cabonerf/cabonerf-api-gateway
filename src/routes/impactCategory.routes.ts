@@ -54,6 +54,13 @@ class ImpactCategoryRoute {
 			asyncHandler(ImpactCategoryController.prototype.deleteImpactCategory)
 		);
 
+		// Delete Impact Category From Method
+		this.router.delete(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_CATEGORIES + '/:categoryId' + ROUTE_ENDPOINTS.IMPACT_METHODS + '/:methodId',
+			validatorAccessToken,
+			asyncHandler(ImpactCategoryController.prototype.deleteImpactCategoryFromMethod)
+		);
+
 		return this.router;
 	}
 }

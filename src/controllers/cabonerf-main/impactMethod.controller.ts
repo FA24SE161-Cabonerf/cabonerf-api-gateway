@@ -43,4 +43,9 @@ export default class ImpactMethodController {
 		const result = await ImpactMethodService.prototype.addCategoryToMethod(methodId, categoryId);
 		return res.status(result.status).json(result.data);
 	}
+
+	public async getAllMethodName(_req: Request, res: Response) {
+		const result = await ImpactMethodService.prototype.getAllMethodName();
+		return res.status(result.status).json(result.data);
+	}
 }

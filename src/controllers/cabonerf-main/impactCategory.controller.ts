@@ -45,6 +45,12 @@ class ImpactCategoryController {
 		const result = await ImpactCategoryService.prototype.deleteImpactCategory(ParamID);
 		return res.status(result.status).json(result.data);
 	}
+
+	public async deleteImpactCategoryFromMethod(_req: Request, res: Response) {
+		const { methodId, categoryId } = _req.params;
+		const result = await ImpactCategoryService.prototype.deleteImpactCategoryFromMethod(categoryId, methodId);
+		return res.status(result.status).json(result.data);
+	}
 }
 
 export default ImpactCategoryController;

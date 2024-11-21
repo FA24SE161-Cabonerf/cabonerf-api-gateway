@@ -24,6 +24,10 @@ export class ROUTE_ENDPOINTS {
 
 	// Impact Midpoint
 	public static MIDPOINT_FACTORS = '/midpoint-factors';
+	public static IMPORT_MIDPOINT_FACTORS = '/midpoint-factors/import';
+	public static EXPORT_MIDPOINT_FACTORS = '/midpoint-factors/export';
+	public static DOWNLOAD_MIDPOINT_FACTORS = '/midpoint-factors/download';
+	public static DOWNLOAD_TEMPLATE_MIDPOINT_FACTORS = '/midpoint-factors/factor-template';
 
 	// Midpoint Impact Category
 	public static MIDPOINT_CATEGORIES = '/midpoint-categories';
@@ -98,4 +102,11 @@ export class ROUTE_ENDPOINTS {
 	 * Admin
 	 */
 	public static ADMIN = '/admin';
+	public static BAN_UNBAN = '/ban-unban-user';
+
+	/**
+	 * Workspace
+	 */
+
+	public static WORKSPACE = '/workspaces';
 }

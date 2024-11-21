@@ -44,9 +44,9 @@ export default class ProjectService {
 	}
 
 	public async calculateProject(projectId: string) {
-		const res = await mainAxiosService.axios.get<CommonResponse<any>>(
-			ROUTE_ENDPOINTS.PROJECTS + ROUTE_ENDPOINTS.CALCULATION + `/${projectId}`
-		);
+		const res = await mainAxiosService.axios.post<CommonResponse<any>>(ROUTE_ENDPOINTS.PROJECTS + ROUTE_ENDPOINTS.CALCULATION, {
+			projectId: projectId
+		});
 		return res;
 	}
 }

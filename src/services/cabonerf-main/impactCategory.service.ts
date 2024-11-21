@@ -48,6 +48,13 @@ class ImpactCategoryService {
 		);
 		return response;
 	}
+
+	public async deleteImpactCategoryFromMethod(categoryId: string, methodId: string) {
+		const response = await mainAxiosService.axios.delete<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_CATEGORIES + `/${categoryId}` + ROUTE_ENDPOINTS.IMPACT_METHODS + `/${methodId}`
+		);
+		return response;
+	}
 }
 
 export default ImpactCategoryService;
