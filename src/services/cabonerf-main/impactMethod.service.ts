@@ -50,4 +50,11 @@ export class ImpactMethodService {
 		);
 		return response;
 	}
+
+	public async getAllMethodName() {
+		const response = await mainAxiosService.axios.get<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_METHODS + '/name'
+		);
+		return response;
+	}
 }

@@ -18,6 +18,23 @@ class LifeCycleStagesRoute {
 			asyncHandler(LifeCycleStagesController.prototype.getAllLifeCycleStages)
 		);
 
+		this.router.post(
+			ROUTE_ENDPOINTS.LIFE_CYCLE_STAGES,
+			validatorAccessToken,
+			asyncHandler(LifeCycleStagesController.prototype.createLifeCycleStages)
+		);
+
+		this.router.put(
+			ROUTE_ENDPOINTS.LIFE_CYCLE_STAGES + '/:id',
+			validatorAccessToken,
+			asyncHandler(LifeCycleStagesController.prototype.updateLifeCycleStages)
+		);
+
+		this.router.delete(
+			ROUTE_ENDPOINTS.LIFE_CYCLE_STAGES + '/:id',
+			validatorAccessToken,
+			asyncHandler(LifeCycleStagesController.prototype.deleteLifeCycleStages)
+		);
 		return this.router;
 	}
 }

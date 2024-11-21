@@ -102,7 +102,7 @@ export class ProjectController {
 	}
 
 	public async calculateProject(_req: Request, res: Response) {
-		const { projectId } = _req.params;
+		const { projectId } = _req.body;
 		const result = await ProjectService.prototype.calculateProject(projectId);
 		return res.status(result.status).json(result.data);
 	}

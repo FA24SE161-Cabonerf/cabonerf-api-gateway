@@ -17,7 +17,7 @@ export class ProjectRoute {
 
 		// Get project by id
 		this.router.get(
-			`${ROUTE_ENDPOINTS.PROJECTS}/:id/:wid`,
+			`${ROUTE_ENDPOINTS.PROJECTS}/:id${ROUTE_ENDPOINTS.WORKSPACE}/:wid`,
 			validatorAccessToken,
 			asyncHandler(ProjectController.prototype.getProjectByID)
 		);
@@ -42,8 +42,8 @@ export class ProjectRoute {
 		);
 
 		// Calculate project
-		this.router.get(
-			ROUTE_ENDPOINTS.PROJECTS + ROUTE_ENDPOINTS.CALCULATION + '/:projectId',
+		this.router.post(
+			ROUTE_ENDPOINTS.PROJECTS + ROUTE_ENDPOINTS.CALCULATION,
 			validatorAccessToken,
 			asyncHandler(ProjectController.prototype.calculateProject)
 		);

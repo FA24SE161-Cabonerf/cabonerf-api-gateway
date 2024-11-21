@@ -27,7 +27,7 @@ import processRoute from './routes/process.routes';
 import { Server } from 'socket.io';
 import { SocketIOHandler } from '@gateway/socket/socket.io';
 import exchangeRoute from './routes/exchange.routes';
-import emissionCompartmentRoute from '@gateway/routes/emisisonCompartment.routes';
+import emissionCompartmentRoute from '@gateway/routes/emissisonCompartment.routes';
 import connectorRoute from './routes/connector.routes';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'Gateway', 'debug');

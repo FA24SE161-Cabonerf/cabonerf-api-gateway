@@ -53,6 +53,14 @@ class ImpactMethodRoute {
 			validatorAccessToken,
 			asyncHandler(ImpactMethodController.prototype.addCategoryToMethod)
 		);
+
+		// Get all method name
+		this.router.get(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_METHODS + '/name',
+			validatorAccessToken,
+			asyncHandler(ImpactMethodController.prototype.getAllMethodName)
+		);
+
 		return this.router;
 	}
 }
