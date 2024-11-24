@@ -26,6 +26,12 @@ class ImpactCategoryController {
 		return res.status(result.status).json(result.data);
 	}
 
+	public async getImpactMethodFromImpactCategory(_req: Request, res: Response) {
+		const { id } = _req.params;
+		const result = await ImpactCategoryService.prototype.getImpactMethodFromImpactCategory(id);
+		return res.status(result.status).json(result.data);
+	}
+
 	public async createImpactCategory(_req: Request<ParamsDictionary, unknown, BaseImpactCategoryReqBody>, res: Response) {
 		const { ...rest } = _req.body;
 		const result = await ImpactCategoryService.prototype.createImpactCategory(rest);
@@ -41,8 +47,8 @@ class ImpactCategoryController {
 	}
 
 	public async deleteImpactCategory(_req: Request<ParamID, any, any>, res: Response) {
-		const ParamID = _req.params;
-		const result = await ImpactCategoryService.prototype.deleteImpactCategory(ParamID);
+		const { id } = _req.params;
+		const result = await ImpactCategoryService.prototype.deleteImpactCategory(id);
 		return res.status(result.status).json(result.data);
 	}
 
