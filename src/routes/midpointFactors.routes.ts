@@ -3,6 +3,7 @@ import { validatorAccessToken } from '@gateway/middlewares/token.middleware';
 import MidpointFactorController from '@gateway/controllers/cabonerf-main/midpointFactor.controller';
 import { asyncHandler } from '@gateway/utils/async-handler';
 import express, { Router } from 'express';
+import { fileUpload } from '@gateway/middlewares/fileUpload.middleware';
 
 class MidpointFactorRoute {
 	private router: Router;
@@ -34,46 +35,47 @@ class MidpointFactorRoute {
 		);
 
 		// create
-		// this.router.post(
-		// 	ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN,
-		// 	validatorAccessToken,
-		// 	asyncHandler(MidpointFactorController.prototype.createMidpointFactor)
-		// );
+		this.router.post(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN,
+			validatorAccessToken,
+			asyncHandler(MidpointFactorController.prototype.createMidpointFactor)
+		);
 
-		// // delete
-		// this.router.delete(
-		// 	ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.MIDPOINT_FACTORS + '/:id',
-		// 	validatorAccessToken,
-		// 	asyncHandler(MidpointFactorController.prototype.deleteMidpointFactor)
-		// );
+		// delete
+		this.router.delete(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.MIDPOINT_FACTORS + '/:id',
+			validatorAccessToken,
+			asyncHandler(MidpointFactorController.prototype.deleteMidpointFactor)
+		);
 
-		// // importExcel (post)
-		// this.router.post(
-		// 	ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.IMPORT_MIDPOINT_FACTORS,
-		// 	validatorAccessToken,
-		// 	asyncHandler(MidpointFactorController.prototype.importExcel)
-		// );
+		// importExcel (post)
+		this.router.post(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.IMPORT_MIDPOINT_FACTORS,
+			validatorAccessToken,
+			fileUpload.single('file'),
+			asyncHandler(MidpointFactorController.prototype.importExcel)
+		);
 
-		// // downloadFileLog (get)
-		// this.router.get(
-		// 	ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.DOWNLOAD_MIDPOINT_FACTORS,
-		// 	validatorAccessToken,
-		// 	asyncHandler(MidpointFactorController.prototype.downloadFileLog)
-		// );
+		// downloadFileLog (get)
+		this.router.get(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.DOWNLOAD_ERROR_LOG_MIDPOINT_FACTORS,
+			validatorAccessToken,
+			asyncHandler(MidpointFactorController.prototype.downloadFileLog)
+		);
 
 		// downloadFactorTemplate (get)
-		// this.router.get(
-		// 	ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.DOWNLOAD_TEMPLATE_MIDPOINT_FACTORS,
-		// 	validatorAccessToken,
-		// 	asyncHandler(MidpointFactorController.prototype.downloadFactorTemplate)
-		// );
+		this.router.get(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.DOWNLOAD_TEMPLATE_MIDPOINT_FACTORS,
+			validatorAccessToken,
+			asyncHandler(MidpointFactorController.prototype.downloadFactorTemplate)
+		);
 
-		// // exportFactor (get)
-		// this.router.get(
-		// 	ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.EXPORT_MIDPOINT_FACTORS,
-		// 	validatorAccessToken,
-		// 	asyncHandler(MidpointFactorController.prototype.exportFactor)
-		// );
+		// exportFactor (get)
+		this.router.get(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.EXPORT_MIDPOINT_FACTORS,
+			validatorAccessToken,
+			asyncHandler(MidpointFactorController.prototype.exportFactor)
+		);
 
 		return this.router;
 	}

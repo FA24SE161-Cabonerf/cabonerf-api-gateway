@@ -1,7 +1,7 @@
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import { ImpactCategory } from '@gateway/models/cabonerf-main/impact-category.model';
 import mainAxiosService from '@gateway/services/cabonerf-main/main.axios';
-import { CommonResponse, ParamID } from '@gateway/types/common.types';
+import { CommonResponse } from '@gateway/types/common.types';
 import { BaseImpactCategoryReqBody } from '@gateway/types/impactCategory.types';
 
 class ImpactCategoryService {
@@ -26,6 +26,12 @@ class ImpactCategoryService {
 		return response;
 	}
 
+	public async getImpactMethodFromImpactCategory(id: string) {
+		return await mainAxiosService.axios.get<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_CATEGORIES + `/${id}` + ROUTE_ENDPOINTS.IMPACT_METHODS
+		);
+	}
+
 	public async createImpactCategory(payload: BaseImpactCategoryReqBody) {
 		const response = await mainAxiosService.axios.post<CommonResponse<any>>(
 			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_CATEGORIES,
@@ -42,7 +48,7 @@ class ImpactCategoryService {
 		return response;
 	}
 
-	public async deleteImpactCategory(id: ParamID) {
+	public async deleteImpactCategory(id: string) {
 		const response = await mainAxiosService.axios.delete<CommonResponse<any>>(
 			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_CATEGORIES + `/${id}`
 		);

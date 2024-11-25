@@ -1,3 +1,5 @@
+import { PaginationRequest } from '@gateway/models/cabonerf-main/paginationRequest.model';
+
 interface CreateFactorReqBody {
 	name: string;
 	chemicalName: string;
@@ -12,4 +14,14 @@ interface CreateFactorReqBody {
 	emissionSubstanceId: string;
 }
 
-export type { CreateFactorReqBody };
+interface ExportFactorReqQuery {
+	methodId: string;
+	impactCategoryId: string;
+}
+
+interface GetMidpointSubstanceFactorsAdminReqParams extends PaginationRequest {
+	compartmentId?: string;
+	keyword?: string;
+}
+
+export type { CreateFactorReqBody, ExportFactorReqQuery, GetMidpointSubstanceFactorsAdminReqParams };
