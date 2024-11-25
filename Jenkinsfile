@@ -29,7 +29,7 @@ pipeline {
 		// Prepare environment
 		stage("Prepare Environment") {
 			steps {
-				git branch: 'minh/dev', credentialsId: 'github', url: 'https://github.com/FA24SE161-Cabonerf/cabonerf-api-gateway',
+				git branch: 'minh/minikube', credentialsId: 'github', url: 'https://github.com/FA24SE161-Cabonerf/cabonerf-api-gateway',
 				sh "npm install"
 			}
 		}
