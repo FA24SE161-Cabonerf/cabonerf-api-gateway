@@ -47,8 +47,8 @@ class MidpointFactorController {
 		result.data.pipe(res);
 	}
 
-	public async importExcel(_req: Request, res: Response) {
-		const { methodName } = _req.body;
+	public async importExcel(_req: Request<ParamsDictionary, any, any, { methodName: string }>, res: Response) {
+		const { methodName } = _req.query;
 		const file = _req.file;
 		if (!file) {
 			return res.status(StatusCodes.BAD_REQUEST).json(
