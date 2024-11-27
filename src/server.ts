@@ -34,6 +34,8 @@ import emissionSubstanceRoute from './routes/emissionSubstance.routes';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'Gateway', 'debug');
 
+const allowedOrigins = [config.CLIENT_URL, 'http://localhost:5174'];
+
 export class GatewayServer {
 	public start(app: Application) {
 		this.initServer(app);
@@ -54,7 +56,13 @@ export class GatewayServer {
 		_app.set('trust proxy', 1);
 		_app.use(
 			cors({
-				origin: config.CLIENT_URL,
+				origin: (origin, callback) => {
+					if (!origin || allowedOrigins.includes(origin)) {
+						callback(null, true);
+					} else {
+						callback(new Error('Not allowed by CORS'));
+					}
+				},
 				credentials: true,
 				methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH']
 			})

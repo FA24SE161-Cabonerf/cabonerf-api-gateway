@@ -27,7 +27,10 @@ export class SocketIOHandler {
 			 * @emit nodebased:cabonerf-node-create
 			 */
 			socket.on('gateway:cabonerf-node-create', (data: CabonerfNodeReqBody) => {
+				console.log('Vao node created');
 				if (data) {
+					console.log('Vao node created2');
+					console.log(data);
 					nodebasedClient.emit('nodebased:cabonerf-node-create', data);
 				}
 			});
