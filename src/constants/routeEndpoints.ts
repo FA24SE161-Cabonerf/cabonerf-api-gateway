@@ -109,4 +109,16 @@ export class ROUTE_ENDPOINTS {
 	 */
 
 	public static WORKSPACE = '/workspaces';
+
+	/**
+	 * Contracts
+	 */
+
+	public static CONTRACTS = '/contracts';
+
+	/**
+	 * Organizations
+	 */
+
+	public static ORGANIZATIONS = '/organizations';
 }

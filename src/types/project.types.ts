@@ -35,4 +35,11 @@ interface UpdateProjectReqBody {
 	location?: string;
 }
 
-export { CreateProjectReqBody, UpdateProjectReqBody, Project };
+interface GetAllProjectsReqParams {
+	pageCurrent?: string;
+	pageSize?: string;
+	methodId?: string;
+	workspaceId?: string;
+}
+
+export { CreateProjectReqBody, UpdateProjectReqBody, Project, GetAllProjectsReqParams };

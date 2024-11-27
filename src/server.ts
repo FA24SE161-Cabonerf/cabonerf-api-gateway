@@ -29,6 +29,8 @@ import { SocketIOHandler } from '@gateway/socket/socket.io';
 import exchangeRoute from './routes/exchange.routes';
 import emissionCompartmentRoute from '@gateway/routes/emissisonCompartment.routes';
 import connectorRoute from './routes/connector.routes';
+import workspaceRoute from './routes/workspace.routes';
+import contractRoute from './routes/contracts.routes';
 import usersRoute from './routes/users.routes';
 import emissionSubstanceRoute from './routes/emissionSubstance.routes';
 
@@ -87,6 +89,8 @@ export class GatewayServer {
 		_app.use(BASE_PATH_V1, exchangeRoute.routes());
 		_app.use(BASE_PATH_V1, emissionCompartmentRoute.routes());
 		_app.use(BASE_PATH_V1, connectorRoute.routes());
+		_app.use(BASE_PATH_V1, workspaceRoute.routes());
+		_app.use(BASE_PATH_V1, contractRoute.routes());
 		_app.use(BASE_PATH_V1, usersRoute.routes());
 		_app.use(BASE_PATH_V1, emissionSubstanceRoute.routes());
 	}

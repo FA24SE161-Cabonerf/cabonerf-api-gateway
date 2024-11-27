@@ -1,12 +1,13 @@
 import ProjectService from '@gateway/services/cabonerf-main/project.service';
 import { NodeProcessService } from '@gateway/services/cabonerf-nodebased/nodeProcess.service';
 import { GatewayResponse, ParamID } from '@gateway/types/common.types';
-import { CreateProjectReqBody, UpdateProjectReqBody } from '@gateway/types/project.types';
+import { CreateProjectReqBody, UpdateProjectReqBody, GetAllProjectsReqParams } from '@gateway/types/project.types';
 import { Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core/index';
 export class ProjectController {
-	public async getAllProjects(_req: Request, res: Response) {
-		const result = await ProjectService.prototype.getProject();
+	public async getAllProjects(_req: Request<ParamsDictionary, any, any, GetAllProjectsReqParams>, res: Response) {
+		const GetAllProjectsReqParams = _req.query;
+		const result = await ProjectService.prototype.getProject(GetAllProjectsReqParams);
 
 		return res.status(result.status).json(result.data);
 	}
