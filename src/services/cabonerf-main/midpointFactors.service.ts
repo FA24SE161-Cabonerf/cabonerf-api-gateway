@@ -34,7 +34,7 @@ export class MidpointFactorService {
 
 	public async deleteMidpointFactor(id: string) {
 		const response = await mainAxiosService.axios.delete<CommonResponse<any>>(
-			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.MIDPOINT_FACTORS + `${id}`
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.MIDPOINT_FACTORS + `/${id}`
 		);
 		return response;
 	}

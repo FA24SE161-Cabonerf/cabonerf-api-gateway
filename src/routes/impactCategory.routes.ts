@@ -33,6 +33,13 @@ class ImpactCategoryRoute {
 			asyncHandler(ImpactCategoryController.prototype.getAllImpactCategory)
 		);
 
+		// Get impact method by categoryId
+		this.router.get(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_CATEGORIES + '/:id' + ROUTE_ENDPOINTS.IMPACT_METHODS,
+			validatorAccessToken,
+			asyncHandler(ImpactCategoryController.prototype.getImpactMethodFromImpactCategory)
+		);
+
 		// Create impact category
 		this.router.post(
 			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.IMPACT_CATEGORIES,

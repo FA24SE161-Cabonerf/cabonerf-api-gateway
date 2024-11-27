@@ -31,8 +31,12 @@ import emissionCompartmentRoute from '@gateway/routes/emissisonCompartment.route
 import connectorRoute from './routes/connector.routes';
 import workspaceRoute from './routes/workspace.routes';
 import contractRoute from './routes/contracts.routes';
+import usersRoute from './routes/users.routes';
+import emissionSubstanceRoute from './routes/emissionSubstance.routes';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'Gateway', 'debug');
+
+const allowedOrigins = [config.CLIENT_URL, 'http://localhost:5174'];
 
 export class GatewayServer {
 	public start(app: Application) {
@@ -54,7 +58,13 @@ export class GatewayServer {
 		_app.set('trust proxy', 1);
 		_app.use(
 			cors({
-				origin: config.CLIENT_URL,
+				origin: (origin, callback) => {
+					if (!origin || allowedOrigins.includes(origin)) {
+						callback(null, true);
+					} else {
+						callback(new Error('Not allowed by CORS'));
+					}
+				},
 				credentials: true,
 				methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH']
 			})
@@ -81,6 +91,8 @@ export class GatewayServer {
 		_app.use(BASE_PATH_V1, connectorRoute.routes());
 		_app.use(BASE_PATH_V1, workspaceRoute.routes());
 		_app.use(BASE_PATH_V1, contractRoute.routes());
+		_app.use(BASE_PATH_V1, usersRoute.routes());
+		_app.use(BASE_PATH_V1, emissionSubstanceRoute.routes());
 	}
 
 	private async initElasticsearch() {
