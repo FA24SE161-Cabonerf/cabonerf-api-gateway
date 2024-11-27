@@ -1,11 +1,13 @@
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import mainAxiosService from '@gateway/services/cabonerf-main/main.axios';
 import { CommonResponse } from '@gateway/types/common.types';
-import { CreateProjectReqBody, Project, UpdateProjectReqBody } from '@gateway/types/project.types';
+import { CreateProjectReqBody, Project, UpdateProjectReqBody, GetAllProjectsReqParams } from '@gateway/types/project.types';
 
 export default class ProjectService {
-	public async getProject() {
-		const response = await mainAxiosService.axios.get<CommonResponse<any>>(ROUTE_ENDPOINTS.PROJECTS);
+	public async getProject(payload: GetAllProjectsReqParams) {
+		const response = await mainAxiosService.axios.get<CommonResponse<any>>(ROUTE_ENDPOINTS.PROJECTS, {
+			params: payload
+		});
 
 		return response;
 	}
