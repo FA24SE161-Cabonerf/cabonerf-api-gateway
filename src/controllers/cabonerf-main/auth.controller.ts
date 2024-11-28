@@ -1,5 +1,5 @@
 import { AuthService } from '@gateway/services/cabonerf-main/auth.service';
-import { LoginReqBody, RegisterReqBody } from '@gateway/types/auth.types';
+import { LoginReqBody, RegisterReqBody, ChangePasswordReqBody } from '@gateway/types/auth.types';
 import { Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core/index';
 
@@ -31,6 +31,12 @@ export class AuthController {
 	public async me(_req: Request, res: Response) {
 		const result = await AuthService.prototype.me();
 
+		return res.status(result.status).json(result.data);
+	}
+
+	public async changePassword(_req: Request<ParamsDictionary, unknown, any, ChangePasswordReqBody>, res: Response) {
+		const ChangePasswordReqBody = _req.body;
+		const result = await AuthService.prototype.changePassword(ChangePasswordReqBody);
 		return res.status(result.status).json(result.data);
 	}
 }

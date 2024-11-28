@@ -28,7 +28,22 @@ interface AuthResponse<T> {
 	user: T;
 }
 
+interface ChangePasswordReqBody {
+	oldPassword: string;
+	newPassword: string;
+	newPasswordConfirm: string;
+}
+
 type LoginResponse = AuthResponse<Omit<User, 'phone' | 'bio' | 'userVerifyStatus'>>;
 type RegisterResponse = LoginResponse;
 
-export { AuthResponse, LoginReqBody, LoginResponse, RegisterReqBody, RegisterResponse, LogoutReqBody, AuthorizationHeaders };
+export {
+	AuthResponse,
+	LoginReqBody,
+	LoginResponse,
+	RegisterReqBody,
+	RegisterResponse,
+	LogoutReqBody,
+	AuthorizationHeaders,
+	ChangePasswordReqBody
+};

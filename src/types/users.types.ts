@@ -4,4 +4,11 @@ interface PagingRequestParams {
 	keyword?: string;
 }
 
-export type { PagingRequestParams };
+interface UpdateUserProfileReqBody {
+	fullName: string;
+	phone: string;
+	profilePictureUrl?: string;
+	bio: string;
+}
+
+export type { PagingRequestParams, UpdateUserProfileReqBody };

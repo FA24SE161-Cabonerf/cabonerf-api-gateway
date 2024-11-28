@@ -3,6 +3,7 @@ import { validatorAccessToken } from '@gateway/middlewares/token.middleware';
 import { asyncHandler } from '@gateway/utils/async-handler';
 import express, { Router } from 'express';
 import UsersController from '@gateway/controllers/cabonerf-main/users.controller';
+import { fileUpload } from '@gateway/middlewares/fileUpload.middleware';
 class UsersRoute {
 	private router: Router;
 
@@ -23,6 +24,19 @@ class UsersRoute {
 			ROUTE_ENDPOINTS.USERS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.BAN_UNBAN + '/:id',
 			validatorAccessToken,
 			asyncHandler(UsersController.prototype.updateUserStatus)
+		);
+
+		this.router.put(
+			ROUTE_ENDPOINTS.USERS + ROUTE_ENDPOINTS.PROFILE,
+			validatorAccessToken,
+			asyncHandler(UsersController.prototype.updateUserProfile)
+		);
+
+		this.router.put(
+			ROUTE_ENDPOINTS.USERS + ROUTE_ENDPOINTS.AVATAR,
+			validatorAccessToken,
+			fileUpload.single('image'),
+			asyncHandler(UsersController.prototype.updateUserAvatar)
 		);
 		return this.router;
 	}
