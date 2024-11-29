@@ -12,10 +12,8 @@ export default class ProjectService {
 		return response;
 	}
 
-	public async getProjectByID(payload: { id: string; wid: string }) {
-		const response = await mainAxiosService.axios.get<CommonResponse<Project>>(
-			`${ROUTE_ENDPOINTS.PROJECTS}/${payload.id}${ROUTE_ENDPOINTS.WORKSPACE}/${payload.wid}`
-		);
+	public async getProjectByID(payload: { id: string }) {
+		const response = await mainAxiosService.axios.get<CommonResponse<Project>>(`${ROUTE_ENDPOINTS.PROJECTS}/${payload.id}`);
 
 		return response;
 	}
