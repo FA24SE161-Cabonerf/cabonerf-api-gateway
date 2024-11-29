@@ -79,9 +79,6 @@ export class MidpointFactorService {
 	}
 
 	public async exportFactor(payload: ExportFactorReqQuery) {
-		console.log('category', payload.impactCategoryId);
-		console.log('method', payload.methodId);
-
 		const response = await mainAxiosService.axios.get(
 			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.EXPORT_MIDPOINT_FACTORS,
 			{

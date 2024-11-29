@@ -23,7 +23,7 @@ class OrganizationRoute {
 		this.router.get(
 			ROUTE_ENDPOINTS.ORGANIZATIONS + '/:id',
 			validatorAccessToken,
-			asyncHandler(OrganizationController.prototype.getAllByOrganization)
+			asyncHandler(OrganizationController.prototype.getOrganizationById)
 		);
 
 		// get member in organization
@@ -42,11 +42,30 @@ class OrganizationRoute {
 
 		// upload organization logo
 		this.router.post(
-			ROUTE_ENDPOINTS.ORGANIZATIONS + ':/id' + ROUTE_ENDPOINTS.UPLOAD_LOGO,
+			ROUTE_ENDPOINTS.ORGANIZATIONS + '/:id' + ROUTE_ENDPOINTS.UPLOAD_LOGO,
 			validatorAccessToken,
 			fileUpload.single('logo'),
 			asyncHandler(OrganizationController.prototype.uploadLogo)
 		);
+
+		// MANAGER ENDPOINTS
+		// update organization info -> no longer need this
+
+		// get all for manager
+		this.router.get(
+			ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.MANAGER,
+			validatorAccessToken,
+			asyncHandler(OrganizationController.prototype.getAllForManager)
+		);
+
+		// delete organization for manager
+		this.router.delete(
+			ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.MANAGER + '/:id',
+			validatorAccessToken,
+			asyncHandler(OrganizationController.prototype.deleteOrganizationForManager)
+		);
+
+		// ORG MANAGER ENDPOINTS
 
 		return this.router;
 	}

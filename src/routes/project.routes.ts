@@ -43,6 +43,28 @@ export class ProjectRoute {
 			validatorAccessToken,
 			asyncHandler(ProjectController.prototype.calculateProject)
 		);
+
+		// update favourite
+		this.router.put(
+			ROUTE_ENDPOINTS.PROJECTS + '/:id' + ROUTE_ENDPOINTS.FAVORITE,
+			validatorAccessToken,
+			asyncHandler(ProjectController.prototype.updateFavoriteProject)
+		);
+
+		// get project intensity
+		this.router.get(
+			ROUTE_ENDPOINTS.PROJECTS + '/:id' + ROUTE_ENDPOINTS.INTENSITY,
+			validatorAccessToken,
+			asyncHandler(ProjectController.prototype.getProjectIntensity)
+		);
+
+		// export project
+		this.router.get(
+			ROUTE_ENDPOINTS.PROJECTS + '/:id' + ROUTE_ENDPOINTS.EXPORT_PROJECT,
+			validatorAccessToken,
+			asyncHandler(ProjectController.prototype.exportProject)
+		);
+
 		return this.router;
 	}
 }
