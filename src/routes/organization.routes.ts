@@ -3,6 +3,7 @@ import { validatorAccessToken } from '@gateway/middlewares/token.middleware';
 import { asyncHandler } from '@gateway/utils/async-handler';
 import express, { Router } from 'express';
 import OrganizationController from '@gateway/controllers/cabonerf-main/organization.controller';
+import { fileUpload } from '@gateway/middlewares/fileUpload.middleware';
 class OrganizationRoute {
 	private router: Router;
 
@@ -37,6 +38,14 @@ class OrganizationRoute {
 			ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.INVITED_LIST,
 			validatorAccessToken,
 			asyncHandler(OrganizationController.prototype.getListMemberInvited)
+		);
+
+		// upload organization logo
+		this.router.post(
+			ROUTE_ENDPOINTS.ORGANIZATIONS + ':/id' + ROUTE_ENDPOINTS.UPLOAD_LOGO,
+			validatorAccessToken,
+			fileUpload.single('logo'),
+			asyncHandler(OrganizationController.prototype.uploadLogo)
 		);
 
 		return this.router;
