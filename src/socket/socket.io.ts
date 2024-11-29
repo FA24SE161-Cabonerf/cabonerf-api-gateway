@@ -18,8 +18,11 @@ export class SocketIOHandler {
 
 	public listen(): void {
 		this.io.on('connection', (socket) => {
-			const userId = socket.handshake.auth.user_id;
-			this.user_conn.set(userId, socket.id);
+			const { user_id } = socket.handshake.auth;
+
+			this.user_conn.set(user_id, socket.id);
+
+			socket.join(this.user_conn.get(socket.id) as string);
 
 			/**
 			 ** Create new process
@@ -27,10 +30,11 @@ export class SocketIOHandler {
 			 * @emit nodebased:cabonerf-node-create
 			 */
 			socket.on('gateway:cabonerf-node-create', (data: CabonerfNodeReqBody) => {
-				console.log('Vao node created');
+				console.log('GATEWAY', this.user_conn.get(socket.id) as string);
+
 				if (data) {
 					console.log('Vao node created2');
-					console.log(data);
+					nodebasedClient.auth = { user_id: this.user_conn.get(socket.id) as string };
 					nodebasedClient.emit('nodebased:cabonerf-node-create', data);
 				}
 			});
@@ -108,7 +112,7 @@ export class SocketIOHandler {
 		nodebasedClient.connect();
 
 		nodebasedClient.on('nodebased:create-process-success', (data) => {
-			this.io.emit('gateway:create-process-success', data);
+			this.io.to(data.user_id).emit('gateway:create-process-success', data);
 		});
 
 		nodebasedClient.on('nodebased:delete-process-success', (data) => {
