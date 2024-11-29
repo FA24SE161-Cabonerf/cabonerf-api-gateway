@@ -107,4 +107,25 @@ export class ProjectController {
 		const result = await ProjectService.prototype.calculateProject(projectId);
 		return res.status(result.status).json(result.data);
 	}
+
+	public async updateFavoriteProject(_req: Request<ParamID, any, any>, res: Response) {
+		const { id } = _req.params;
+		const result = await ProjectService.prototype.updateFavoriteProject(id);
+		return res.status(result.status).json(result.data);
+	}
+
+	public async getProjectIntensity(_req: Request<ParamID, any, any>, res: Response) {
+		const { id } = _req.params;
+		const result = await ProjectService.prototype.getProjectIntensity(id);
+		return res.status(result.status).json(result.data);
+	}
+
+	public async exportProject(_req: Request<ParamID, any, any>, res: Response) {
+		const { id } = _req.params;
+		const result = await ProjectService.prototype.exportProject(id);
+		res.setHeader('Content-Disposition', result.headers['content-disposition']);
+		res.setHeader('Content-Type', result.headers['content-type']);
+		res.setHeader('Content-Length', result.headers['content-length']);
+		result.data.pipe(res);
+	}
 }

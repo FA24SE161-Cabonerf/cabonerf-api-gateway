@@ -18,6 +18,18 @@ export class ROUTE_ENDPOINTS {
 	public static AVATAR = '/avatar';
 
 	/**
+	 * Manager
+	 */
+
+	public static MANAGER = '/manager';
+
+	/**
+	 * Organization Manager
+	 */
+
+	public static ORGANIZATION_MANAGER = '/organization-manager';
+
+	/**
 	 * Impacts Endpoint
 	 */
 
@@ -55,6 +67,9 @@ export class ROUTE_ENDPOINTS {
 	 */
 	public static PROJECTS = '/projects';
 	public static CALCULATION = '/calculation';
+	public static FAVORITE = '/favorite';
+	public static INTENSITY = '/intensity';
+	public static EXPORT_PROJECT = '/export';
 
 	/**
 	 * Process

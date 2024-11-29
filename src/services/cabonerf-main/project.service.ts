@@ -49,4 +49,18 @@ export default class ProjectService {
 		});
 		return res;
 	}
+
+	public async updateFavoriteProject(id: string) {
+		return await mainAxiosService.axios.put<CommonResponse<any>>(ROUTE_ENDPOINTS.PROJECTS + `/${id}` + ROUTE_ENDPOINTS.FAVORITE);
+	}
+
+	public async getProjectIntensity(id: string) {
+		return await mainAxiosService.axios.get<CommonResponse<any>>(ROUTE_ENDPOINTS.PROJECTS + `/${id}` + ROUTE_ENDPOINTS.INTENSITY);
+	}
+
+	public async exportProject(id: string) {
+		return await mainAxiosService.axios.get(ROUTE_ENDPOINTS.PROJECTS + `/${id}` + ROUTE_ENDPOINTS.EXPORT_PROJECT, {
+			responseType: 'stream'
+		});
+	}
 }

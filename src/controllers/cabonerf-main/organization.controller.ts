@@ -2,6 +2,8 @@ import OrganizationService from '@gateway/services/cabonerf-main/organization.se
 import { ParamID, GatewayResponse } from '@gateway/types/common.types';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import { ParamsDictionary } from 'express-serve-static-core/index';
+import { GetAllForManagerReqParams } from '@gateway/types/organization.types';
 
 export default class OrganizationController {
 	public async getUserOrganization(_req: Request, res: Response) {
@@ -9,9 +11,9 @@ export default class OrganizationController {
 		return res.status(result.status).json(result.data);
 	}
 
-	public async getAllByOrganization(_req: Request<ParamID, any, any>, res: Response) {
+	public async getOrganizationById(_req: Request<ParamID, any, any>, res: Response) {
 		const { id } = _req.params;
-		const result = await OrganizationService.prototype.getAllByOrganization(id);
+		const result = await OrganizationService.prototype.getOrganizationById(id);
 		return res.status(result.status).json(result.data);
 	}
 
@@ -39,6 +41,18 @@ export default class OrganizationController {
 			);
 		}
 		const result = await OrganizationService.prototype.uploadLogo(id, logo.buffer);
+		return res.status(result.status).json(result.data);
+	}
+
+	public async getAllForManager(_req: Request<ParamsDictionary, unknown, any, GetAllForManagerReqParams>, res: Response) {
+		const GetAllForManagerReqParams = _req.query;
+		const result = await OrganizationService.prototype.getAllForManager(GetAllForManagerReqParams);
+		return res.status(result.status).json(result.data);
+	}
+
+	public async deleteOrganizationForManager(_req: Request<ParamID, any, any>, res: Response) {
+		const { id } = _req.params;
+		const result = await OrganizationService.prototype.deleteOrganizationForManager(id);
 		return res.status(result.status).json(result.data);
 	}
 }
