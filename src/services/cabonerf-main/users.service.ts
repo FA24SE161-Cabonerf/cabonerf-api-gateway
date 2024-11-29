@@ -1,8 +1,8 @@
 import { CommonResponse } from '@gateway/types/common.types';
 import mainAxiosService from './main.axios';
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
-import { PagingRequestParams } from '@gateway/types/users.types';
-
+import { PagingRequestParams, UpdateUserProfileReqBody } from '@gateway/types/users.types';
+import FormData from 'form-data';
 export class UsersService {
 	public async getAllUsersForAdmin(payload: PagingRequestParams) {
 		return mainAxiosService.axios.get<CommonResponse<any>>(ROUTE_ENDPOINTS.USERS + ROUTE_ENDPOINTS.ADMIN, {
@@ -18,5 +18,29 @@ export class UsersService {
 		return mainAxiosService.axios.post<CommonResponse<any>>(
 			ROUTE_ENDPOINTS.USERS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.BAN_UNBAN + `/${id}`
 		);
+	}
+
+	public async updateUserProfile(payload: UpdateUserProfileReqBody) {
+		return mainAxiosService.axios.put<CommonResponse<any>>(ROUTE_ENDPOINTS.USERS + ROUTE_ENDPOINTS.PROFILE, payload);
+	}
+
+	public async updateUserAvatar(image: Buffer) {
+		const formData = new FormData();
+
+		formData.append('image', image, {
+			filename: `avatar.png`, // Give the file a name
+			contentType: 'image/png' // Specify the file type
+		});
+
+		const response = await mainAxiosService.axios.put<CommonResponse<any>>(
+			`${ROUTE_ENDPOINTS.USERS + ROUTE_ENDPOINTS.AVATAR}`,
+			formData,
+			{
+				headers: {
+					...formData.getHeaders()
+				}
+			}
+		);
+		return response;
 	}
 }

@@ -7,7 +7,15 @@ export class ROUTE_ENDPOINTS {
 	public static LOGIN = this.USERS + '/login';
 	public static REGISTER = this.USERS + '/register';
 	public static LOGOUT = this.USERS + '/logout';
+	public static PASSWORD = this.USERS + '/password';
+
+	/**
+	 * User
+	 */
+
+	public static PROFILE = '/profile';
 	public static ME = this.USERS + '/me';
+	public static AVATAR = '/avatar';
 
 	/**
 	 * Impacts Endpoint

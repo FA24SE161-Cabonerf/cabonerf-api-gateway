@@ -20,6 +20,7 @@
 	"description": "",
 	"dependencies": {
 		"@elastic/elasticsearch": "^8.15.0",
+		"@types/file-type": "^10.9.3",
 		"@types/form-data": "^2.5.2",
 		"@types/jsonwebtoken": "^9.0.7",
 		"@types/lodash": "^4.17.13",

@@ -2,7 +2,14 @@ import { API_PARAMS } from '@gateway/constants/apiParams.';
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import { User } from '@gateway/models/cabonerf-main/user.model';
 import mainAxiosService from '@gateway/services/cabonerf-main/main.axios';
-import { LoginReqBody, LoginResponse, LogoutReqBody, RegisterReqBody, RegisterResponse } from '@gateway/types/auth.types';
+import {
+	ChangePasswordReqBody,
+	LoginReqBody,
+	LoginResponse,
+	LogoutReqBody,
+	RegisterReqBody,
+	RegisterResponse
+} from '@gateway/types/auth.types';
 import { CommonResponse } from '@gateway/types/common.types';
 
 export class AuthService {
@@ -34,5 +41,9 @@ export class AuthService {
 		const response = await mainAxiosService.axios.get<CommonResponse<User>>(ROUTE_ENDPOINTS.ME);
 
 		return response;
+	}
+
+	public async changePassword(payload: ChangePasswordReqBody) {
+		return await mainAxiosService.axios.put<CommonResponse<any>>(ROUTE_ENDPOINTS.PASSWORD, payload);
 	}
 }
