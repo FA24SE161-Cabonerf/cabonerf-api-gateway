@@ -26,7 +26,7 @@ interface CreateProjectReqBody {
 	description: string;
 	location: string;
 	methodId: number;
-	workspaceId: number;
+	organizationId: string;
 }
 
 interface UpdateProjectReqBody {
