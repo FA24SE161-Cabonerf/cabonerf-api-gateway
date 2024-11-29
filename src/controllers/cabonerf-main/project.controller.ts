@@ -12,11 +12,11 @@ export class ProjectController {
 		return res.status(result.status).json(result.data);
 	}
 
-	public async getProjectByID(req: Request<ParamID & { wid: string }, unknown, unknown>, res: Response) {
-		const { id, wid } = req.params;
+	public async getProjectByID(req: Request<ParamID, unknown, unknown>, res: Response) {
+		const { id } = req.params;
 
 		const [mainData, cabonerfNodeData, cabonerfEdgeData] = await Promise.all([
-			ProjectService.prototype.getProjectByID({ id, wid }),
+			ProjectService.prototype.getProjectByID({ id }),
 			NodeProcessService.prototype.getNodeProcessByProjectId({ projectId: id }),
 			NodeProcessService.prototype.getEdgeProcessByProjectId({ projectId: id })
 		]);

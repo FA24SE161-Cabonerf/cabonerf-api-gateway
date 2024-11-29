@@ -129,4 +129,6 @@ export class ROUTE_ENDPOINTS {
 	 */
 
 	public static ORGANIZATIONS = '/organizations';
+	public static MEMBERS = '/members';
+	public static INVITED_LIST = '/invite-list';
 }

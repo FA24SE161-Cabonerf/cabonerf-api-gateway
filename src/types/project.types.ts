@@ -39,7 +39,7 @@ interface GetAllProjectsReqParams {
 	pageCurrent?: string;
 	pageSize?: string;
 	methodId?: string;
-	workspaceId?: string;
+	organizationId?: string;
 }
 
 export { CreateProjectReqBody, UpdateProjectReqBody, Project, GetAllProjectsReqParams };
