@@ -3,7 +3,6 @@ import mainAxiosService from './main.axios';
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import { PagingRequestParams, UpdateUserProfileReqBody } from '@gateway/types/users.types';
 import FormData from 'form-data';
-import { fileTypeFromBuffer } from 'file-type';
 export class UsersService {
 	public async getAllUsersForAdmin(payload: PagingRequestParams) {
 		return mainAxiosService.axios.get<CommonResponse<any>>(ROUTE_ENDPOINTS.USERS + ROUTE_ENDPOINTS.ADMIN, {
@@ -28,17 +27,9 @@ export class UsersService {
 	public async updateUserAvatar(image: Buffer) {
 		const formData = new FormData();
 
-		const fileType = await fileTypeFromBuffer(image);
-
-		if (!fileType) {
-			throw new Error('Unsupported file type'); // Handle unsupported formats
-		}
-
-		const { mime, ext } = fileType;
-
 		formData.append('image', image, {
-			filename: `avatar.${ext}`, // Give the file a name
-			contentType: mime // Specify the file type
+			filename: `avatar.png`, // Give the file a name
+			contentType: 'image/png' // Specify the file type
 		});
 
 		const response = await mainAxiosService.axios.put<CommonResponse<any>>(
