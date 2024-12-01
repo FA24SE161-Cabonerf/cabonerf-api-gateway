@@ -147,6 +147,9 @@ export class ROUTE_ENDPOINTS {
 	public static MEMBERS = '/members';
 	public static INVITED_LIST = '/invite-list';
 	public static UPLOAD_LOGO = '/upload-logo';
+	public static INVITE_MEMBER = '/invite';
+	public static ACCEPT_INVITE = '/accept';
+	public static REMOVE_MEMBER = '/remove-member';
 
 	/**
 	 * Object library
