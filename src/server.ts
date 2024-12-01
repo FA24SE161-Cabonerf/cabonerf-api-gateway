@@ -33,6 +33,7 @@ import organizationRoute from './routes/organization.routes';
 import contractRoute from './routes/contracts.routes';
 import usersRoute from './routes/users.routes';
 import emissionSubstanceRoute from './routes/emissionSubstance.routes';
+import objectLibraryRoute from './routes/objectLibrary.routes';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'Gateway', 'debug');
 
@@ -93,6 +94,7 @@ export class GatewayServer {
 		_app.use(BASE_PATH_V1, contractRoute.routes());
 		_app.use(BASE_PATH_V1, usersRoute.routes());
 		_app.use(BASE_PATH_V1, emissionSubstanceRoute.routes());
+		_app.use(BASE_PATH_V1, objectLibraryRoute.routes());
 	}
 
 	private async initElasticsearch() {
