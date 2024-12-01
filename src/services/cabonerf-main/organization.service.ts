@@ -2,7 +2,13 @@ import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import mainAxiosService from './main.axios';
 import { CommonResponse } from '@gateway/types/common.types';
 import FormData from 'form-data';
-import { GetAllForManagerReqParams } from '@gateway/types/organization.types';
+import {
+	AcceptInviteReqQuery,
+	CreateOrganizationReqParams,
+	GetAllForManagerReqParams,
+	InviteUserToOrganizationReqBody
+} from '@gateway/types/organization.types';
+import mime from 'mime-types';
 
 export default class OrganizationService {
 	public async getUserOrganization() {
@@ -46,5 +52,49 @@ export default class OrganizationService {
 
 	public async deleteOrganizationForManager(id: string) {
 		return mainAxiosService.axios.delete<CommonResponse<any>>(ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.MANAGER + `/${id}`);
+	}
+
+	public async inviteMember(payload: InviteUserToOrganizationReqBody) {
+		return mainAxiosService.axios.post<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.ORGANIZATION_MANAGER + ROUTE_ENDPOINTS.INVITE_MEMBER,
+			payload
+		);
+	}
+
+	public async acceptInvite(payload: AcceptInviteReqQuery) {
+		return mainAxiosService.axios.put<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.ACCEPT_INVITE,
+			{},
+			{
+				params: payload
+			}
+		);
+	}
+
+	public async removeMember(id: string) {
+		return mainAxiosService.axios.delete<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.ORGANIZATION_MANAGER + `/${id}`
+		);
+	}
+
+	public async createOrganization(data: CreateOrganizationReqParams, contractFile: Express.Multer.File, logo: Express.Multer.File) {
+		const formData = new FormData();
+
+		formData.append('logo', logo.buffer, {
+			filename: logo.originalname,
+			contentType: mime.contentType(logo.originalname) || 'image/png'
+		});
+
+		formData.append('contractFile', contractFile.buffer, {
+			filename: contractFile.originalname,
+			contentType: mime.contentType(contractFile.originalname) || 'application/pdf'
+		});
+
+		formData.append('name', data.name);
+		formData.append('email', data.email);
+
+		return mainAxiosService.axios.post<CommonResponse<any>>(ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.MANAGER, formData, {
+			headers: { ...formData.getHeaders() }
+		});
 	}
 }
