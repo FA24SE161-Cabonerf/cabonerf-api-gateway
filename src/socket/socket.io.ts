@@ -18,24 +18,36 @@ export class SocketIOHandler {
 
 	public listen(): void {
 		this.io.on('connection', (socket) => {
-			const { user_id } = socket.handshake.auth;
+			/**
+			 ** Handle an user join room
+			 * @on gateway:join-room
+			 * @emit nodebased:join-room
+			 */
+			socket.on('gateway:join-room', (data: { projectId: string }) => {
+				socket.join(data.projectId);
+				console.log('JOIN SUCCESS GATEWAY');
+				nodebasedClient.emit('nodebased:join-room', { projectId: data.projectId });
+			});
 
-			this.user_conn.set(user_id, socket.id);
-
-			socket.join(this.user_conn.get(socket.id) as string);
+			/**
+			 ** Handle an user leave room
+			 * @on gateway:leave-room
+			 * @emit nodebased:leave-room
+			 */
+			socket.on('gateway:leave-room', (data: string) => {
+				socket.leave(data);
+				nodebasedClient.emit('nodebased:leave-room', data);
+			});
 
 			/**
 			 ** Create new process
 			 * @on gateway:cabonerf-node-create
 			 * @emit nodebased:cabonerf-node-create
 			 */
-			socket.on('gateway:cabonerf-node-create', (data: CabonerfNodeReqBody) => {
-				console.log('GATEWAY', this.user_conn.get(socket.id) as string);
-
+			socket.on('gateway:cabonerf-node-create', (data: { data: CabonerfNodeReqBody; projectId: string }) => {
 				if (data) {
-					console.log('Vao node created2');
-					nodebasedClient.auth = { user_id: this.user_conn.get(socket.id) as string };
-					nodebasedClient.emit('nodebased:cabonerf-node-create', data);
+					console.log('LINE 38 projectId', data.projectId);
+					nodebasedClient.emit('nodebased:cabonerf-node-create', { data: data.data, projectId: data.projectId });
 				}
 			});
 
@@ -44,7 +56,7 @@ export class SocketIOHandler {
 			 * @on gateway:cabonerf-node-delete
 			 * @emit nodebased:cabonerf-node-delete
 			 */
-			socket.on('gateway:cabonerf-node-delete', (data: string) => {
+			socket.on('gateway:cabonerf-node-delete', (data: { data: string; projectId: string }) => {
 				if (data) {
 					nodebasedClient.emit('nodebased:cabonerf-node-delete', data);
 				}
@@ -55,7 +67,7 @@ export class SocketIOHandler {
 			 * @on gateway:cabonerf-node-update-position
 			 * @emit nodebased:node-update-position
 			 */
-			socket.on('gateway:node-update-position', (data: { id: string; x: number; y: number }) => {
+			socket.on('gateway:node-update-position', (data: { data: { id: string; x: number; y: number }; projectId: string }) => {
 				if (data) {
 					console.log('UPDATE');
 					nodebasedClient.emit('nodebased:node-update-position', data);
@@ -67,7 +79,7 @@ export class SocketIOHandler {
 			 * @on gateway:node-update-color
 			 * @emit nodebased:node-update-color
 			 */
-			socket.on('gateway:node-update-color', (data: { id: string; color: string }) => {
+			socket.on('gateway:node-update-color', (data: { data: { id: string; color: string }; projectId: string }) => {
 				if (data) {
 					nodebasedClient.emit('nodebased:node-update-color', data);
 				}
@@ -94,7 +106,7 @@ export class SocketIOHandler {
 			 * @on gateway:connector-delete
 			 * @emit nodebased:connector-delete
 			 */
-			socket.on('gateway:connector-delete', (data: string) => {
+			socket.on('gateway:connector-delete', (data: { data: string; projectId: string }) => {
 				nodebasedClient.emit('nodebased:connector-delete', data);
 			});
 		});
@@ -111,28 +123,34 @@ export class SocketIOHandler {
 
 		nodebasedClient.connect();
 
-		nodebasedClient.on('nodebased:create-process-success', (data) => {
-			this.io.to(data.user_id).emit('gateway:create-process-success', data);
+		nodebasedClient.on('nodebased:create-process-success', (data: { data: any; projectId: string }) => {
+			console.log('LINE 116: VAO LAI NODEBASED');
+			this.io.to(data.projectId).emit('gateway:create-process-success', data.data);
+			this.io.emit('gateway:create-process-success-self', data.data);
 		});
 
-		nodebasedClient.on('nodebased:delete-process-success', (data) => {
-			this.io.emit('gateway:delete-process-success', data);
+		nodebasedClient.on('nodebased:delete-process-success', (data: { data: any; projectId: string }) => {
+			this.io.to(data.projectId).emit('gateway:delete-process-success', data.data);
+			this.io.emit('gateway:delete-process-success', data.data);
 		});
 
-		nodebasedClient.on('nodebased:update-process-color-success', (data) => {
-			this.io.emit('gateway:update-process-color-success', data);
+		nodebasedClient.on('nodebased:update-process-color-success', (data: { data: any; projectId: string }) => {
+			this.io.emit('gateway:update-process-color-success', data.data);
+			this.io.to(data.projectId).emit('gateway:update-process-color-success', data.data);
 		});
 
-		nodebasedClient.on('nodebased:connector-created', (data) => {
-			this.io.emit('gateway:connector-created', data);
+		nodebasedClient.on('nodebased:connector-created', (data: { data: any; projectId: string }) => {
+			this.io.emit('gateway:connector-created', data.data);
+			// this.io.to(data.projectId).emit('gateway:connector-created', data.data);
 		});
 
 		nodebasedClient.on('nodebased:error-create-edge', (data) => {
 			this.io.emit('gateway:error-create-edge', data);
 		});
 
-		nodebasedClient.on('nodebased:connector-deleted', (data) => {
-			this.io.emit('gateway:connector-deleted', data);
+		nodebasedClient.on('nodebased:connector-deleted', (data: { data: any; projectId: string }) => {
+			this.io.emit('gateway:connector-deleted', data.data);
+			// this.io.to(data.projectId).emit('gateway:connector-deleted', data.data);
 		});
 
 		nodebasedClient.on('nodebased:delete-connector-ids', (data) => {
