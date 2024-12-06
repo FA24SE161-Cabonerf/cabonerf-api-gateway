@@ -156,4 +156,10 @@ export class ROUTE_ENDPOINTS {
 	 */
 
 	public static OBJECT_LIBRARY = '/object-library';
+
+	/**
+	 * System boundary
+	 */
+
+	public static SYSTEM_BOUNDARY = '/system-boundary';
 }

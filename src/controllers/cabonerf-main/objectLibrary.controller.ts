@@ -1,26 +1,25 @@
 import ObjectLibraryService from '@gateway/services/cabonerf-main/objectLibrary.service';
 import { ParamsDictionary } from 'express-serve-static-core';
-import { ParamID } from '@gateway/types/common.types';
 import { Request, Response } from 'express';
 import { SearchObjectLibraryReqParams } from '@gateway/types/objectLibrary.types';
 
 export default class ObjectLibraryController {
 	public async searchObjectLibraryOfOrganization(_req: Request<ParamsDictionary, any, any, SearchObjectLibraryReqParams>, res: Response) {
-		const { id } = _req.params;
+		const { orgId } = _req.params;
 		const SearchObjectLibraryReqParams = _req.query;
-		const result = await ObjectLibraryService.prototype.searchObjectLibraryOfOrganization(id, SearchObjectLibraryReqParams);
+		const result = await ObjectLibraryService.prototype.searchObjectLibraryOfOrganization(orgId, SearchObjectLibraryReqParams);
 		return res.status(result.status).json(result.data);
 	}
 
-	public async saveToObjectLibrary(_req: Request<ParamID, any, any>, res: Response) {
-		const { id } = _req.params;
-		const result = await ObjectLibraryService.prototype.saveToObjectLibrary(id);
+	public async saveToObjectLibrary(_req: Request<{ projectId: string }, any, any>, res: Response) {
+		const { projectId } = _req.params;
+		const result = await ObjectLibraryService.prototype.saveToObjectLibrary(projectId);
 		return res.status(result.status).json(result.data);
 	}
 
-	public async removeFromObjectLibrary(_req: Request<ParamID, any, any>, res: Response) {
-		const { id } = _req.params;
-		const result = await ObjectLibraryService.prototype.removeFromObjectLibrary(id);
+	public async removeFromObjectLibrary(_req: Request<{ processId: string }, any, any>, res: Response) {
+		const { processId } = _req.params;
+		const result = await ObjectLibraryService.prototype.removeFromObjectLibrary(processId);
 		return res.status(result.status).json(result.data);
 	}
 

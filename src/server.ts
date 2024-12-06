@@ -36,7 +36,7 @@ import emissionSubstanceRoute from './routes/emissionSubstance.routes';
 import { YSocketIO } from 'y-socket.io/dist/server';
 
 import objectLibraryRoute from './routes/objectLibrary.routes';
-
+import systemBoundaryRoute from './routes/systemBoundary.routes';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'Gateway', 'debug');
 
@@ -103,6 +103,7 @@ export class GatewayServer {
 		_app.use(BASE_PATH_V1, usersRoute.routes());
 		_app.use(BASE_PATH_V1, emissionSubstanceRoute.routes());
 		_app.use(BASE_PATH_V1, objectLibraryRoute.routes());
+		_app.use(BASE_PATH_V1, systemBoundaryRoute.routes());
 	}
 
 	private async initElasticsearch() {
