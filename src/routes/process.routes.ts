@@ -26,6 +26,7 @@ export class ProcessRoute {
 
 		// Delete process
 		this.router.delete(`${ROUTE_ENDPOINTS.PROJECTS}/:id`, validatorAccessToken, asyncHandler(ProcessController.prototype.deleteProcess));
+
 		return this.router;
 	}
 }

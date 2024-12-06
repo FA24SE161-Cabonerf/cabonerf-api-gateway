@@ -26,12 +26,14 @@ class UsersRoute {
 			asyncHandler(UsersController.prototype.updateUserStatus)
 		);
 
+		// update profile
 		this.router.put(
 			ROUTE_ENDPOINTS.USERS + ROUTE_ENDPOINTS.PROFILE,
 			validatorAccessToken,
 			asyncHandler(UsersController.prototype.updateUserProfile)
 		);
 
+		// update avatar
 		this.router.put(
 			ROUTE_ENDPOINTS.USERS + ROUTE_ENDPOINTS.AVATAR,
 			validatorAccessToken,

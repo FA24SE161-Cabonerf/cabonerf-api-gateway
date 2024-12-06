@@ -3,7 +3,12 @@ import { ParamID, GatewayResponse } from '@gateway/types/common.types';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { ParamsDictionary } from 'express-serve-static-core/index';
-import { GetAllForManagerReqParams } from '@gateway/types/organization.types';
+import {
+	GetAllForManagerReqParams,
+	InviteUserToOrganizationReqBody,
+	AcceptInviteReqQuery,
+	CreateOrganizationReqParams
+} from '@gateway/types/organization.types';
 
 export default class OrganizationController {
 	public async getUserOrganization(_req: Request, res: Response) {
@@ -53,6 +58,57 @@ export default class OrganizationController {
 	public async deleteOrganizationForManager(_req: Request<ParamID, any, any>, res: Response) {
 		const { id } = _req.params;
 		const result = await OrganizationService.prototype.deleteOrganizationForManager(id);
+		return res.status(result.status).json(result.data);
+	}
+
+	public async inviteMember(_req: Request<ParamsDictionary, unknown, InviteUserToOrganizationReqBody>, res: Response) {
+		const { ...rest } = _req.body;
+		const result = await OrganizationService.prototype.inviteMember(rest);
+		return res.status(result.status).json(result.data);
+	}
+
+	public async acceptInvite(_req: Request<ParamsDictionary, unknown, unknown, AcceptInviteReqQuery>, res: Response) {
+		const data = _req.query;
+		const result = await OrganizationService.prototype.acceptInvite(data);
+		return res.status(result.status).json(result.data);
+	}
+
+	public async removeMember(_req: Request<ParamID>, res: Response) {
+		const { id } = _req.params;
+		const result = await OrganizationService.prototype.removeMember(id);
+		return res.status(result.status).json(result.data);
+	}
+
+	public async createOrganization(
+		_req: Request<ParamsDictionary, unknown, CreateOrganizationReqParams, CreateOrganizationReqParams>,
+		res: Response
+	) {
+		const data = _req.body;
+		const files = _req.files as { [fieldname: string]: Express.Multer.File[] };
+		const contractFile = files['contractFile'][0];
+		const logo = files['logo'][0];
+
+		if (!contractFile) {
+			return res.status(StatusCodes.BAD_REQUEST).json(
+				new GatewayResponse({
+					status: 'Error',
+					message: 'Contract file is not present.',
+					data: []
+				})
+			);
+		}
+
+		if (!logo) {
+			return res.status(StatusCodes.BAD_REQUEST).json(
+				new GatewayResponse({
+					status: 'Error',
+					message: 'Logo is not present.',
+					data: []
+				})
+			);
+		}
+
+		const result = await OrganizationService.prototype.createOrganization(data, contractFile, logo);
 		return res.status(result.status).json(result.data);
 	}
 }

@@ -35,6 +35,9 @@ import usersRoute from './routes/users.routes';
 import emissionSubstanceRoute from './routes/emissionSubstance.routes';
 import { YSocketIO } from 'y-socket.io/dist/server';
 
+import objectLibraryRoute from './routes/objectLibrary.routes';
+
+
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'Gateway', 'debug');
 
 const allowedOrigins = [config.CLIENT_URL, 'http://localhost:5174'];
@@ -99,6 +102,7 @@ export class GatewayServer {
 		_app.use(BASE_PATH_V1, contractRoute.routes());
 		_app.use(BASE_PATH_V1, usersRoute.routes());
 		_app.use(BASE_PATH_V1, emissionSubstanceRoute.routes());
+		_app.use(BASE_PATH_V1, objectLibraryRoute.routes());
 	}
 
 	private async initElasticsearch() {
