@@ -33,7 +33,10 @@ import organizationRoute from './routes/organization.routes';
 import contractRoute from './routes/contracts.routes';
 import usersRoute from './routes/users.routes';
 import emissionSubstanceRoute from './routes/emissionSubstance.routes';
+import { YSocketIO } from 'y-socket.io/dist/server';
+
 import objectLibraryRoute from './routes/objectLibrary.routes';
+
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'Gateway', 'debug');
 
@@ -47,6 +50,11 @@ export class GatewayServer {
 		this.initSecurityMiddleware(app);
 		this.initRoutes(app);
 		this.initErrorHandler(app);
+	}
+
+	private initYSocketIo(io: Server) {
+		const ysocketio = new YSocketIO(io);
+		ysocketio.initialize();
 	}
 
 	private initStandardMiddleware(_app: Application) {
@@ -122,6 +130,7 @@ export class GatewayServer {
 			}
 		});
 		this.startSocketIO(io);
+		this.initYSocketIo(io);
 	}
 
 	private async initServer(_app: Application): Promise<void> {
