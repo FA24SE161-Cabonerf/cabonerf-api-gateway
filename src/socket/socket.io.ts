@@ -8,10 +8,26 @@ let nodebasedClient: SocketClient;
 
 export class SocketIOHandler {
 	private io: Server;
-	private user_conn: Map<string, string>;
+	private user_conn: Map<
+		string,
+		Array<{
+			userId: string;
+			userName: string;
+			userAvatar: string;
+			projectId: string;
+		}>
+	>;
 
 	constructor(io: Server) {
-		this.user_conn = new Map<string, string>();
+		this.user_conn = new Map<
+			string,
+			Array<{
+				userId: string;
+				userName: string;
+				userAvatar: string;
+				projectId: string;
+			}>
+		>();
 		this.io = io;
 		this.startNodebasedServiceSocketConnection();
 	}
@@ -23,10 +39,32 @@ export class SocketIOHandler {
 			 * @on gateway:join-room
 			 * @emit nodebased:join-room
 			 */
-			socket.on('gateway:join-room', (data: { projectId: string }) => {
+			socket.on('gateway:join-room', (data: { userId: string; userName: string; userAvatar: string; projectId: string }) => {
 				socket.join(data.projectId);
 				console.log('JOIN SUCCESS GATEWAY');
 				nodebasedClient.emit('nodebased:join-room', { projectId: data.projectId });
+
+				if (!this.user_conn.has(data.projectId)) {
+					this.user_conn.set(data.projectId, []);
+				}
+
+				// Lấy danh sách người dùng hiện tại trong projectId
+				const users = this.user_conn.get(data.projectId);
+
+				users?.push({
+					userId: data.userId,
+					userName: data.userName,
+					userAvatar: data.userAvatar,
+					projectId: data.projectId
+				});
+
+				this.user_conn.set(data.projectId, users || []);
+
+				const usersInsideProject = this.user_conn.get(data.projectId);
+				console.log(usersInsideProject);
+
+				socket.to(data.projectId).emit('gateway:user-connect-to-project', usersInsideProject);
+				socket.emit('gateway:user-connect-to-project', usersInsideProject);
 			});
 
 			/**
@@ -34,9 +72,17 @@ export class SocketIOHandler {
 			 * @on gateway:leave-room
 			 * @emit nodebased:leave-room
 			 */
-			socket.on('gateway:leave-room', (data: string) => {
-				socket.leave(data);
-				nodebasedClient.emit('nodebased:leave-room', data);
+			socket.on('gateway:user-leave-room', (data: { userId: string; projectId: string }) => {
+				socket.leave(data.projectId);
+				nodebasedClient.emit('nodebased:leave-room', data.projectId);
+				// Lấy danh sách người dùng hiện tại trong projectId
+				const users = this.user_conn.get(data.projectId);
+
+				this.user_conn.set(data.projectId, users?.filter((item) => item.userId !== data.userId) || []);
+
+				const usersInsideProject = this.user_conn.get(data.projectId);
+
+				socket.to(data.projectId).emit('gateway:user-leave-room-success', usersInsideProject);
 			});
 
 			/**
