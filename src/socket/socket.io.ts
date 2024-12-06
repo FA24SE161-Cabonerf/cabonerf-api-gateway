@@ -51,17 +51,20 @@ export class SocketIOHandler {
 				// Lấy danh sách người dùng hiện tại trong projectId
 				const users = this.user_conn.get(data.projectId);
 
-				users?.push({
-					userId: data.userId,
-					userName: data.userName,
-					userAvatar: data.userAvatar,
-					projectId: data.projectId
-				});
+				const isExist = users?.find((item) => item.userId === data.userId);
+
+				if (!isExist) {
+					users?.push({
+						userId: data.userId,
+						userName: data.userName,
+						userAvatar: data.userAvatar,
+						projectId: data.projectId
+					});
+				}
 
 				this.user_conn.set(data.projectId, users || []);
 
 				const usersInsideProject = this.user_conn.get(data.projectId);
-				console.log(usersInsideProject);
 
 				socket.to(data.projectId).emit('gateway:user-connect-to-project', usersInsideProject);
 				socket.emit('gateway:user-connect-to-project', usersInsideProject);
