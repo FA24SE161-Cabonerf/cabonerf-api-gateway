@@ -14,21 +14,21 @@ export class ObjectLibraryRoute {
 	public routes() {
 		// search object lib
 		this.router.get(
-			ROUTE_ENDPOINTS.OBJECT_LIBRARY + ROUTE_ENDPOINTS.ORGANIZATIONS + '/:id',
+			ROUTE_ENDPOINTS.OBJECT_LIBRARY + ROUTE_ENDPOINTS.ORGANIZATIONS + '/:orgId',
 			validatorAccessToken,
 			asyncHandler(ObjectLibraryController.prototype.searchObjectLibraryOfOrganization)
 		);
 
-		// Save process to object lib
+		// Save project to object lib
 		this.router.post(
-			ROUTE_ENDPOINTS.OBJECT_LIBRARY + '/:id',
+			ROUTE_ENDPOINTS.OBJECT_LIBRARY + '/:projectId',
 			validatorAccessToken,
 			asyncHandler(ObjectLibraryController.prototype.saveToObjectLibrary)
 		);
 
 		// Remove from object library
 		this.router.delete(
-			ROUTE_ENDPOINTS.OBJECT_LIBRARY + '/:id',
+			ROUTE_ENDPOINTS.OBJECT_LIBRARY + '/:processId',
 			validatorAccessToken,
 			asyncHandler(ObjectLibraryController.prototype.removeFromObjectLibrary)
 		);

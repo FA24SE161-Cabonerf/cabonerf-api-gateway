@@ -2,7 +2,7 @@ import { PaginationRequest } from '@gateway/models/cabonerf-main/paginationReque
 
 interface SearchObjectLibraryReqParams extends PaginationRequest {
 	keyword?: string;
-	methodId: string;
+	systemBoundaryId?: string;
 }
 
 export type { SearchObjectLibraryReqParams };
