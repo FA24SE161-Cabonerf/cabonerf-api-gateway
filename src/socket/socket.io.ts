@@ -158,6 +158,31 @@ export class SocketIOHandler {
 			socket.on('gateway:connector-delete', (data: { data: string; projectId: string }) => {
 				nodebasedClient.emit('nodebased:connector-delete', data);
 			});
+
+			/**
+			 ** Add object library
+			 * @on gateway:create-object-library
+			 * @emit nodebased:create-object-library
+			 */
+			socket.on(
+				'gateway:create-object-library',
+				(data: {
+					data: {
+						projectId: string | undefined;
+						color: string;
+						userId: string | undefined;
+						objectLibraryId: string;
+						position: {
+							x: number;
+							y: number;
+						};
+						type: string;
+					};
+					projectId: string;
+				}) => {
+					nodebasedClient.emit('nodebased:create-object-library', data);
+				}
+			);
 		});
 
 		this.io.on('disconnect', (socket) => {
@@ -173,9 +198,11 @@ export class SocketIOHandler {
 		nodebasedClient.connect();
 
 		nodebasedClient.on('nodebased:create-process-success', (data: { data: any; projectId: string }) => {
-			console.log('LINE 116: VAO LAI NODEBASED');
 			this.io.to(data.projectId).emit('gateway:create-process-success', data.data);
-			this.io.emit('gateway:create-process-success-self', data.data);
+		});
+
+		nodebasedClient.on('nodebased:created-object-library', (data: { data: any; projectId: string }) => {
+			this.io.to(data.projectId).emit('gateway:created-object-library', data.data);
 		});
 
 		nodebasedClient.on('nodebased:delete-process-success', (data: { data: any; projectId: string }) => {
@@ -189,8 +216,7 @@ export class SocketIOHandler {
 		});
 
 		nodebasedClient.on('nodebased:connector-created', (data: { data: any; projectId: string }) => {
-			this.io.emit('gateway:connector-created', data.data);
-			// this.io.to(data.projectId).emit('gateway:connector-created', data.data);
+			this.io.to(data.projectId).emit('gateway:connector-created', data.data);
 		});
 
 		nodebasedClient.on('nodebased:error-create-edge', (data) => {
