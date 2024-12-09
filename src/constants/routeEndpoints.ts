@@ -162,4 +162,10 @@ export class ROUTE_ENDPOINTS {
 	 */
 
 	public static SYSTEM_BOUNDARY = '/system-boundary';
+
+	/**
+	 * DATASETS
+	 */
+
+	public static DATASETS = '/datasets';
 }
