@@ -5,6 +5,7 @@ export const asyncHandler = (fn: any) => {
 		try {
 			await fn(req, res, next);
 		} catch (error) {
+			console.log('Loi o day', error);
 			next(error);
 		}
 	};

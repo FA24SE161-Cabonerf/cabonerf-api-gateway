@@ -128,7 +128,7 @@ export class SocketIOHandler {
 			 * @on gateway:node-update-color
 			 * @emit nodebased:node-update-color
 			 */
-			socket.on('gateway:node-update-color', (data: { data: { id: string; color: string }; projectId: string }) => {
+			socket.on('gateway:node-update-color', (data: { data: { id: string; bgColor: string; color: string }; projectId: string }) => {
 				if (data) {
 					nodebasedClient.emit('nodebased:node-update-color', data);
 				}

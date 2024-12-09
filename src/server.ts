@@ -112,7 +112,7 @@ export class GatewayServer {
 	private initErrorHandler(_app: Application) {
 		_app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
 			if (err instanceof AxiosError) {
-				res.status(err.status!).json(err.response?.data);
+				res.status(err.status ?? 400).json(err.response?.data);
 			} else if (err instanceof CommonGatewayError) {
 				res.status(err.status).json(err);
 			}
