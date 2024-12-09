@@ -1,6 +1,5 @@
 interface CabonerfNodeReqBody {
 	projectId: string;
-	color: string;
 	lifeCycleStagesId: string;
 	position: {
 		x: number;
