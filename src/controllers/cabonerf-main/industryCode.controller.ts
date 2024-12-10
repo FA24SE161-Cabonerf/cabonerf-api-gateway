@@ -27,7 +27,10 @@ export class IndustryCodeController {
 	}
 
 	public async getAllIndustryCode(req: Request<ParamsDictionary, unknown, any, GetIndustryCodeReqQuery>, res: Response) {
-		const response = await IndsutryCodeService.prototype.getAllIndustryCodeByManager(req.query);
+		const cc = req.query;
+		console.log('31', cc);
+		console.log('32', req.query);
+		const response = await IndsutryCodeService.prototype.getAllIndustryCodeByManager(cc);
 
 		return res.status(response.status).json(response.data);
 	}

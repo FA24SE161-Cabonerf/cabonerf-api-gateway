@@ -22,20 +22,20 @@ class IndustryCodeRoute {
 
 		// Create industry code
 		this.router.post(
-			`${ROUTE_ENDPOINTS.INDUSTRY}${ROUTE_ENDPOINTS.MANAGER}`,
+			`${ROUTE_ENDPOINTS.MANAGER}${ROUTE_ENDPOINTS.INDUSTRY}`,
 			validatorAccessToken,
 			asyncHandler(IndustryCodeController.prototype.createIndustryCodeByManager)
 		);
 
 		// [DELETE]
 		this.router.delete(
-			`${ROUTE_ENDPOINTS.INDUSTRY}${ROUTE_ENDPOINTS.MANAGER}/:industryCodeId`,
+			`${ROUTE_ENDPOINTS.MANAGER}${ROUTE_ENDPOINTS.INDUSTRY}/:industryCodeId`,
 			validatorAccessToken,
 			asyncHandler(IndustryCodeController.prototype.deleteIndustryCodeByManager)
 		);
 
 		this.router.get(
-			`${ROUTE_ENDPOINTS.INDUSTRY}${ROUTE_ENDPOINTS.MANAGER}`,
+			`${ROUTE_ENDPOINTS.MANAGER}${ROUTE_ENDPOINTS.INDUSTRY}`,
 			validatorAccessToken,
 			asyncHandler(IndustryCodeController.prototype.getAllIndustryCode)
 		);
