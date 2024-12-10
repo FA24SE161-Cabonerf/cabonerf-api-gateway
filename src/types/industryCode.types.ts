@@ -1,7 +1,13 @@
+import { PaginationRequest } from '@gateway/models/cabonerf-main/paginationRequest.model';
+
 type IndustryCode = {
 	id: string;
 	name: string;
 	code: string;
 };
 
-export type { IndustryCode };
+interface GetIndustryCodeReqQuery extends PaginationRequest {
+	keyword?: string;
+}
+
+export type { IndustryCode, GetIndustryCodeReqQuery };
