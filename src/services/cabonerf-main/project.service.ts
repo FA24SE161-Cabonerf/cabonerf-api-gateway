@@ -59,7 +59,7 @@ export default class ProjectService {
 	}
 
 	public async exportProject(id: string) {
-		return await mainAxiosService.axios.get<CommonResponse<any>>(ROUTE_ENDPOINTS.PROJECTS + `/${id}` + ROUTE_ENDPOINTS.EXPORT_PROJECT, {
+		return await mainAxiosService.axios.get(ROUTE_ENDPOINTS.PROJECTS + `/${id}` + ROUTE_ENDPOINTS.EXPORT_PROJECT, {
 			responseType: 'stream'
 		});
 	}
