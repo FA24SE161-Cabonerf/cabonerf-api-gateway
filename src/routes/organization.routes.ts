@@ -98,6 +98,13 @@ class OrganizationRoute {
 			asyncHandler(OrganizationController.prototype.removeMember)
 		);
 
+		// leave Organization
+		this.router.delete(
+			ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.LEAVE_ORGANIZATION + '/:userOrganizationId',
+			validatorAccessToken,
+			asyncHandler(OrganizationController.prototype.leaveOrganization)
+		);
+
 		return this.router;
 	}
 }

@@ -17,6 +17,9 @@ interface AcceptInviteReqQuery {
 interface CreateOrganizationReqParams {
 	name: string;
 	email: string;
+	description: string;
+	taxCode: string;
+	industryCodeIds: string[];
 }
 
 export type { GetAllForManagerReqParams, InviteUserToOrganizationReqBody, AcceptInviteReqQuery, CreateOrganizationReqParams };

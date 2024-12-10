@@ -128,4 +128,14 @@ export class ProjectController {
 		res.setHeader('Content-Length', result.headers['content-length']);
 		result.data.pipe(res);
 	}
+
+	public async countAllProject(_req: Request, res: Response) {
+		const result = await ProjectService.prototype.countAllProject();
+		return res.status(result.status).json(result.data);
+	}
+
+	public async getSumImpact(_req: Request, res: Response) {
+		const result = await ProjectService.prototype.getSumImpact();
+		return res.status(result.status).json(result.data);
+	}
 }

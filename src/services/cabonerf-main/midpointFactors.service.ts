@@ -91,4 +91,10 @@ export class MidpointFactorService {
 		);
 		return response;
 	}
+
+	public async getEmissionDashboardAdmin() {
+		return await mainAxiosService.axios.get<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.GET_EMISSION_DASHBOARD
+		);
+	}
 }

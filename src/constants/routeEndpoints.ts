@@ -16,6 +16,9 @@ export class ROUTE_ENDPOINTS {
 	public static PROFILE = '/profile';
 	public static ME = this.USERS + '/me';
 	public static AVATAR = '/avatar';
+	public static INVITE_USER = '/invite';
+	public static COUNT_NEW_USER = '/count-user-new';
+	public static COUNT_ALL_USER = '/count-all-user';
 
 	/**
 	 * Manager
@@ -48,6 +51,7 @@ export class ROUTE_ENDPOINTS {
 	public static EXPORT_MIDPOINT_FACTORS = '/midpoint-factors/export';
 	public static DOWNLOAD_ERROR_LOG_MIDPOINT_FACTORS = '/midpoint-factors/download';
 	public static DOWNLOAD_TEMPLATE_MIDPOINT_FACTORS = '/midpoint-factors/factor-template';
+	public static GET_EMISSION_DASHBOARD = '/count-emission-substance';
 
 	// Midpoint Impact Category
 	public static MIDPOINT_CATEGORIES = '/midpoint-categories';
@@ -70,7 +74,8 @@ export class ROUTE_ENDPOINTS {
 	public static FAVORITE = '/favorite';
 	public static INTENSITY = '/intensity';
 	public static EXPORT_PROJECT = '/export';
-
+	public static COUNT_PROJECTS = '/count-project';
+	public static SUM_IMPACT = '/sum-impact';
 	/**
 	 * Process
 	 */
@@ -150,6 +155,7 @@ export class ROUTE_ENDPOINTS {
 	public static INVITE_MEMBER = '/invite';
 	public static ACCEPT_INVITE = '/accept';
 	public static REMOVE_MEMBER = '/remove-member';
+	public static LEAVE_ORGANIZATION = '/leave-organization';
 
 	/**
 	 * Object library

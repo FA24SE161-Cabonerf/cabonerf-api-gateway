@@ -65,6 +65,18 @@ export class ProjectRoute {
 			asyncHandler(ProjectController.prototype.exportProject)
 		);
 
+		// count all project
+		this.router.get(
+			ROUTE_ENDPOINTS.PROJECTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.COUNT_PROJECTS,
+			validatorAccessToken,
+			asyncHandler(ProjectController.prototype.countAllProject)
+		);
+
+		// get sum project
+		this.router.get(ROUTE_ENDPOINTS.PROJECTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.SUM_IMPACT),
+			validatorAccessToken,
+			asyncHandler(ProjectController.prototype.getSumImpact);
+
 		return this.router;
 	}
 }

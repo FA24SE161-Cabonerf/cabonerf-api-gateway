@@ -6,6 +6,7 @@ import { PagingRequestParams } from '@gateway/types/users.types';
 import { isUndefined, omitBy } from 'lodash';
 import { UpdateUserProfileReqBody } from '@gateway/types/users.types';
 import { StatusCodes } from 'http-status-codes';
+import { PaginationKeywordRequest } from '@gateway/models/cabonerf-main/paginationRequest.model';
 
 type QueryConfig = {
 	[key in keyof PagingRequestParams]: string;
@@ -52,6 +53,22 @@ export default class UsersController {
 			);
 		}
 		const result = await UsersService.prototype.updateUserAvatar(image.buffer);
+		return res.status(result.status).json(result.data);
+	}
+
+	public async getUserToInvite(_req: Request<ParamsDictionary, any, any, PaginationKeywordRequest>, res: Response) {
+		const query = _req.query;
+		const result = await UsersService.prototype.getUserToInvite(query);
+		return res.status(result.status).json(result.data);
+	}
+
+	public async getUserInDashboard(_req: Request, res: Response) {
+		const result = await UsersService.prototype.getUserInDashboard();
+		return res.status(result.status).json(result.data);
+	}
+
+	public async countAllUser(_req: Request, res: Response) {
+		const result = await UsersService.prototype.countAllUser();
 		return res.status(result.status).json(result.data);
 	}
 }
