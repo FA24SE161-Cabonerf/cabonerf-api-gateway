@@ -27,6 +27,7 @@ interface CreateProjectReqBody {
 	location: string;
 	methodId: number;
 	organizationId: string;
+	industryCodeId: string;
 }
 
 interface UpdateProjectReqBody {

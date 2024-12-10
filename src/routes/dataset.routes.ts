@@ -2,7 +2,7 @@ import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import { validatorAccessToken } from '@gateway/middlewares/token.middleware';
 import { asyncHandler } from '@gateway/utils/async-handler';
 import express, { Router } from 'express';
-import DatasetController from '@gateway/controllers/cabonerf-main/dataset.contrller';
+import DatasetController from '@gateway/controllers/cabonerf-main/dataset.controller';
 
 export class DatasetRoute {
 	private router: Router;

@@ -2,7 +2,7 @@ import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import { validatorAccessToken } from '@gateway/middlewares/token.middleware';
 import { asyncHandler } from '@gateway/utils/async-handler';
 import express, { Router } from 'express';
-import ConnectorController from '@gateway/controllers/cabonerf-main/connector.controllers';
+import ConnectorController from '@gateway/controllers/cabonerf-main/connector.controller';
 
 class ConnectorRoute {
 	private router: Router;
