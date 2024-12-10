@@ -9,4 +9,4 @@ interface PaginationKeywordRequest {
 	keyword?: string;
 }
 
-export { PaginationRequest };
+export { PaginationRequest, PaginationKeywordRequest };
