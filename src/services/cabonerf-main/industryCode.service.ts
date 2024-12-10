@@ -35,7 +35,6 @@ export class IndsutryCodeService {
 	}
 
 	public async getAllIndustryCodeByManager(payload: GetIndustryCodeReqQuery) {
-		console.log('38', payload);
 		const result = await mainAxiosService.axios.get<
 			CommonResponse<{ pageCurrent: number; pageSize: number; totalPage: number; industryCodes: IndustryCode[] }>
 		>(`${ROUTE_ENDPOINTS.MANAGER}${ROUTE_ENDPOINTS.INDUSTRY}`, {
