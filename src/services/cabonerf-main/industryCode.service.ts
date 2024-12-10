@@ -1,7 +1,7 @@
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import mainAxiosService from '@gateway/services/cabonerf-main/main.axios';
 import { CommonResponse } from '@gateway/types/common.types';
-import { IndustryCode } from '@gateway/types/industryCode.types';
+import { GetIndustryCodeReqQuery, IndustryCode } from '@gateway/types/industryCode.types';
 
 export class IndsutryCodeService {
 	public async getListIndustryCodeByOrganizationId(payload: { orgId: string }) {
@@ -17,7 +17,7 @@ export class IndsutryCodeService {
 				code: string;
 				name: string;
 			}>
-		>(`${ROUTE_ENDPOINTS.INDUSTRY}${ROUTE_ENDPOINTS.MANAGER}`, payload);
+		>(`${ROUTE_ENDPOINTS.MANAGER}${ROUTE_ENDPOINTS.INDUSTRY}`, payload);
 
 		return result;
 	}
@@ -29,17 +29,19 @@ export class IndsutryCodeService {
 				code: string;
 				name: string;
 			}>
-		>(`${ROUTE_ENDPOINTS.INDUSTRY}${ROUTE_ENDPOINTS.MANAGER}/${payload.id}`);
+		>(`${ROUTE_ENDPOINTS.MANAGER}${ROUTE_ENDPOINTS.INDUSTRY}/${payload.id}`);
 
 		return result;
 	}
 
-	public async getAllIndustryCodeByManager(payload: any) {
+	public async getAllIndustryCodeByManager(payload: GetIndustryCodeReqQuery) {
 		const result = await mainAxiosService.axios.get<
 			CommonResponse<{ pageCurrent: number; pageSize: number; totalPage: number; industryCodes: IndustryCode[] }>
-		>(`${ROUTE_ENDPOINTS.INDUSTRY}${ROUTE_ENDPOINTS.MANAGER}`, {
+		>(`${ROUTE_ENDPOINTS.MANAGER}${ROUTE_ENDPOINTS.INDUSTRY}`, {
 			params: {
-				...payload
+				pageCurrent: payload.currentPage,
+				pageSize: payload.pageSize,
+				keyword: payload.keyword
 			}
 		});
 

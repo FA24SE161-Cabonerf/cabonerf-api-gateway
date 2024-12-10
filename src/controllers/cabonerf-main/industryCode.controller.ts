@@ -1,4 +1,5 @@
 import { IndsutryCodeService } from '@gateway/services/cabonerf-main/industryCode.service';
+import { GetIndustryCodeReqQuery } from '@gateway/types/industryCode.types';
 import { Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core/index';
 
@@ -25,8 +26,9 @@ export class IndustryCodeController {
 		return res.status(response.status).json(response.data);
 	}
 
-	public async getAllIndustryCode(req: Request, res: Response) {
-		const response = await IndsutryCodeService.prototype.getAllIndustryCodeByManager(req.query);
+	public async getAllIndustryCode(req: Request<ParamsDictionary, unknown, any, GetIndustryCodeReqQuery>, res: Response) {
+		const query = req.query;
+		const response = await IndsutryCodeService.prototype.getAllIndustryCodeByManager(query);
 
 		return res.status(response.status).json(response.data);
 	}
