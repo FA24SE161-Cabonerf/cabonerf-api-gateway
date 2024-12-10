@@ -3,4 +3,10 @@ interface PaginationRequest {
 	pageSize: number;
 }
 
-export { PaginationRequest };
+interface PaginationKeywordRequest {
+	pageCurrent: number;
+	pageSize: number;
+	keyword?: string;
+}
+
+export { PaginationRequest, PaginationKeywordRequest };

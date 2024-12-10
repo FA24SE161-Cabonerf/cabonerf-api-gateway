@@ -92,9 +92,18 @@ export default class OrganizationService {
 
 		formData.append('name', data.name);
 		formData.append('email', data.email);
+		formData.append('description', data.description);
+		formData.append('taxCode', data.taxCode);
+		formData.append('industryCodeIds', data.industryCodeIds);
 
 		return mainAxiosService.axios.post<CommonResponse<any>>(ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.MANAGER, formData, {
 			headers: { ...formData.getHeaders() }
 		});
+	}
+
+	public async leaveOrganization(userOrganizationId: string) {
+		return await mainAxiosService.axios.delete<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.LEAVE_ORGANIZATION + `/${userOrganizationId}`
+		);
 	}
 }

@@ -79,7 +79,11 @@ class MidpointFactorController {
 		res.setHeader('Content-Type', result.headers['content-type']);
 		res.setHeader('Content-Length', result.headers['content-length']);
 		result.data.pipe(res);
-		// return res.status(result.status).json(result.data);
+	}
+
+	public async getEmissionDashboardAdmin(_req: Request, res: Response) {
+		const result = await MidpointFactorService.prototype.getEmissionDashboardAdmin();
+		return res.status(result.status).json(result.data);
 	}
 }
 

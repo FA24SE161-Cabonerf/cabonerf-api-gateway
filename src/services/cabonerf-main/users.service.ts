@@ -3,6 +3,7 @@ import mainAxiosService from './main.axios';
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import { PagingRequestParams, UpdateUserProfileReqBody } from '@gateway/types/users.types';
 import FormData from 'form-data';
+import { PaginationKeywordRequest } from '@gateway/models/cabonerf-main/paginationRequest.model';
 export class UsersService {
 	public async getAllUsersForAdmin(payload: PagingRequestParams) {
 		return mainAxiosService.axios.get<CommonResponse<any>>(ROUTE_ENDPOINTS.USERS + ROUTE_ENDPOINTS.ADMIN, {
@@ -42,5 +43,23 @@ export class UsersService {
 			}
 		);
 		return response;
+	}
+
+	public async getUserToInvite(payload: PaginationKeywordRequest) {
+		return mainAxiosService.axios.get<CommonResponse<any>>(ROUTE_ENDPOINTS.USERS + ROUTE_ENDPOINTS.INVITE_USER, {
+			params: payload
+		});
+	}
+
+	public async getUserInDashboard() {
+		return mainAxiosService.axios.get<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.USERS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.COUNT_NEW_USER
+		);
+	}
+
+	public async countAllUser() {
+		return mainAxiosService.axios.get<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.USERS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.COUNT_ALL_USER
+		);
 	}
 }

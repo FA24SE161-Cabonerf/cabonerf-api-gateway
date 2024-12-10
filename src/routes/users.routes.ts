@@ -40,6 +40,28 @@ class UsersRoute {
 			fileUpload.single('image'),
 			asyncHandler(UsersController.prototype.updateUserAvatar)
 		);
+
+		// get user to invite
+		this.router.get(
+			ROUTE_ENDPOINTS.USERS + ROUTE_ENDPOINTS.INVITE_USER,
+			validatorAccessToken,
+			asyncHandler(UsersController.prototype.getUserToInvite)
+		);
+
+		// get user in dashboard
+		this.router.get(
+			ROUTE_ENDPOINTS.USERS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.COUNT_NEW_USER,
+			validatorAccessToken,
+			asyncHandler(UsersController.prototype.getUserInDashboard)
+		);
+
+		// count all user
+		this.router.get(
+			ROUTE_ENDPOINTS.USERS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.COUNT_ALL_USER,
+			validatorAccessToken,
+			asyncHandler(UsersController.prototype.countAllUser)
+		);
+
 		return this.router;
 	}
 }

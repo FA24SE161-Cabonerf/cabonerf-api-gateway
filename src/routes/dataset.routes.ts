@@ -15,6 +15,12 @@ export class DatasetRoute {
 		// get all datasets
 		this.router.get(ROUTE_ENDPOINTS.DATASETS, validatorAccessToken, asyncHandler(DatasetController.prototype.getAllDataset));
 
+		// get all by admin
+		this.router.get(
+			ROUTE_ENDPOINTS.DATASETS + ROUTE_ENDPOINTS.ADMIN,
+			validatorAccessToken,
+			asyncHandler(DatasetController.prototype.getAllDatasetByAdmin)
+		);
 		return this.router;
 	}
 }

@@ -77,6 +77,12 @@ class MidpointFactorRoute {
 			asyncHandler(MidpointFactorController.prototype.exportFactor)
 		);
 
+		this.router.get(
+			ROUTE_ENDPOINTS.IMPACTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.GET_EMISSION_DASHBOARD,
+			validatorAccessToken,
+			asyncHandler(MidpointFactorController.prototype.getEmissionDashboardAdmin)
+		);
+
 		return this.router;
 	}
 }

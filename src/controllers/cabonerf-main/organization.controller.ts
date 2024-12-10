@@ -111,4 +111,10 @@ export default class OrganizationController {
 		const result = await OrganizationService.prototype.createOrganization(data, contractFile, logo);
 		return res.status(result.status).json(result.data);
 	}
+
+	public async leaveOrganization(_req: Request<{ userOrganizationId: string }, any, any>, res: Response) {
+		const { userOrganizationId } = _req.params;
+		const result = await OrganizationService.prototype.leaveOrganization(userOrganizationId);
+		return res.status(result.status).json(result.data);
+	}
 }

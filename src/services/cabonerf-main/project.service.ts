@@ -63,4 +63,16 @@ export default class ProjectService {
 			responseType: 'stream'
 		});
 	}
+
+	public async countAllProject() {
+		return await mainAxiosService.axios.get<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.PROJECTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.COUNT_PROJECTS
+		);
+	}
+
+	public async getSumImpact() {
+		return await mainAxiosService.axios.get<CommonResponse<any>>(
+			ROUTE_ENDPOINTS.PROJECTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.SUM_IMPACT
+		);
+	}
 }
