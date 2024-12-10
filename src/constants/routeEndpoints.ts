@@ -168,4 +168,9 @@ export class ROUTE_ENDPOINTS {
 	 */
 
 	public static DATASETS = '/datasets';
+
+	/**
+	 * INDUSTRY
+	 */
+	public static INDUSTRY = '/industry-code';
 }

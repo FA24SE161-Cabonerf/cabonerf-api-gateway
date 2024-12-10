@@ -38,6 +38,7 @@ import { YSocketIO } from 'y-socket.io/dist/server';
 import objectLibraryRoute from './routes/objectLibrary.routes';
 import systemBoundaryRoute from './routes/systemBoundary.routes';
 import datasetRoute from './routes/dataset.routes';
+import industryCodeRoute from '@gateway/routes/industryCode.routes';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'Gateway', 'debug');
 
@@ -106,6 +107,7 @@ export class GatewayServer {
 		_app.use(BASE_PATH_V1, objectLibraryRoute.routes());
 		_app.use(BASE_PATH_V1, systemBoundaryRoute.routes());
 		_app.use(BASE_PATH_V1, datasetRoute.routes());
+		_app.use(BASE_PATH_V1, industryCodeRoute.routes());
 	}
 
 	private async initElasticsearch() {
