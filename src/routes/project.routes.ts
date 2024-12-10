@@ -73,9 +73,11 @@ export class ProjectRoute {
 		);
 
 		// get sum project
-		this.router.get(ROUTE_ENDPOINTS.PROJECTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.SUM_IMPACT),
+		this.router.get(
+			ROUTE_ENDPOINTS.PROJECTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.SUM_IMPACT,
 			validatorAccessToken,
-			asyncHandler(ProjectController.prototype.getSumImpact);
+			asyncHandler(ProjectController.prototype.getSumImpact)
+		);
 
 		return this.router;
 	}
