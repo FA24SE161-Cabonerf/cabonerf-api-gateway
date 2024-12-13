@@ -47,7 +47,7 @@ export default class OrganizationService {
 	public async getAllForManager(payload: GetAllForManagerReqParams) {
 		return mainAxiosService.axios.get<CommonResponse<any>>(ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.MANAGER, {
 			params: {
-				pageCurrent: payload.currentPage,
+				pageCurrent: payload.pageCurrent,
 				pageSize: payload.pageSize,
 				keyword: payload.keyword
 			}

@@ -1,4 +1,4 @@
-import { PaginationRequest } from '@gateway/models/cabonerf-main/paginationRequest.model';
+import { PageCurrentRequest } from '@gateway/models/cabonerf-main/paginationRequest.model';
 
 type IndustryCode = {
 	id: string;
@@ -6,7 +6,7 @@ type IndustryCode = {
 	code: string;
 };
 
-interface GetIndustryCodeReqQuery extends PaginationRequest {
+interface GetIndustryCodeReqQuery extends PageCurrentRequest {
 	keyword?: string;
 }
 

@@ -9,4 +9,9 @@ interface PaginationKeywordRequest {
 	keyword?: string;
 }
 
-export { PaginationRequest, PaginationKeywordRequest };
+interface PageCurrentRequest {
+	pageCurrent: number;
+	pageSize: number;
+}
+
+export { PaginationRequest, PaginationKeywordRequest, PageCurrentRequest };

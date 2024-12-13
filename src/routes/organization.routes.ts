@@ -60,14 +60,14 @@ class OrganizationRoute {
 
 		// get all for manager
 		this.router.get(
-			ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.MANAGER,
+			ROUTE_ENDPOINTS.MANAGER + ROUTE_ENDPOINTS.ORGANIZATIONS,
 			validatorAccessToken,
 			asyncHandler(OrganizationController.prototype.getAllForManager)
 		);
 
 		// create organization for manager
 		this.router.post(
-			ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.MANAGER,
+			ROUTE_ENDPOINTS.MANAGER + ROUTE_ENDPOINTS.ORGANIZATIONS,
 			validatorAccessToken,
 			fileUpload.fields([
 				{ name: 'contractFile', maxCount: 1 },
@@ -78,7 +78,7 @@ class OrganizationRoute {
 
 		// delete organization for manager
 		this.router.delete(
-			ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.MANAGER + '/:id',
+			ROUTE_ENDPOINTS.MANAGER + ROUTE_ENDPOINTS.ORGANIZATIONS + '/:id',
 			validatorAccessToken,
 			asyncHandler(OrganizationController.prototype.deleteOrganizationForManager)
 		);
@@ -86,14 +86,14 @@ class OrganizationRoute {
 		// ORG MANAGER ENDPOINTS
 		// invite user to org
 		this.router.post(
-			ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.ORGANIZATION_MANAGER + ROUTE_ENDPOINTS.INVITE_MEMBER,
+			ROUTE_ENDPOINTS.ORGANIZATION_MANAGER + ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.INVITE_MEMBER,
 			validatorAccessToken,
 			asyncHandler(OrganizationController.prototype.inviteMember)
 		);
 
 		// remove from org
 		this.router.delete(
-			ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.ORGANIZATION_MANAGER + ROUTE_ENDPOINTS.REMOVE_MEMBER + '/:id',
+			ROUTE_ENDPOINTS.ORGANIZATION_MANAGER + ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.REMOVE_MEMBER + '/:id',
 			validatorAccessToken,
 			asyncHandler(OrganizationController.prototype.removeMember)
 		);
