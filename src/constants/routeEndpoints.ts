@@ -180,4 +180,5 @@ export class ROUTE_ENDPOINTS {
 	 * INDUSTRY
 	 */
 	public static INDUSTRY = '/industry-code';
+	public static GET_CREATE = '/get-create';
 }

@@ -32,4 +32,10 @@ export class IndustryCodeController {
 
 		return res.status(response.status).json(response.data);
 	}
+
+	public async getAllToCreate(_req: Request<ParamsDictionary, unknown, any, { keyword: string }>, res: Response) {
+		const { keyword } = _req.query;
+		const response = await IndsutryCodeService.prototype.getAllToCreate({ keyword });
+		return res.status(response.status).json(response.data);
+	}
 }

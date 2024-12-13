@@ -39,6 +39,12 @@ class IndustryCodeRoute {
 			validatorAccessToken,
 			asyncHandler(IndustryCodeController.prototype.getAllIndustryCode)
 		);
+
+		this.router.get(
+			ROUTE_ENDPOINTS.MANAGER + ROUTE_ENDPOINTS.INDUSTRY + ROUTE_ENDPOINTS.GET_CREATE,
+			validatorAccessToken,
+			asyncHandler(IndustryCodeController.prototype.getAllToCreate)
+		);
 		return this.router;
 	}
 }
