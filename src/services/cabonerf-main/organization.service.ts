@@ -45,7 +45,7 @@ export default class OrganizationService {
 	}
 
 	public async getAllForManager(payload: GetAllForManagerReqParams) {
-		return mainAxiosService.axios.get<CommonResponse<any>>(ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.MANAGER, {
+		return mainAxiosService.axios.get<CommonResponse<any>>(ROUTE_ENDPOINTS.MANAGER + ROUTE_ENDPOINTS.ORGANIZATIONS, {
 			params: {
 				pageCurrent: payload.pageCurrent,
 				pageSize: payload.pageSize,
@@ -55,12 +55,12 @@ export default class OrganizationService {
 	}
 
 	public async deleteOrganizationForManager(id: string) {
-		return mainAxiosService.axios.delete<CommonResponse<any>>(ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.MANAGER + `/${id}`);
+		return mainAxiosService.axios.delete<CommonResponse<any>>(ROUTE_ENDPOINTS.MANAGER + ROUTE_ENDPOINTS.ORGANIZATIONS + `/${id}`);
 	}
 
 	public async inviteMember(payload: InviteUserToOrganizationReqBody) {
 		return mainAxiosService.axios.post<CommonResponse<any>>(
-			ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.ORGANIZATION_MANAGER + ROUTE_ENDPOINTS.INVITE_MEMBER,
+			ROUTE_ENDPOINTS.ORGANIZATION_MANAGER + ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.INVITE_MEMBER,
 			payload
 		);
 	}
@@ -77,7 +77,7 @@ export default class OrganizationService {
 
 	public async removeMember(id: string) {
 		return mainAxiosService.axios.delete<CommonResponse<any>>(
-			ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.ORGANIZATION_MANAGER + `/${id}`
+			ROUTE_ENDPOINTS.ORGANIZATION_MANAGER + ROUTE_ENDPOINTS.ORGANIZATIONS + `/${id}`
 		);
 	}
 
@@ -100,7 +100,7 @@ export default class OrganizationService {
 		formData.append('taxCode', data.taxCode);
 		formData.append('industryCodeIds', data.industryCodeIds);
 
-		return mainAxiosService.axios.post<CommonResponse<any>>(ROUTE_ENDPOINTS.ORGANIZATIONS + ROUTE_ENDPOINTS.MANAGER, formData, {
+		return mainAxiosService.axios.post<CommonResponse<any>>(ROUTE_ENDPOINTS.MANAGER + ROUTE_ENDPOINTS.ORGANIZATIONS, formData, {
 			headers: { ...formData.getHeaders() }
 		});
 	}
