@@ -1,8 +1,6 @@
-import { PaginationRequest } from '@gateway/models/cabonerf-main/paginationRequest.model';
+import { PaginationKeywordRequest } from '@gateway/models/cabonerf-main/paginationRequest.model';
 
-interface GetAllForManagerReqParams extends PaginationRequest {
-	keyword?: string;
-}
+interface GetAllForManagerReqParams extends PaginationKeywordRequest {}
 
 interface InviteUserToOrganizationReqBody {
 	organizationId: string;

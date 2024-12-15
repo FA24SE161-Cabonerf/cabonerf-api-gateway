@@ -39,8 +39,20 @@ export class IndsutryCodeService {
 			CommonResponse<{ pageCurrent: number; pageSize: number; totalPage: number; industryCodes: IndustryCode[] }>
 		>(`${ROUTE_ENDPOINTS.MANAGER}${ROUTE_ENDPOINTS.INDUSTRY}`, {
 			params: {
-				pageCurrent: payload.currentPage,
+				pageCurrent: payload.pageCurrent,
 				pageSize: payload.pageSize,
+				keyword: payload.keyword
+			}
+		});
+
+		return result;
+	}
+
+	public async getAllToCreate(payload: { keyword: string }) {
+		const result = await mainAxiosService.axios.get<
+			CommonResponse<{ pageCurrent: number; pageSize: number; totalPage: number; industryCodes: IndustryCode[] }>
+		>(`${ROUTE_ENDPOINTS.MANAGER}${ROUTE_ENDPOINTS.INDUSTRY}${ROUTE_ENDPOINTS.GET_CREATE}`, {
+			params: {
 				keyword: payload.keyword
 			}
 		});

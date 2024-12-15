@@ -1,7 +1,7 @@
 import ObjectLibraryService from '@gateway/services/cabonerf-main/objectLibrary.service';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { Request, Response } from 'express';
-import { SearchObjectLibraryReqParams } from '@gateway/types/objectLibrary.types';
+import { SearchObjectLibraryReqParams, RemoveObjectLibraryReqBody } from '@gateway/types/objectLibrary.types';
 
 export default class ObjectLibraryController {
 	public async searchObjectLibraryOfOrganization(_req: Request<ParamsDictionary, any, any, SearchObjectLibraryReqParams>, res: Response) {
@@ -17,9 +17,10 @@ export default class ObjectLibraryController {
 		return res.status(result.status).json(result.data);
 	}
 
-	public async removeFromObjectLibrary(_req: Request<{ processId: string }, any, any>, res: Response) {
-		const { processId } = _req.params;
-		const result = await ObjectLibraryService.prototype.removeFromObjectLibrary(processId);
+	public async removeFromObjectLibrary(_req: Request<ParamsDictionary, any, RemoveObjectLibraryReqBody, any>, res: Response) {
+		const { organizationId } = _req.params;
+		const payload = _req.body;
+		const result = await ObjectLibraryService.prototype.removeFromObjectLibrary(organizationId, payload);
 		return res.status(result.status).json(result.data);
 	}
 

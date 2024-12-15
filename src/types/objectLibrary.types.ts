@@ -5,4 +5,8 @@ interface SearchObjectLibraryReqParams extends PaginationRequest {
 	systemBoundaryId?: string;
 }
 
-export type { SearchObjectLibraryReqParams };
+interface RemoveObjectLibraryReqBody {
+	objectIds: string[];
+}
+
+export type { SearchObjectLibraryReqParams, RemoveObjectLibraryReqBody };
