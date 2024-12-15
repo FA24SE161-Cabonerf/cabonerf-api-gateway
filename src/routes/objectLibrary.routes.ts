@@ -28,7 +28,7 @@ export class ObjectLibraryRoute {
 
 		// Remove from object library
 		this.router.delete(
-			ROUTE_ENDPOINTS.OBJECT_LIBRARY + '/:processId',
+			ROUTE_ENDPOINTS.OBJECT_LIBRARY + ROUTE_ENDPOINTS.ORGANIZATIONS + '/:organizationId',
 			validatorAccessToken,
 			asyncHandler(ObjectLibraryController.prototype.removeFromObjectLibrary)
 		);
