@@ -1,7 +1,13 @@
 import { ROUTE_ENDPOINTS } from '@gateway/constants/routeEndpoints';
 import mainAxiosService from '@gateway/services/cabonerf-main/main.axios';
 import { CommonResponse } from '@gateway/types/common.types';
-import { CreateProjectReqBody, Project, UpdateProjectReqBody, GetAllProjectsReqParams } from '@gateway/types/project.types';
+import {
+	CreateProjectReqBody,
+	Project,
+	UpdateProjectReqBody,
+	GetAllProjectsReqParams,
+	CompareProjectsReqBody
+} from '@gateway/types/project.types';
 
 export default class ProjectService {
 	public async getProject(payload: GetAllProjectsReqParams) {
@@ -74,5 +80,9 @@ export default class ProjectService {
 		return await mainAxiosService.axios.get<CommonResponse<any>>(
 			ROUTE_ENDPOINTS.PROJECTS + ROUTE_ENDPOINTS.ADMIN + ROUTE_ENDPOINTS.SUM_IMPACT
 		);
+	}
+
+	public async compareProjects(payload: CompareProjectsReqBody) {
+		return await mainAxiosService.axios.post<CommonResponse<any>>(ROUTE_ENDPOINTS.PROJECTS + ROUTE_ENDPOINTS.COMPARISONS, payload);
 	}
 }
