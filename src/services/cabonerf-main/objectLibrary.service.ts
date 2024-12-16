@@ -15,11 +15,9 @@ export default class ObjectLibraryService {
 	}
 
 	public async removeFromObjectLibrary(organizationId: string, payload: RemoveObjectLibraryReqBody) {
-		return await mainAxiosService.axios.delete<CommonResponse<any>>(
+		return await mainAxiosService.axios.post<CommonResponse<any>>(
 			ROUTE_ENDPOINTS.OBJECT_LIBRARY + ROUTE_ENDPOINTS.ORGANIZATIONS + `/${organizationId}`,
-			{
-				data: payload
-			}
+			payload
 		);
 	}
 
