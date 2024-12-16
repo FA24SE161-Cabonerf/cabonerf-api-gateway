@@ -43,4 +43,9 @@ interface GetAllProjectsReqParams {
 	organizationId: string;
 }
 
-export { CreateProjectReqBody, UpdateProjectReqBody, Project, GetAllProjectsReqParams };
+interface CompareProjectsReqBody {
+	firstProjectId: string;
+	secondProjectId: String;
+}
+
+export { CreateProjectReqBody, UpdateProjectReqBody, Project, GetAllProjectsReqParams, CompareProjectsReqBody };

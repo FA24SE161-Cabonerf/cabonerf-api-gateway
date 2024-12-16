@@ -76,7 +76,7 @@ export class ROUTE_ENDPOINTS {
 	public static EXPORT_PROJECT = '/export';
 	public static COUNT_PROJECTS = '/count-project';
 	public static SUM_IMPACT = '/sum-impact';
-
+	public static COMPARISONS = '/comparisons';
 	/**
 	 * Process
 	 */

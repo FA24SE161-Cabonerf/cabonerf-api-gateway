@@ -1,7 +1,7 @@
 import ProjectService from '@gateway/services/cabonerf-main/project.service';
 import { NodeProcessService } from '@gateway/services/cabonerf-nodebased/nodeProcess.service';
 import { GatewayResponse, ParamID } from '@gateway/types/common.types';
-import { CreateProjectReqBody, UpdateProjectReqBody, GetAllProjectsReqParams } from '@gateway/types/project.types';
+import { CreateProjectReqBody, UpdateProjectReqBody, GetAllProjectsReqParams, CompareProjectsReqBody } from '@gateway/types/project.types';
 import { Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core/index';
 export class ProjectController {
@@ -136,6 +136,12 @@ export class ProjectController {
 
 	public async getSumImpact(_req: Request, res: Response) {
 		const result = await ProjectService.prototype.getSumImpact();
+		return res.status(result.status).json(result.data);
+	}
+
+	public async compareProjects(_req: Request<ParamsDictionary, unknown, CompareProjectsReqBody, any>, res: Response) {
+		const { firstProjectId, secondProjectId } = _req.body;
+		const result = await ProjectService.prototype.compareProjects({ firstProjectId, secondProjectId });
 		return res.status(result.status).json(result.data);
 	}
 }

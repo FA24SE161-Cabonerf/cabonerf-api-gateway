@@ -79,6 +79,13 @@ export class ProjectRoute {
 			asyncHandler(ProjectController.prototype.getSumImpact)
 		);
 
+		// compare 2 projects
+		this.router.post(
+			ROUTE_ENDPOINTS.PROJECTS + ROUTE_ENDPOINTS.COMPARISONS,
+			validatorAccessToken,
+			asyncHandler(ProjectController.prototype.compareProjects)
+		);
+
 		return this.router;
 	}
 }
