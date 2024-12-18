@@ -20,10 +20,9 @@ export class ProjectController {
 			NodeProcessService.prototype.getNodeProcessByProjectId({ projectId: id }),
 			NodeProcessService.prototype.getEdgeProcessByProjectId({ projectId: id })
 		]);
-
 		const mainDataProcessesMap = new Map(mainData.data.data.processes.map((item) => [item.id, item]));
 		const mainDataEdgeMap = new Map(mainData.data.data.connectors.map((item) => [item.id, item]));
-
+		const nodeTexts = cabonerfNodeData.data.data.filter((item) => item.type === 'text');
 		// Merge node process
 		const _processes = cabonerfNodeData.data.data
 			.map((node) => {
@@ -65,7 +64,8 @@ export class ProjectController {
 		const project = {
 			...mainData.data.data,
 			processes: _processes,
-			connectors: _edges
+			connectors: _edges,
+			texts: nodeTexts
 		};
 
 		const gatewayResponse = new GatewayResponse({ status: 'Success', message: 'Get success', data: project });

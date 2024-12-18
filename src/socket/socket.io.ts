@@ -183,6 +183,56 @@ export class SocketIOHandler {
 					nodebasedClient.emit('nodebased:create-object-library', data);
 				}
 			);
+
+			/**
+			 ** Add node text
+			 * @on gateway:create-node-text
+			 * @emit nodebased:create-node-text
+			 */
+			socket.on(
+				'gateway:create-node-text',
+				(data: {
+					data: {
+						projectId: string;
+						position: {
+							x: number;
+							y: number;
+						};
+						type: string;
+						fontSize: number;
+					};
+					projectId: string;
+				}) => {
+					if (data) {
+						nodebasedClient.emit('nodebased:create-node-text', data);
+					}
+				}
+			);
+
+			/**
+			 ** Delete text
+			 */
+			socket.on(`gateway:cabonerf-text-delete`, (data: { data: string; projectId: string }) => {
+				if (data) {
+					console.log('VAO DAY DE XOA NE');
+					nodebasedClient.emit('nodebased:cabonerf-text-delete', data);
+				}
+			});
+
+			/**
+			 ** Update text
+			 */
+			socket.on(`gateway:cabonerf-text-update`, (data: { data: string; content: string; projectId: string }) => {
+				if (data) {
+					nodebasedClient.emit('nodebased:cabonerf-text-update', data);
+				}
+			});
+
+			socket.on('gateway:cabonerf-text-update-fontsize', (data: { data: string; fontSize: number; projectId: string }) => {
+				if (data) {
+					nodebasedClient.emit('nodebased:cabonerf-text-update-fontsize', data);
+				}
+			});
 		});
 
 		this.io.on('disconnect', (socket) => {
@@ -198,6 +248,10 @@ export class SocketIOHandler {
 		nodebasedClient.connect();
 
 		nodebasedClient.on('nodebased:create-process-success', (data: { data: any; projectId: string }) => {
+			this.io.to(data.projectId).emit('gateway:create-process-success', data.data);
+		});
+
+		nodebasedClient.on('nodebased:create-text-success', (data: { data: any; projectId: string }) => {
 			this.io.to(data.projectId).emit('gateway:create-process-success', data.data);
 		});
 
@@ -225,11 +279,23 @@ export class SocketIOHandler {
 
 		nodebasedClient.on('nodebased:connector-deleted', (data: { data: any; projectId: string }) => {
 			this.io.emit('gateway:connector-deleted', data.data);
-			// this.io.to(data.projectId).emit('gateway:connector-deleted', data.data);
 		});
 
 		nodebasedClient.on('nodebased:delete-connector-ids', (data) => {
 			this.io.emit('gateway:delete-connector-ids', data);
+		});
+
+		nodebasedClient.on('nodebased:delete-text-success', (data) => {
+			this.io.emit('gateway:delete-text-success', data);
+		});
+
+		nodebasedClient.on('nodebased:update-text-success', (data: { data: string; content: string; projectId: string }) => {
+			this.io.to(data.projectId).emit(`gateway:update-text-success`, data);
+		});
+
+		nodebasedClient.on('nodebased:text-update-fontsize-success', (data: { data: string; fontSize: number; projectId: string }) => {
+			console.log('VAY THI PHAI VAO DAY');
+			this.io.to(data.projectId).emit(`gateway:cabonerf-text-update-fontsize-success`, data);
 		});
 	}
 }
