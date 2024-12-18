@@ -20,7 +20,6 @@ export default class ProjectService {
 
 	public async getProjectByID(payload: { id: string }) {
 		const response = await mainAxiosService.axios.get<CommonResponse<Project>>(`${ROUTE_ENDPOINTS.PROJECTS}/${payload.id}`);
-
 		return response;
 	}
 

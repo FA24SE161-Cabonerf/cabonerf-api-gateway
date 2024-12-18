@@ -12,6 +12,14 @@ export class NodeProcessService {
 		return response;
 	}
 
+	public async getNodeProcessByProjectIdAndType(payload: { projectId: string; type: string }) {
+		const response = await nodebasedAxiosService.axios.get<CommonResponse<NodeProcess[]>>(
+			`/cabonerf-nodes?projectId=${payload.projectId}&type=${payload.type}`
+		);
+
+		return response;
+	}
+
 	public async getEdgeProcessByProjectId(payload: { projectId: string }) {
 		const response = await nodebasedAxiosService.axios.get<CommonResponse<EdgeProcess[]>>(
 			`/cabonerf-edges?projectId=${payload.projectId}`
