@@ -120,9 +120,9 @@ export class ProjectController {
 		return res.status(result.status).json(result.data);
 	}
 
-	public async exportProject(_req: Request<ParamID, any, any>, res: Response) {
-		const { id } = _req.params;
-		const result = await ProjectService.prototype.exportProject(id);
+	public async exportProject(_req: Request<ParamsDictionary, any, { projectId: string }>, res: Response) {
+		const { projectId } = _req.body;
+		const result = await ProjectService.prototype.exportProject({ projectId });
 		res.setHeader('Content-Disposition', result.headers['content-disposition']);
 		res.setHeader('Content-Type', result.headers['content-type']);
 		res.setHeader('Content-Length', result.headers['content-length']);
