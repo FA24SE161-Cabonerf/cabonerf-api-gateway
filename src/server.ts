@@ -42,7 +42,7 @@ import industryCodeRoute from '@gateway/routes/industryCode.routes';
 
 const log: Logger = winstonLogger(`${config.ELASTIC_SEARCH_URL}`, 'Gateway', 'debug');
 
-const allowedOrigins = [config.CLIENT_URL, 'http://localhost:5174'];
+const allowedOrigins = ['http://localhost:4173', 'http://localhost:5174', 'http://localhost:5173'];
 
 export class GatewayServer {
 	public start(app: Application) {
@@ -131,7 +131,7 @@ export class GatewayServer {
 	private initSocketIO(http: http.Server) {
 		const io = new Server(http, {
 			cors: {
-				origin: 'http://localhost:5173'
+				origin: 'http://localhost:4173'
 			}
 		});
 		this.startSocketIO(io);
