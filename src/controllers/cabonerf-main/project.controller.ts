@@ -126,6 +126,7 @@ export class ProjectController {
 		res.setHeader('Content-Disposition', result.headers['content-disposition']);
 		res.setHeader('Content-Type', result.headers['content-type']);
 		res.setHeader('Content-Length', result.headers['content-length']);
+		console.log(result);
 		result.data.pipe(res);
 	}
 
