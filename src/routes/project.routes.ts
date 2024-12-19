@@ -59,8 +59,8 @@ export class ProjectRoute {
 		);
 
 		// export project
-		this.router.get(
-			ROUTE_ENDPOINTS.PROJECTS + '/:id' + ROUTE_ENDPOINTS.EXPORT_PROJECT,
+		this.router.post(
+			ROUTE_ENDPOINTS.PROJECTS + ROUTE_ENDPOINTS.EXPORT_PROJECT,
 			validatorAccessToken,
 			asyncHandler(ProjectController.prototype.exportProject)
 		);
