@@ -270,6 +270,8 @@ export class SocketIOHandler {
 		});
 
 		nodebasedClient.on('nodebased:connector-created', (data: { data: any; projectId: string }) => {
+			// this.io.emit('nodebased:connector-created', data.data);
+			console.log(this.user_conn);
 			this.io.to(data.projectId).emit('gateway:connector-created', data.data);
 		});
 
@@ -282,6 +284,7 @@ export class SocketIOHandler {
 		});
 
 		nodebasedClient.on('nodebased:delete-connector-ids', (data) => {
+			console.log('xoa thi vao day');
 			this.io.emit('gateway:delete-connector-ids', data);
 		});
 

@@ -125,4 +125,11 @@ export default class OrganizationController {
 		const result = await OrganizationService.prototype.leaveOrganization(userOrganizationId);
 		return res.status(result.status).json(result.data);
 	}
+
+	public async inviteMember2(_req: Request<ParamsDictionary, unknown, { email: string; organizationId: string }>, res: Response) {
+		const { email, organizationId } = _req.body;
+		const result = await OrganizationService.prototype.inviteMem({ email, organizationId });
+
+		return res.status(result.status).json(result.data);
+	}
 }

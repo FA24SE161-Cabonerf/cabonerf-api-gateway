@@ -36,6 +36,7 @@ export default class ExchangeController {
 	public async removeProductExchange(_req: Request<ParamID, any, any>, res: Response) {
 		const { id } = _req.params;
 		const result = await ExchangeService.prototype.removeProductExchange(id);
+
 		return res.status(result.status).json(result.data);
 	}
 
