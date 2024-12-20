@@ -77,7 +77,7 @@ export default class OrganizationService {
 
 	public async removeMember(id: string) {
 		return mainAxiosService.axios.delete<CommonResponse<any>>(
-			ROUTE_ENDPOINTS.ORGANIZATION_MANAGER + ROUTE_ENDPOINTS.ORGANIZATIONS + `/${id}`
+			ROUTE_ENDPOINTS.ORGANIZATION_MANAGER + ROUTE_ENDPOINTS.ORGANIZATIONS + `/remove-member` + `/${id}`
 		);
 	}
 
@@ -103,6 +103,11 @@ export default class OrganizationService {
 		return mainAxiosService.axios.post<CommonResponse<any>>(ROUTE_ENDPOINTS.MANAGER + ROUTE_ENDPOINTS.ORGANIZATIONS, formData, {
 			headers: { ...formData.getHeaders() }
 		});
+	}
+
+	// /api/v1/organization-manager/organizations/invite-by-email
+	public async inviteMem(payload: { email: string; organizationId: string }) {
+		return await mainAxiosService.axios.post(`/organization-manager/organizations/invite-by-email`, payload);
 	}
 
 	public async leaveOrganization(userOrganizationId: string) {

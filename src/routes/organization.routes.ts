@@ -105,6 +105,13 @@ class OrganizationRoute {
 			asyncHandler(OrganizationController.prototype.leaveOrganization)
 		);
 
+		// inivte
+		this.router.post(
+			`/organization-manager/organizations/invite-by-email`,
+			validatorAccessToken,
+			asyncHandler(OrganizationController.prototype.inviteMember2)
+		);
+
 		return this.router;
 	}
 }
